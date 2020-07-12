@@ -1,0 +1,20 @@
+# I mostly use Python for quick scripting, nothing too serious.
+
+{ pkgs, config, options, lib, ... }:
+
+with lib;
+{
+  options.modules.dev.python = {
+    enable = mkOption {
+      type = types.bool;
+      default = false;
+    };
+  };
+
+  config = mkIf config.modules.dev.python.enable {
+    home.packages = with pkgs; [
+      python3
+      python38Packages.pip   # Package installer
+    ];
+  };
+}
