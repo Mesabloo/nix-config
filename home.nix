@@ -23,6 +23,12 @@
   modules.dev.python.enable = true;
   modules.dev.vscode.enable = true;
 
+  modules.services.fonts = {
+    enable = true;
+    iosevka.enable = true;
+    font_awesome.enable = true;
+  };
+
   modules.net.brave = {
     enable = true;
     defaultBrowser = true;

@@ -6,6 +6,7 @@
     ./compton.nix
     ./deadd.nix
     ./dunst.nix
+    ./fonts.nix
     ./net
     ./polybar.nix
     ./rofi.nix
