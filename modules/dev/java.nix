@@ -18,7 +18,7 @@ with lib;
 
   config = mkIf config.modules.dev.java.enable {
     home.packages = with pkgs; [
-      modules.dev.java.jdk
+      config.modules.dev.java.jdk
       jetbrains.idea-community  # Java IDE, because you can't program otherwise
     ];
   };
