@@ -2,6 +2,7 @@
 
 {
   imports = [
+    ./agda.nix
     ./cpp.nix
     ./emacs.nix
     ./git.nix

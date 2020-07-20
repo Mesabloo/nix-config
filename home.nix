@@ -15,6 +15,7 @@
   modules.desktop.i3.enable = true;
   modules.desktop.xorg.utils.enable = true;
 
+  modules.dev.agda.enable = true;
   modules.dev.cpp.enable = true;
   modules.dev.emacs.enable = true;
   modules.dev.haskell.enable = true;
