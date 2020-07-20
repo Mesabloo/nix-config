@@ -12,18 +12,13 @@ with lib;
   };
 
   config = mkIf config.modules.dev.haskell.enable {
-    home.packages =
-      let
-        stack2nix = import (builtins.fetchTarball https://github.com/input-output-hk/stack2nix/archive/master.tar.gz) {};
-      in with pkgs; [
-        cachix
+    home.packages = with pkgs; [
+      cachix
 
-        cabal-install
-        ghc
-        stack
-        # ^^^ See ./nix-overlays/unstable.nix
-
-        stack2nix
-      ];
+      cabal-install
+      ghc
+      stack
+      # ^^^ See ./nix-overlays/unstable.nix
+    ];
   };
 }
