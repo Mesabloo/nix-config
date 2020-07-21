@@ -10,6 +10,7 @@
     ./dunst.nix
     ./git.nix
     ./haskell.nix
+    ./termite.nix
     ./zsh.nix
   ];
 }
