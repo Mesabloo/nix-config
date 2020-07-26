@@ -17,6 +17,7 @@
             "${mod}+d" = "exec rofi -show run";
             "${mod}+Ctrl+Left" = "move workspace to output left";
             "${mod}+Ctrl+Right" = "move workspace to output right";
+            "${mod}+l" = "exec i3lock -i $HOME/.wallpapers/lock.png -t";
 
             # Special keys
             "XF86MonBrightnessUp" = "exec brightnessctl s 5%+";
