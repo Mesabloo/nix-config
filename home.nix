@@ -69,6 +69,7 @@
     gimp.enable = true;
     nomacs.enable = true;
     obs.enable = true;
+    okular.enable = true;
     vlc.enable = true;
   };
 

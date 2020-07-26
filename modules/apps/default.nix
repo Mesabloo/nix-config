@@ -6,6 +6,7 @@
     ./gimp.nix
     ./nomacs.nix
     ./obs.nix
+    ./okular.nix
     ./vlc.nix
   ];
 
