@@ -14,7 +14,11 @@ with lib;
 
   config = mkIf config.modules.services.sound.effects.enable {
     home.packages = with pkgs; [
+      dconf
+
       pulseeffects
     ];
+
+    dconf.enable = true;
   };
 }
