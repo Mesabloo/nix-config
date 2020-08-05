@@ -64,6 +64,8 @@
 
   modules.services.archive.enable = true;
 
+  modules.services.neuron.enable = true;
+
   modules.apps = {
     flameshot.enable = true;
     gimp.enable = true;
@@ -78,7 +80,7 @@
 
   programs.home-manager = {
     enable = true;
-    path = "https://github.com/rycee/home-manager/archive/master.tar.gz";
+    path = "https://github.com/rycee/home-manager/archive/release-20.03.tar.gz";
   };
 }
 

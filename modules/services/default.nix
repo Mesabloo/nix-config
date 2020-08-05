@@ -8,6 +8,7 @@
     ./dunst.nix
     ./fonts.nix
     ./net
+    ./neuron.nix
     ./polybar.nix
     ./rofi.nix
     ./shell
