@@ -7,6 +7,7 @@
     ./nomacs.nix
     ./obs.nix
     ./okular.nix
+    ./pandoc.nix
     ./vlc.nix
   ];
 
