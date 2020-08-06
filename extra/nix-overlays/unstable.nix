@@ -9,4 +9,6 @@ in
   cabal-install = nixos-unstable.cabal-install;
 
   sd-switch = nixos-unstable.sd-switch;
+
+  discord = nixos-unstable.discord;
 }
