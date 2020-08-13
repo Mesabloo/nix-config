@@ -3,6 +3,7 @@
 {
   imports = [
     ./i3
+    ./alacritty
     ./polybar
     ./rofi
 

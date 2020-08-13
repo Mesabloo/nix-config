@@ -45,11 +45,11 @@
   modules.social.discord.enable = true;
 
   modules.services.dunst.enable = true;
-  # modules.services.deadd.enable = false;
+  # modules.services.deadd.enable = true;
   modules.services.polybar.enable = true;
   modules.services.rofi.enable = true;
 
-  modules.services.shell.emulator = pkgs.termite;
+  modules.services.shell.emulator = pkgs.alacritty;
   modules.services.shell.zsh = {
     enable = true;
     oh-my-zsh.enable = true;
