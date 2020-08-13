@@ -11,4 +11,6 @@ in
   sd-switch = nixos-unstable.sd-switch;
 
   discord = nixos-unstable.discord;
+
+  alacritty = nixos-unstable.alacritty;
 }
