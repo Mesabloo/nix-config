@@ -17,7 +17,7 @@ stdenv.mkDerivation rec {
       sha256 = "0jvmi1c98hm8x1x7kw9ws0nbf4y56yy44c3bqm6rjj4lrm89l83s";
     })
     (pkgs.fetchurl {
-      url = "https://raw.githubusercontent.com/phuhl/linux_notification_center/blob/${version}/deadd-notification-center.service.in";
+      url = "https://raw.githubusercontent.com/phuhl/linux_notification_center/${version}/deadd-notification-center.service.in";
       sha256 = "18rrk896w5x4dflbxfm2nhhx300f2dicychqlw151idxld4fsnfq";
     })
   ];
@@ -42,24 +42,37 @@ stdenv.mkDerivation rec {
   ];
 
   unpackPhase = ":";
- 
-  installPhase = with lib; ''
-    mkdir -p $out/bin
-    install -m755 ${elemAt srcs 0} $out/bin
 
-    sed "s|##PREFIX##|$out/bin|" ${elemAt srcs 1} > $out/com.ph-uhl.deadd.notification.service
-    mkdir -p $out/share/dbus-1/services
-    install -m644 $out/com.ph-uhl.deadd.notification.service $out/share/dbus-1/services
+  installPhase =
+    with lib;
+    let
+      executable      = elemAt srcs 0;
+      dbus-service    = elemAt srcs 1;
+      systemd-service = elemAt srcs 2;
+    in
+    ''
+      mkdir -p $out/bin
 
-    sed "s|##PREFIX##|$out/bin|" ${elemAt srcs 2} > $out/deadd-notification-center.service
-    mkdir -p $out/lib/systemd/services
-    install -m644 $out/deadd-notification-center.service $out/lib/systemd/services
-  '';
+      echo "Installing executable"
+      install -m755 ${executable} $out/bin/deadd-notification-center
 
-  meta = with lib; {
-    homepage = https://github.com/phuhl/linux_notification_center;
-    description = "A haskell-written notification center for users that like a desktop with style…";
-    platforms = platforms.all;
-    maintainers = with maintainers; [ ph-uhl ];
-  };
+      echo "Patching DBus service"
+      sed "s|##PREFIX##|$out|" ${dbus-service} > $out/com.ph-uhl.deadd.notification.service
+      mkdir -p $out/share/dbus-1/services
+      echo "Installing DBus service"
+      install -m644 $out/com.ph-uhl.deadd.notification.service $out/share/dbus-1/services
+
+      echo "Patching systemd service"
+      sed "s|##PREFIX##|$out|" ${systemd-service} > $out/deadd-notification-center.service
+      mkdir -p $out/share/systemd/services
+      echo "Installing systemd service"
+      install -m644 $out/deadd-notification-center.service $out/share/systemd/services
+    '';
+
+    meta = with lib; {
+      homepage = https://github.com/phuhl/linux_notification_center;
+      description = "A haskell-written notification center for users that like a desktop with style…";
+      platforms = platforms.all;
+      maintainers = with maintainers; [ ph-uhl ];
+    };
 }

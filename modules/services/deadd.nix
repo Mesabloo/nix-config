@@ -230,12 +230,16 @@ in
     home.packages = with pkgs; [
       deadd-notification-center
       libnotify
+      # notify-send-py
     ];
 
     xdg.dataFile."dbus-1/services/com.ph-uhl.deadd.notification.service".source =
       "${pkgs.deadd-notification-center}/share/dbus-1/services/com.ph-uhl.deadd.notification.service";
 
-    systemd.user.services.deadd-notification-center = {
+    xdg.configFile."systemd/user/deadd-notification-center.service".source =
+      "${pkgs.deadd-notification-center}/share/systemd/services/deadd-notification-center.service";
+
+    /* systemd.user.services.deadd-notification-center = {
       Unit = {
         Description = "Deadd notification daemon";
         Require = [ "dbus.service" ];
@@ -244,9 +248,7 @@ in
       Service = {
         ExecStart = "${pkgs.deadd-notification-center}/bin/deadd-notification-center";
         Restart = "on-failure";
-        RestartSec = 5;
-      };
-    };
+    }; */
 
     xdg.configFile."deadd/deadd.conf".text =
       let
