@@ -13,7 +13,7 @@
 
           keybindings = lib.mkOptionDefault {
             "${mod}+Print" = "exec flameshot gui";
-            "${mod}+Return" = "exec ${config.modules.services.shell.emulator}/bin/*";
+            "${mod}+Return" = "exec env WINIT_X11_SCALE_FACTOR=1 ${config.modules.services.shell.emulator}/bin/*";
             "${mod}+d" = "exec rofi -show run";
             "${mod}+Ctrl+Left" = "move workspace to output left";
             "${mod}+Ctrl+Right" = "move workspace to output right";
