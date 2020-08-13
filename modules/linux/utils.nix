@@ -13,13 +13,14 @@ with lib;
 
   config = mkIf config.modules.linux.utils.enable {
     home.packages = with pkgs; [
-      bat         # `cat`, but actually better
-      cloc        # count my lines of code
-      dialog      # terminal dialog boxes
-      hyperfine   # gotta go fast
-      neofetch    # please tell me my system information
-      texinfo     # if one day I want to write some documentation...
-      wget        # `curl` is better
+      bat          # `cat`, but actually better
+      cloc         # count my lines of code
+      dialog       # terminal dialog boxes
+      hyperfine    # gotta go fast
+      mount-helper # See the overlays. Makes it easy to mount a disk
+      neofetch     # please tell me my system information
+      texinfo      # if one day I want to write some documentation...
+      wget         # `curl` is better
     ];
   };
 }
