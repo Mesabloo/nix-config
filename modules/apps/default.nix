@@ -2,6 +2,7 @@
 
 {
   imports = [
+    ./audacity.nix
     ./flameshot.nix
     ./gimp.nix
     ./nomacs.nix

@@ -67,6 +67,7 @@
   modules.services.neuron.enable = true;
 
   modules.apps = {
+    audacity.enable = true;
     flameshot.enable = true;
     gimp.enable = true;
     nomacs.enable = true;
