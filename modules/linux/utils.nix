@@ -17,6 +17,7 @@ with lib;
       cloc         # count my lines of code
       dialog       # terminal dialog boxes
       hyperfine    # gotta go fast
+      ltrace       # function call tracer
       mount-helper # See the overlays. Makes it easy to mount a disk
       neofetch     # please tell me my system information
       texinfo      # if one day I want to write some documentation...
