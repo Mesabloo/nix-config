@@ -3,5 +3,5 @@
 {
 	allowUnfree = true;
 	oraclejdk.accept_license = true;
-	allowBroken = false;
+	allowBroken = true;
 }
