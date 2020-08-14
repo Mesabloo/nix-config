@@ -8,6 +8,7 @@
     ./rofi
 
     ./compton.nix
+    ./deadd.nix
     ./dunst.nix
     ./git.nix
     ./haskell.nix
