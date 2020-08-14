@@ -7,9 +7,5 @@ with lib;
 
     xdg.configFile."alacritty/alacritty.yml".source =
       ./config.yml;
-
-    programs.zsh.localVariables = mkIf config.modules.services.shell.zsh.enable {
-      "WINIT_X11_SCALE_FACTOR" = 1;
-    };
   };
 }
