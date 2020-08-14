@@ -44,8 +44,8 @@
 
   modules.social.discord.enable = true;
 
-  modules.services.dunst.enable = true;
-  # modules.services.deadd.enable = true;
+  # modules.services.dunst.enable = true;
+  modules.services.deadd.enable = true;
   modules.services.polybar.enable = true;
   modules.services.rofi.enable = true;
 
