@@ -15,7 +15,7 @@ with lib;
         width = 450;
         followMouse = true;
         iconSize = 20;
-        maxImageSize = 64;
+        maxImageSize = 0;
       };
 
       colors = {
