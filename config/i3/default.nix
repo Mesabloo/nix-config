@@ -18,7 +18,6 @@
             "${mod}+Ctrl+Left" = "move workspace to output left";
             "${mod}+Ctrl+Right" = "move workspace to output right";
             "${mod}+l" = "exec i3lock -i $HOME/.wallpapers/lock.png -t";
-            "${mod}+r" = "exec i3-input -F 'rename workspace to \"%s\"' -P 'New workspace name: '";
 
             "${mod}+1" = "workspace number 1";
             "${mod}+2" = "workspace number 2";
