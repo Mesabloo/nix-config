@@ -1,4 +1,4 @@
-{ lib, config, ... }:
+{ lib, config, pkgs, ... }:
 
 {
   config = lib.mkIf config.modules.services.polybar.enable {
@@ -11,8 +11,12 @@
           currentPath = ./.;
           files = attrNames (readDir (sourceByRegex currentPath ["^.*\\.ini$"]).outPath);
           fileToStr = f: "${readFile "${currentPath}/${f}"}\n";
+
+          postProcess = builtins.replaceStrings
+            ["##PLAYER_MPRIS_TAIL##"                                           "##UPTIME##"]
+            ["${pkgs.polybar-scripts.player-mpris-tail}/bin/player-mpris-tail" "${pkgs.polybar-scripts.system-uptime}/bin/system-uptime"];
         in
-        concatMapStrings fileToStr files;
+          postProcess (concatMapStrings fileToStr files);
     };
   };
 }
