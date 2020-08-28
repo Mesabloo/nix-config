@@ -20,6 +20,7 @@ with lib;
       ltrace       # function call tracer
       mount-helper # See the overlays. Makes it easy to mount a disk
       neofetch     # please tell me my system information
+      psmisc       # some misc functions on processes
       texinfo      # if one day I want to write some documentation...
       wget         # `curl` is better
     ];

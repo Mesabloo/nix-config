@@ -1,10 +1,9 @@
 #!/usr/bin/env bash
 
 # Terminate already running bar instances
-killall -q polybar
-
-# Wait until the processes have been shut down
-while pgrep  polybar >/dev/null; do sleep 1; done
+for p in $(pgrep polybar); do
+    kill -TERM $p
+done
 
 if type "xrandr" > /dev/null; then
   for m in $(xrandr --query | grep " connected" | cut -d" " -f1); do
@@ -15,7 +14,7 @@ if type "xrandr" > /dev/null; then
     MONITOR=$m polybar -r status &         # bottom right
     MONITOR=$m polybar -r fs &             # bottom left
 
-    MONITOR=$m polybar -r tray &           # bottom left
+    MONITOR=$m polybar -r music &           # bottom left
     #MONITOR=$m polybar -r padding_bottom &
   done
 else
@@ -27,7 +26,7 @@ else
   polybar -r fs &               # bottom left
   #polybar -r padding_bottom &
 
-  polybar -r tray &             # bottom left
+  polybar -r music &             # bottom left
 fi
 
 echo "Bars launched..."
