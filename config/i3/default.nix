@@ -12,9 +12,9 @@
           fonts = [ "pango:FontAwesome 12" ];
 
           keybindings = lib.mkOptionDefault {
-            "${mod}+Print" = "exec flameshot gui";
-            "${mod}+Return" = "exec env WINIT_X11_SCALE_FACTOR=1 ${config.modules.services.shell.emulator}/bin/*";
-            "${mod}+d" = "exec rofi -show run";
+            "${mod}+Print" = "exec --no-startup-id flameshot gui";
+            "${mod}+Return" = "exec --no-startup-id env WINIT_X11_SCALE_FACTOR=1 ${config.modules.services.shell.emulator}/bin/*";
+            "${mod}+d" = "exec --no-startup-id rofi -show run";
             "${mod}+Ctrl+Left" = "move workspace to output left";
             "${mod}+Ctrl+Right" = "move workspace to output right";
             "${mod}+l" = "exec i3lock -i $HOME/.wallpapers/lock.png -t";
