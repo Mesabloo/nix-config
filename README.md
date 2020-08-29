@@ -6,8 +6,8 @@ This one is an exception.
 
 ### Screenshots
 
-![emacs + termite + nmtui](./assets/emacs-termite-nmtui.png)
+![screenshot](./assets/emacs-termite-nmtui.png)
 
 Left: doom emacs
-Right-top: termite
-Right-bottom: nmtui
+
+Right: Alacritty running `stack ghci`
