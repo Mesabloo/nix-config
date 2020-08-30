@@ -4,7 +4,7 @@ let
   script = pkgs.writeScript "system-uptime" ''
     #!${pkgs.stdenv.shell}
 
-    TIME=$(${pkgs.coreutils}/bin/uptime | ${pkgs.coreutils}/bin/cut -d ' ' -f 7 | sed "s/,//")
+    TIME=$(${pkgs.coreutils}/bin/uptime | ${pkgs.gawk}/bin/awk '{print $3}')
     HOURS=$(${pkgs.coreutils}/bin/echo $TIME | ${pkgs.coreutils}/bin/cut -d ':' -f 1)
     MINS=$(${pkgs.coreutils}/bin/echo $TIME | ${pkgs.coreutils}/bin/cut -d ':' -f 2)
 
