@@ -14,6 +14,7 @@ with lib;
   config = mkIf config.modules.linux.nix-utils.enable {
     home.packages = with pkgs; [
       nix-index
+      nix-prefetch-scripts  # we like hashes
     ];
   };
 }
