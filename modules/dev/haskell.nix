@@ -19,6 +19,8 @@ with lib;
       ghc
       stack
       # ^^^ See ./nix-overlays/unstable.nix
+
+      haskellPackages.hie
     ];
   };
 }
