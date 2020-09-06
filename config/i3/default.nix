@@ -39,13 +39,13 @@
             "${mod}+Shift+9" = "move container to workspace number 9";
 
             # Special keys
-            "XF86MonBrightnessUp" = "exec brightnessctl s 5%+";
-            "XF86MonBrightnessDown" = "exec brightnessctl s 5%-";
-            "XF86AudioRaiseVolume" = "exec pactl set-sink-volume @DEFAULT_SINK@ +4%";
-            "XF86AudioLowerVolume" = "exec pactl set-sink-volume @DEFAULT_SINK@ -4%";
-            "XF86AudioMute" = "exec pactl set-sink-mute @DEFAULT_SINK@ toggle";
-            "XF86KbdBrightnessUp" = "exec brightnessctl --device=$(brightnessctl --list | grep kbd | cut -d\" \" -f2 | cut -d\"'\" -f2) s 1+";
-            "XF86KbdBrightnessDown" = "exec brightnessctl --device=$(brightnessctl --list | grep kbd | cut -d\" \" -f2 | cut -d\"'\" -f2) s 1-";
+            "XF86MonBrightnessUp" = "exec --no-startup-id brightnessctl s 5%+";
+            "XF86MonBrightnessDown" = "exec --no-startup-id brightnessctl s 5%-";
+            "XF86AudioRaiseVolume" = "exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +4%";
+            "XF86AudioLowerVolume" = "exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -4%";
+            "XF86AudioMute" = "exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle";
+            "XF86KbdBrightnessUp" = "exec --no-startup-id brightnessctl --device=$(brightnessctl --list | grep kbd | cut -d\" \" -f2 | cut -d\"'\" -f2) s 1+";
+            "XF86KbdBrightnessDown" = "exec --no-startup-id brightnessctl --device=$(brightnessctl --list | grep kbd | cut -d\" \" -f2 | cut -d\"'\" -f2) s 1-";
           };
 
           bars = [ { mode = "invisible"; } ];
