@@ -13,4 +13,6 @@ in
   discord = nixos-unstable.discord;
 
   alacritty = nixos-unstable.alacritty;
+
+  emacs = nixos-unstable.emacs;
 }
