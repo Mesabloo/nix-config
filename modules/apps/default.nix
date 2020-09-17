@@ -7,6 +7,7 @@
     ./gimp.nix
     ./nomacs.nix
     ./obs.nix
+    ./office.nix
     ./okular.nix
     ./pandoc.nix
     ./vlc.nix
