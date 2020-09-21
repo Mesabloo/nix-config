@@ -15,11 +15,11 @@
   modules.desktop.i3.enable = true;
   modules.desktop.xorg.utils.enable = true;
 
-  modules.dev.agda.enable = true;
-  modules.dev.cpp.enable = true;
+  modules.dev.agda.enable = false;
+  modules.dev.cpp.enable = false;
   modules.dev.emacs.enable = true;
   modules.dev.haskell.enable = true;
-  modules.dev.rust.enable = true;
+  modules.dev.rust.enable = false;
   modules.dev.python.enable = true;
   modules.dev.vscode.enable = true;
 
