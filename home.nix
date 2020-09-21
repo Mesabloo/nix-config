@@ -72,6 +72,7 @@
     gimp.enable = true;
     nomacs.enable = true;
     obs.enable = true;
+    office.enable = true;
     okular.enable = true;
     pandoc.enable = true;
     vlc.enable = true;
