@@ -1,7 +1,8 @@
-{ lib, config, ... }:
+{ lib, config, pkgs, ... }:
 
+with lib;
 {
-  config = lib.mkIf config.modules.desktop.i3.enable {
+  config = mkIf config.modules.desktop.i3.enable {
     xsession.windowManager.i3 =
       let
         mod = "Mod4";
@@ -11,13 +12,17 @@
 
           fonts = [ "pango:FontAwesome 12" ];
 
-          keybindings = lib.mkOptionDefault {
-            "${mod}+Print" = "exec --no-startup-id flameshot gui";
-            "${mod}+Return" = "exec --no-startup-id env WINIT_X11_SCALE_FACTOR=1 ${config.modules.services.shell.emulator}/bin/*";
-            "${mod}+d" = "exec --no-startup-id rofi -show run";
+          keybindings =
+            let
+              brightnessctl-device = "${pkgs.brightnessctl}/bin/brightnessctl --list | ${pkgs.gnugrep}/bin/grep kbd | ${pkgs.gawk}/bin/awk '{print $11}' | ${pkgs.coreutils}/bin/cut -d\"'\" -f2";
+            in
+            mkOptionDefault {
+            "${mod}+Print" = "exec --no-startup-id ${pkgs.flameshot}/bin/flameshot gui";
+            "${mod}+Return" = "exec --no-startup-id ${pkgs.coreutils}/bin/env WINIT_X11_SCALE_FACTOR=1 ${config.modules.services.shell.emulator}/bin/*";
+            "${mod}+d" = "exec --no-startup-id ${pkgs.rofi}/bin/rofi -show run";
             "${mod}+Ctrl+Left" = "move workspace to output left";
             "${mod}+Ctrl+Right" = "move workspace to output right";
-            "${mod}+l" = "exec i3lock -i $HOME/.wallpapers/lock.png -t";
+            "${mod}+l" = "exec ${pkgs.i3lock}/bin/i3lock -i $HOME/.wallpapers/lock.png -t";
             "${mod}+Shift+F" = "floating enable, sticky enable";
 
             "${mod}+1" = "workspace number 1";
@@ -40,13 +45,13 @@
             "${mod}+Shift+9" = "move container to workspace number 9";
 
             # Special keys
-            "XF86MonBrightnessUp" = "exec --no-startup-id brightnessctl s 5%+";
-            "XF86MonBrightnessDown" = "exec --no-startup-id brightnessctl s 5%-";
-            "XF86AudioRaiseVolume" = "exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +4%";
-            "XF86AudioLowerVolume" = "exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -4%";
-            "XF86AudioMute" = "exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle";
-            "XF86KbdBrightnessUp" = "exec --no-startup-id brightnessctl --device=$(brightnessctl --list | grep kbd | cut -d\" \" -f2 | cut -d\"'\" -f2) s 1+";
-            "XF86KbdBrightnessDown" = "exec --no-startup-id brightnessctl --device=$(brightnessctl --list | grep kbd | cut -d\" \" -f2 | cut -d\"'\" -f2) s 1-";
+            "XF86MonBrightnessUp" = "exec --no-startup-id ${pkgs.brightnessctl}/bin/brightnessctl s 5%+";
+            "XF86MonBrightnessDown" = "exec --no-startup-id ${pkgs.brightnessctl}/bin/brightnessctl s 5%-";
+            "XF86AudioRaiseVolume" = "exec --no-startup-id ${pkgs.pulseaudio}/bin/pactl set-sink-volume @DEFAULT_SINK@ +4%";
+            "XF86AudioLowerVolume" = "exec --no-startup-id ${pkgs.pulseaudio}/bin/pactl set-sink-volume @DEFAULT_SINK@ -4%";
+            "XF86AudioMute" = "exec --no-startup-id ${pkgs.pulseaudio}/bin/pactl set-sink-mute @DEFAULT_SINK@ toggle";
+            "XF86KbdBrightnessUp" = "exec --no-startup-id ${pkgs.brightnessctl}/bin/brightnessctl --device=$(${brightnessctl-device}) s 1+";
+            "XF86KbdBrightnessDown" = "exec --no-startup-id ${pkgs.brightnessctl}/bin/brightnessctl --device=$(${brightnessctl-device}) s 1-";
           };
 
           bars = [ { mode = "invisible"; } ];
