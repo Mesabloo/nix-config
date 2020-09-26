@@ -10,6 +10,7 @@
     ./office.nix
     ./okular.nix
     ./pandoc.nix
+    ./teams.nix
     ./vlc.nix
   ];
 
