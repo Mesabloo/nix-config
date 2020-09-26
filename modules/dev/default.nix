@@ -3,6 +3,7 @@
 {
   imports = [
     ./agda.nix
+    ./android.nix
     ./cpp.nix
     ./emacs.nix
     ./git.nix
