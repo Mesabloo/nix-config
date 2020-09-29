@@ -22,7 +22,7 @@ with lib;
             "${mod}+d" = "exec --no-startup-id ${pkgs.rofi}/bin/rofi -show run";
             "${mod}+Ctrl+Left" = "move workspace to output left";
             "${mod}+Ctrl+Right" = "move workspace to output right";
-            "${mod}+l" = "exec ${pkgs.i3lock}/bin/i3lock -i $HOME/.wallpapers/lock.png -t";
+            "${mod}+l" = "exec --no-startup-id ${pkgs.betterlockscreen}/bin/betterlockscreen -l dim -t 'Please type your password'";
             "${mod}+Shift+F" = "floating enable, sticky enable";
 
             "${mod}+1" = "workspace number 1";
