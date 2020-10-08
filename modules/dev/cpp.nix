@@ -9,15 +9,29 @@ with lib;
       type = types.bool;
       default = false;
     };
+
+    qt = {
+      enable = mkOption {
+        type = types.bool;
+        default = false;
+      };
+
+      editor = mkOption {
+        type = types.package;
+        default = pkgs.qtcreator;
+      };
+    };
   };
 
-  config = mkIf config.modules.dev.cpp.enable {
+  config = mkIf (config.modules.dev.cpp.enable || config.modules.dev.cpp.qt.enable) {
     home.packages = with pkgs; [
       autoconf
 
       # clang
       # ^^^^^ Conflicts with gcc
       cmake     # prefered build manager
+
+      doxygen   # because we want to write some documentation
 
       gcc       # C and C++ compilers (mostly)
       gdb       # ehhhhhhh, we need to debug this
@@ -27,6 +41,9 @@ with lib;
       libgcc
 
       scons     # another build manager, scriptable in python
+
+
+      (mkIf config.modules.dev.cpp.qt.enable config.modules.dev.cpp.qt.editor)
     ];
   };
 }
