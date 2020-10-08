@@ -14,7 +14,7 @@ with lib;
 
           keybindings =
             let
-              brightnessctl-device = "${pkgs.brightnessctl}/bin/brightnessctl --list | ${pkgs.gnugrep}/bin/grep kbd | ${pkgs.gawk}/bin/awk '{print $11}' | ${pkgs.coreutils}/bin/cut -d\"'\" -f2";
+              brightnessctl-device = "${pkgs.brightnessctl}/bin/brightnessctl --list | ${pkgs.gnugrep}/bin/grep kbd | ${pkgs.gawk}/bin/awk '{print $2}' | ${pkgs.gnused}/bin/sed -e \"s/'//g\"";
             in
             mkOptionDefault {
             "${mod}+Print" = "exec --no-startup-id ${pkgs.flameshot}/bin/flameshot gui";
