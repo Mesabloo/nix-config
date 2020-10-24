@@ -11,9 +11,11 @@
     ./deadd.nix
     ./dunst.nix
     ./git.nix
+    ./gtk.nix
     ./haskell.nix
     ./neuron.nix
     ./termite.nix
+    ./x.nix
     ./zsh.nix
   ];
 }
