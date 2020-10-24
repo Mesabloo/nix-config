@@ -13,8 +13,12 @@
           fileToStr = f: "${readFile "${currentPath}/${f}"}\n";
 
           postProcess = builtins.replaceStrings
-            ["##PLAYER_MPRIS_TAIL##"                                           "##UPTIME##"]
-            ["${pkgs.polybar-scripts.player-mpris-tail}/bin/player-mpris-tail" "${pkgs.polybar-scripts.system-uptime}/bin/system-uptime"];
+            ["##PLAYER_MPRIS_TAIL##"
+             "##UPTIME##"
+             "##POLYBAR_BLUETOOTH##"]
+            ["${pkgs.polybar-scripts.player-mpris-tail}/bin/player-mpris-tail"
+             "${pkgs.polybar-scripts.system-uptime}/bin/system-uptime"
+             "${pkgs.polybar-scripts.bluetooth}"];
         in
           postProcess (concatMapStrings fileToStr files);
     };
