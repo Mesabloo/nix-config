@@ -1,2 +1,6 @@
-rofi.theme: ~/.config/rofi/16script.rasi
-rofi.columns: 3
+rofi.theme: slate
+rofi.show-icons: true
+rofi.display-drun: Launch
+rofi.display-window: Switch to
+rofi.modi: window,drun
+rofi.font: Cantarell Regular 11
