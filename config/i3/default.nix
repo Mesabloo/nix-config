@@ -25,6 +25,7 @@ with lib;
             "${mod}+Ctrl+Right" = "move workspace to output right";
             "${mod}+l" = "exec --no-startup-id ${pkgs.betterlockscreen}/bin/betterlockscreen -l dim -t 'Please type your password'";
             "${mod}+Shift+F" = "floating enable, sticky enable";
+            "${mod}+g" = "layout default";    # because we use i3-gaps, it's the gaps mode
 
             "${mod}+1" = "workspace number 1";
             "${mod}+2" = "workspace number 2";
