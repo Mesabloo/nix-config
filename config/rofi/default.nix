@@ -1,10 +1,19 @@
 { config, lib, ... }:
 
+with lib;
 {
-  config = lib.mkIf config.modules.services.rofi.enable {
-    home.file = {
-      ".config/rofi/config".source = ./config;
-      ".config/rofi/16script.rasi".source = ./16script.rasi;
-    };
+  config = mkIf config.modules.services.rofi.enable {
+    home.file =
+      with builtins;
+      let
+        themes = readDir (sourceByRegex ./. ["$.*\\.rasi^"]).outPath;
+
+        themes-config = mapAttrs'
+          (name: val: nameValuePair ".config/rofi/themes/${name}" val)
+          themes;
+      in
+      {
+        ".config/rofi/config".source = ./config;
+      } // themes-config;
   };
 }
