@@ -19,7 +19,8 @@ with lib;
             mkOptionDefault {
             "${mod}+Print" = "exec --no-startup-id ${pkgs.flameshot}/bin/flameshot gui";
             "${mod}+Return" = "exec --no-startup-id ${pkgs.coreutils}/bin/env WINIT_X11_SCALE_FACTOR=1 ${config.modules.services.shell.emulator}/bin/*";
-            "${mod}+d" = "exec --no-startup-id ${pkgs.rofi}/bin/rofi -show run";
+            "${mod}+d" = "exec --no-startup-id ${pkgs.rofi}/bin/rofi -show drun";
+            "${mod}+Tab" = "exec --no-startup-id ${pkgs.rofi}/bin/rofi -show window";
             "${mod}+Ctrl+Left" = "move workspace to output left";
             "${mod}+Ctrl+Right" = "move workspace to output right";
             "${mod}+l" = "exec --no-startup-id ${pkgs.betterlockscreen}/bin/betterlockscreen -l dim -t 'Please type your password'";
