@@ -1,18 +1,18 @@
 self: super:
 
 let
-  nixos-unstable = import <nixos-unstable> {};
+  unstable = import <nixpkgs-unstable> {};
 in
 {
-  stack = nixos-unstable.stack;
-  ghc = nixos-unstable.ghc;
-  cabal-install = nixos-unstable.cabal-install;
+  stack = unstable.stack;
+  ghc = unstable.ghc;
+  cabal-install = unstable.cabal-install;
 
-  sd-switch = nixos-unstable.sd-switch;
+  sd-switch = unstable.sd-switch;
 
-  discord = nixos-unstable.discord;
+  discord = unstable.discord;
 
-  alacritty = nixos-unstable.alacritty;
+  alacritty = unstable.alacritty;
 
-  emacs = nixos-unstable.emacs;
+  emacs = unstable.emacs;
 }
