@@ -3,30 +3,47 @@
 }:
 
 let
-  script = pkgs.fetchurl {
-    url = https://raw.githubusercontent.com/msaitz/polybar-bluetooth/master/bluetooth.sh;
-    sha256 = "03gqz633001mbhj33c6a05g8mjqhm5s4rkbnz8f7x8fqxf0i18ss";
+  script = pkgs.writeTextFile {
+    name = "bluetooth.sh";
+    text = ''
+      #!${stdenv.shell}
+
+      if ! command -v bluetoothctl &> /dev/null; then
+         # bluetoothctl is unavailable
+         # This only happens if `hardware.bluetooth.enable` is set to `false`
+         # as Nix installs the required packages itself.
+         exit 0
+      fi
+
+      ICON=""
+      DISABLED="%{F#66ffffff}$ICON"
+      ENABLED="$ICON"
+      CONNECTED="%{F#2193ff}$ICON"
+      if (( $# > 0 )); then
+          DISABLED=$1
+          shift
+      fi
+      if (( $# > 0 )); then
+          ENABLED=$1
+          shift
+      fi
+      if (( $# > 0 )); then
+          CONNECTED=$1
+          shift
+      fi
+
+      if [ $(bluetoothctl show | grep "Powered: yes" | wc -c) -eq 0 ]; then
+          echo $DISABLED
+      elif [ $(echo info | bluetoothctl | grep 'Device' | wc -c) -eq 0 ]; then
+          echo $ENABLED
+      else
+          echo $CONNECTED
+      fi
+    '';
   };
   script-toggle = pkgs.fetchurl {
     url = https://raw.githubusercontent.com/msaitz/polybar-bluetooth/master/toggle_bluetooth.sh;
     sha256 = "1km98913al0swsb50zn5f08aqwxsgasrm1nr2cgy9mvgj97ki2ic";
-  };
-  script-scan = pkgs.writeTextFile {
-    name = "bluetooth.sh";
-    text =
-      builtins.replaceStrings
-        ["#!/bin/sh"
-         ""]
-        [''
-         #!${stdenv.shell}
-         if ! command -v bluetoothctl &> /dev/null; then
-           # bluetoothctl not found; bluetooth is not activated
-           echo ""
-           exit 0
-         fi
-         ''
-         ""]
-        (builtins.readFile script);
   };
 in
 pkgs.stdenv.mkDerivation rec {
@@ -38,7 +55,7 @@ pkgs.stdenv.mkDerivation rec {
 
   installPhase = ''
     mkdir -p $out/bin
-    install -m755 ${script-scan} $out/bin/bluetooth.sh
+    install -m755 ${script} $out/bin/bluetooth.sh
     install -m755 ${script-toggle} $out/bin/toggle_bluetooth.sh
   '';
 }
