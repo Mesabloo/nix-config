@@ -1,0 +1,4 @@
+config/polybar/*.ini linguist-vendored=false linguist-documentation=false linguist-detectable=true
+config/alacritty/*.yml linguist-vendored=false linguist-documentation=false linguist-detectable=true
+config/*/config linguist-vendored=false linguist-documentation=false linguist-detectable=true
+config/rofi/*.rasi linguist-language=CSS
