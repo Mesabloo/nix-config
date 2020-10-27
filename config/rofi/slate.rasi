@@ -1,9 +1,13 @@
 configuration {
 	modi: "window,drun";
-	font: "Cantarell Regular 11";
+	font: "Iosevka Medium 11";
 	show-icons: true;
 	display-window: "Switch to";
 	display-drun: "Launch";
+    scroll-method: 1;
+
+    drun-display-format: "{name} [<span weight='light' size='x-small'> ({generic})</span>]";
+    window-format: "{w:5} {c:20} {t}";
 }
 
 * {
@@ -11,7 +15,7 @@ configuration {
   border-color: #2e343f;
   text-color: #8ca0aa;
   spacing: 0;
-  width: 768px;
+  width: 50%;
 }
 
 window {
@@ -26,7 +30,7 @@ inputbar {
 
 prompt {
   padding: 12px 16px;
-  border: 0 1px 0 0;
+  border: 0;
 }
 
 textbox {
