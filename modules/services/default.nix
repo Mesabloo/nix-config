@@ -9,6 +9,7 @@
     ./fonts.nix
     ./net
     ./neuron.nix
+    ./oracle-xe.nix
     ./polybar.nix
     ./rofi.nix
     ./shell
