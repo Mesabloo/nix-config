@@ -2,10 +2,10 @@
 
 {
   config = lib.mkIf config.modules.services.polybar.enable {
-    home.file = {
-      ".config/polybar/launch.sh".source = ./launch.sh;
+    xdg.configFile = {
+      "polybar/launch.sh".source = ./launch.sh;
 
-      ".config/polybar/config".text =
+      "polybar/config".text =
         with lib; with builtins;
         let
           currentPath = ./.;
