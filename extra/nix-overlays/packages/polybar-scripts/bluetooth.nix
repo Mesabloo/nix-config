@@ -15,7 +15,7 @@ let
          exit 0
       fi
 
-      ICON=""
+      ICON=""
       DISABLED="%{F#66ffffff}$ICON"
       ENABLED="$ICON"
       CONNECTED="%{F#2193ff}$ICON"
