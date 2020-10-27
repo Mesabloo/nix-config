@@ -28,6 +28,7 @@ with lib;
               cat = "${pkgs.coreutils}/bin/cat";
               i3-msg = "${sysconfig.services.xserver.windowManager.i3.package}/bin/i3-msg";
               pactl = "${pkgs.pulseaudio}/bin/pactl";
+              column = "${pkgs.utillinux}/bin/column";
 
               brightnessctl-device = "${brightnessctl} --list | ${grep} kbd | ${awk} '{print $2}' | ${sed} -e \"s/'//g\"";
             in
@@ -69,14 +70,16 @@ with lib;
                   text =
                     let
                       awk-get-i3-keybinds =
-                        "${awk} '$2 ~ /Mod[0-9](\+[^\+]+)+/ { keybind=$2; $1=$2=\"\"; print keybind \": \" $0 }' < ${config.xdg.configHome}/i3/config";
+                        "${awk} '$2 ~ /Mod[0-9](\+[^\+]+)+/ { keybind=$2; $1=$2=\"\"; print keybind \":⁃\" $0 }' < ${config.xdg.configHome}/i3/config";
+                      make-table =
+                        "${column} -s':' -t";
                       rofi-show-keybinds =
-                        "${rofi} -dmenu -p \"Defined keybindings\" -theme-str 'element-text { font: \"Monospace 10\"; }'";
+                        "${rofi} -dmenu -p \"Defined keybindings\"";
                       awk-retrieve-keybind =
-                        "${awk} '{ $1=\"\"; print $0 }'";
+                        "${awk} '{ $1=$2=\"\"; print $0 }'";
                     in
                       ''
-                        ${i3-msg} $(${awk-get-i3-keybinds} | ${rofi-show-keybinds} | ${awk-retrieve-keybind})
+                        ${i3-msg} $(${awk-get-i3-keybinds} | ${make-table} | ${rofi-show-keybinds} | ${awk-retrieve-keybind})
                       '';
                   executable = true;
                 };
