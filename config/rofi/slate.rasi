@@ -1,3 +1,11 @@
+configuration {
+	modi: "window,drun";
+	font: "Cantarell Regular 11";
+	show-icons: true;
+	display-window: "Switch to";
+	display-drun: "Launch";
+}
+
 * {
   background-color: #212121;
   border-color: #2e343f;
@@ -35,7 +43,7 @@ entry {
 listview {
   cycle: true;
   margin: 0 0 -1px 0;
-  scrollbar: true;
+  scrollbar: false;
   lines: 10;
 }
 
@@ -48,6 +56,10 @@ element selected {
   background-color: #2e343f;
 }
 
+element-text {
+  margin: 0 0 0 10px;
+}
+
 element-icon {
-  margin: 0 15px 0 0;
+  size: 2ch;
 }
