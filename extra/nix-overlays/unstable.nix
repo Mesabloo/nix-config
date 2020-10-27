@@ -15,4 +15,6 @@ in
   alacritty = unstable.alacritty;
 
   emacs = unstable.emacs;
+
+  rofi = unstable.rofi;
 }
