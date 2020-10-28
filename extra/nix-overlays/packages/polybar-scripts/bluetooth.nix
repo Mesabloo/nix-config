@@ -3,12 +3,25 @@
 }:
 
 let
+  sysconfig = (import <nixpkgs/nixos> {}).config;
+  bluetoothEnabled = sysconfig.hardware.bluetooth.enable;
+
+  true_ = "${pkgs.coreutils}/bin/true";
+  false_ = "${pkgs.coreutils}/bin/false";
+  bluetoothctl =
+    if bluetoothEnabled
+    then "${pkgs.bluez}/bin/bluetoothctl"
+    else "2> ${pkgs.coreutils}/bin/cat";
+  wc = "${pkgs.coreutils}/bin/wc";
+  echo = "${pkgs.coreutils}/bin/echo";
+  grep = "${pkgs.gnugrep}/bin/grep";
+
   script = pkgs.writeTextFile {
     name = "bluetooth.sh";
     text = ''
       #!${stdenv.shell}
 
-      if ! command -v bluetoothctl &> /dev/null; then
+      if ${if bluetoothEnabled then false_ else true_}; then
          # bluetoothctl is unavailable
          # This only happens if `hardware.bluetooth.enable` is set to `false`
          # as Nix installs the required packages itself.
@@ -19,6 +32,7 @@ let
       DISABLED="%{F#66ffffff}$ICON"
       ENABLED="$ICON"
       CONNECTED="%{F#2193ff}$ICON"
+
       if (( $# > 0 )); then
           DISABLED=$1
           shift
@@ -32,12 +46,12 @@ let
           shift
       fi
 
-      if [ $(bluetoothctl show | grep "Powered: yes" | wc -c) -eq 0 ]; then
-          echo $DISABLED
-      elif [ $(echo info | bluetoothctl | grep 'Device' | wc -c) -eq 0 ]; then
-          echo $ENABLED
+      if [ $(${bluetoothctl} show | ${grep} 'Powered: yes' | ${wc} -c) -eq 0 ]; then
+          ${echo} $DISABLED
+      elif [ $(${bluetoothctl} <<< 'info' | ${grep} 'Device' | ${wc} -c) -eq 0 ]; then
+          ${echo} $ENABLED
       else
-          echo $CONNECTED
+          ${echo} $CONNECTED
       fi
     '';
   };
