@@ -79,6 +79,7 @@ with lib;
                         "${awk} '{ $1=$2=\"\"; print $0 }'";
                     in
                       ''
+                        #!${pkgs.stdenv.shell}
                         ${i3-msg} $(${awk-get-i3-keybinds} | ${make-table} | ${rofi-show-keybinds} | ${awk-retrieve-keybind})
                       '';
                   executable = true;
