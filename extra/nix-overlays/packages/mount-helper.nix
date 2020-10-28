@@ -10,6 +10,8 @@ let
   id = "${pkgs.coreutils}/bin/id";
   echo = "${pkgs.coreutils}/bin/echo";
   chown = "${pkgs.coreutils}/bin/chown";
+  sed = "${pkgs.gnused}/bin/sed";
+  grep = "${pkgs.gnugrep}/bin/grep";
 
   mount = pkgs.writeScriptBin "mount-helper" ''
     #!${stdenv.shell}
@@ -27,7 +29,7 @@ let
     fi
 
     DISK=$1
-    MOUNTPOINT=`$SUDO ${blkid} $DISK | ${awk} '{print $5}' | ${cut} -d "=" -f 2 | ${cut} -d '"' -f 2`
+    MOUNTPOINT=`$SUDO ${blkid} $DISK | ${grep} -o 'PARTUUID=".*"' | ${sed} 's/PARTUUID="\\(.*\\)/\\1/g"'`
     # ^^^^ Retrieves the PARTUUID of the disk
     TARGET=/run/media/$USER/$MOUNTPOINT
 
