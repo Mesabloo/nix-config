@@ -70,7 +70,7 @@ with lib;
                   text =
                     let
                       awk-get-i3-keybinds =
-                        "${awk} '$2 ~ /Mod[0-9](\+[^\+]+)+/ { keybind=$2; $1=$2=\"\"; print keybind \":⁃\" $0 }' < ${config.xdg.configHome}/i3/config";
+                        "${awk} '$2 ~ /(${mod}(\+[^\+]+)+)|(XF86.+)/ { keybind=$2; $1=$2=\"\"; print keybind \":⁃\" $0 }' < ${config.xdg.configHome}/i3/config";
                       make-table =
                         "${column} -s':' -t";
                       rofi-show-keybinds =
