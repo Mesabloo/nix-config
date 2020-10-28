@@ -16,6 +16,9 @@ with lib;
     home.packages = with pkgs; [
       dconf
 
+      gnome3.adwaita-icon-theme   # we need the icon theme else
+                                  # all icons are missing in pulseeffects
+
       pulseeffects
     ];
 
