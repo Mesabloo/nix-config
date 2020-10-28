@@ -17,4 +17,6 @@ in
   emacs = unstable.emacs;
 
   rofi = unstable.rofi;
+
+  screenkey = unstable.screenkey;
 }
