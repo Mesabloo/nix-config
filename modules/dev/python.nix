@@ -13,7 +13,7 @@ with lib;
 
   config = mkIf config.modules.dev.python.enable {
     home.packages = with pkgs; [
-      python3
+      python38
       python38Packages.pip   # Package installer
     ];
   };
