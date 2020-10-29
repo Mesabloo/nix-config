@@ -17,6 +17,8 @@ with lib;
       emacs
 
       # Will try to setup doom emacs with Nix later.
+
+      ispell
     ];
   };
 }
