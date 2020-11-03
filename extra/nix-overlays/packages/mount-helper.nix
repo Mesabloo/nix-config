@@ -29,7 +29,7 @@ let
     fi
 
     DISK=$1
-    MOUNTPOINT=`$SUDO ${blkid} $DISK | ${grep} -o 'PARTUUID=".*"' | ${sed} 's/PARTUUID="\\(.*\\)/\\1/g"'`
+    MOUNTPOINT=`$SUDO ${blkid} $DISK | ${grep} -o 'PARTUUID=".*"' | ${sed} 's/PARTUUID="\\(.*\\)"/\\1/g'`
     # ^^^^ Retrieves the PARTUUID of the disk
     TARGET=/run/media/$USER/$MOUNTPOINT
 
