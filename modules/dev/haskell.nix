@@ -20,7 +20,8 @@ with lib;
       stack
       # ^^^ See ./nix-overlays/unstable.nix
 
-      haskellPackages.hie
+      # haskellPackages.hie
+      haskell-language-server
     ];
   };
 }

@@ -9,5 +9,6 @@ in
   neuron = pkgs.callPackage ./neuron.nix { inherit pkgs; };
   mount-helper = pkgs.callPackage ./mount-helper.nix { inherit pkgs; };
   polybar-scripts = pkgs.callPackages ./polybar-scripts { inherit pkgs; };
+  haskell-language-server = pkgs.callPackages ./haskell-language-server.nix { inherit pkgs; };
   void-space = pkgs.callPackage ./void-space.nix { inherit pkgs; };
 }
