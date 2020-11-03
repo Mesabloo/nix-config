@@ -37,6 +37,7 @@
   modules.dev.git.enable = true;
 
   modules.games.powder-toy.enable = true;
+  modules.games.void-space.enable = true;
 
   modules.linux.core.enable = true;
   modules.linux.nix-utils.enable = true;
@@ -69,7 +70,7 @@
   modules.apps = {
     audacity.enable = true;
     flameshot.enable = true;
-    gimp.enable = true;
+    gimp.enable = false;
     nomacs.enable = true;
     obs.enable = true;
     office.enable = true;
@@ -82,7 +83,7 @@
 
   programs.home-manager = {
     enable = true;
-    path = "https://github.com/nix-community/home-manager/archive/9b1b55ba0264a55add4b7b4e022bdc2832b531f6.tar.gz";
+    path = "https://github.com/nix-community/home-manager/archive/release-20.03.tar.gz";
   };
 }
 
