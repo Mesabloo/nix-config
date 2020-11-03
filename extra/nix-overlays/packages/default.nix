@@ -9,4 +9,5 @@ in
   neuron = pkgs.callPackage ./neuron.nix { inherit pkgs; };
   mount-helper = pkgs.callPackage ./mount-helper.nix { inherit pkgs; };
   polybar-scripts = pkgs.callPackages ./polybar-scripts { inherit pkgs; };
+  void-space = pkgs.callPackage ./void-space.nix { inherit pkgs; };
 }
