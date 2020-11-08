@@ -11,7 +11,7 @@ with lib;
 
       # Fading
       fade = true;
-      fadeDelta = 5;
+      fadeDelta = 4;
       fadeSteps = [ "0.028" "0.03" ];
 
       backend = "xrender";
