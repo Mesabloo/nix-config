@@ -19,4 +19,9 @@ in
   rofi = unstable.rofi;
 
   screenkey = unstable.screenkey;
+
+  the-powder-toy = unstable.the-powder-toy;
+
+  agda = unstable.agda;
+  agda-pkg = unstable.agda-pkg;
 }

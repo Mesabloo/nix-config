@@ -11,9 +11,8 @@ with lib;
 
   config = mkIf config.modules.dev.agda.enable {
     home.packages = with pkgs; [
-      haskellPackages.Agda
-      # haskellPackages.Agda-executable
-      # AgdaStdlib
+      agda
+      agda-pkg
     ];
   };
 }
