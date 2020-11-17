@@ -27,6 +27,7 @@ with lib;
         mod = "Mod4";
 
         workspaces = [
+          "10"
           "1: social"
           "2: code"
           "3: www"
@@ -36,7 +37,6 @@ with lib;
           "7"
           "8"
           "9"
-          "10"
         ];
       in {
         config = {
@@ -48,7 +48,7 @@ with lib;
             let
               workspaceKeybinds = builtins.listToAttrs (flatten (imap0 (i: ws:
               let
-                i' = builtins.toString (i + 1);
+                i' = builtins.toString i;
               in
                 [ (nameValuePair "${mod}+${i'}" "workspace \"${ws}\"")
                   (nameValuePair "${mod}+Shift+${i'}" "move container to workspace \"${ws}\"")
@@ -75,8 +75,8 @@ with lib;
                       name = "fetch-i3-keybindings";
                       text =
                         let
-                          awk-get-i3-keybinds = "${awk} '$2 ~ /(${mod}(\+[^\+]+)+)|(XF86.+)/ { keybind=$2; $1=$2=\"\"; print keybind \":⁃\" $0 }' < ${config.xdg.configHome}/i3/config";
-                          make-table = "${column} -s':' -t";
+                          awk-get-i3-keybinds = "${awk} '$2 ~ /(${mod}(\+[^\+]+)+)|(XF86.+)/ { keybind=$2; $1=$2=\"\"; print keybind \"@⁃\" $0 }' < ${config.xdg.configHome}/i3/config";
+                          make-table = "${column} -s'@' -t";
                           rofi-show-keybinds = "${rofi} -dmenu -p \"Defined keybindings\"";
                           awk-retrieve-keybind = "${awk} '{ $1=$2=\"\"; print $0 }'";
                         in
@@ -101,6 +101,11 @@ with lib;
             );
 
           bars = [ { mode = "invisible"; } ];
+
+          assigns = builtins.listToAttrs [
+            (nameValuePair (elemAt workspaces 1) [{ class = "Discord"; }])
+            (nameValuePair (elemAt workspaces 2) [{ class = "emacs"; } { class = "jetbrains-idea-ce"; }])
+          ];
 
           focus = {
             mouseWarping = false;
