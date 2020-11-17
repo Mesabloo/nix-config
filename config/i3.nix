@@ -103,7 +103,7 @@ with lib;
           bars = [ { mode = "invisible"; } ];
 
           assigns = builtins.listToAttrs [
-            (nameValuePair (elemAt workspaces 1) [{ class = "Discord"; }])
+            (nameValuePair (elemAt workspaces 1) [{ class = "discord"; } { class = "microsoft teams - preview"; }])
             (nameValuePair (elemAt workspaces 2) [{ class = "emacs"; } { class = "jetbrains-idea-ce"; }])
             (nameValuePair (elemAt workspaces 3) [{ class = "brave-browser"; }])
           ];
