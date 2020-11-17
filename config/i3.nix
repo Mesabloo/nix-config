@@ -105,6 +105,7 @@ with lib;
           assigns = builtins.listToAttrs [
             (nameValuePair (elemAt workspaces 1) [{ class = "Discord"; }])
             (nameValuePair (elemAt workspaces 2) [{ class = "emacs"; } { class = "jetbrains-idea-ce"; }])
+            (nameValuePair (elemAt workspaces 3) [{ class = "brave-browser"; }])
           ];
 
           focus = {
