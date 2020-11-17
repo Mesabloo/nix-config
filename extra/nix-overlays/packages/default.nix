@@ -11,4 +11,5 @@ in
   polybar-scripts = pkgs.callPackages ./polybar-scripts { inherit pkgs; };
   haskell-language-server = pkgs.callPackages ./haskell-language-server.nix { inherit pkgs; };
   void-space = pkgs.callPackage ./void-space.nix { inherit pkgs; };
+  i3-workspace-swap = pkgs.callPackage ./i3-workspace-swap.nix { inherit pkgs; };
 }

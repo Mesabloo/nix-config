@@ -9,6 +9,19 @@ with lib;
     xsession.windowManager.i3 =
       let
         mod = "Mod4";
+
+        workspaces = [
+          "1: social"
+          "2: code"
+          "3: www"
+          "4"
+          "5"
+          "6"
+          "7"
+          "8"
+          "9"
+          "10"
+        ];
       in {
         config = {
           modifier = mod;
@@ -29,10 +42,12 @@ with lib;
               i3-msg = "${sysconfig.services.xserver.windowManager.i3.package}/bin/i3-msg";
               pactl = "${pkgs.pulseaudio}/bin/pactl";
               column = "${pkgs.utillinux}/bin/column";
+              i3-workspace-swap = "${pkgs.i3-workspace-swap}/bin/i3-workspace-swap";
 
               brightnessctl-device = "${brightnessctl} --list | ${grep} kbd | ${awk} '{print $2}' | ${sed} -e \"s/'//g\"";
             in
-            mkOptionDefault {
+              mkOptionDefault (
+                {
               "${mod}+Print" = "exec --no-startup-id ${flameshot} gui";
               "${mod}+Return" = "exec --no-startup-id ${env} WINIT_X11_SCALE_FACTOR=1 ${config.modules.services.shell.emulator}/bin/*";
               "${mod}+d" = "exec --no-startup-id ${rofi} -show drun";
@@ -42,25 +57,6 @@ with lib;
               "${mod}+l" = "exec --no-startup-id ${betterlockscreen} -l dim -t 'Please type your password'";
               "${mod}+Shift+F" = "floating enable, sticky enable";
               "${mod}+g" = "layout default";    # because we use i3-gaps, it's the gaps mode
-
-              "${mod}+1" = "workspace number 1";
-              "${mod}+2" = "workspace number 2";
-              "${mod}+3" = "workspace number 3";
-              "${mod}+4" = "workspace number 4";
-              "${mod}+5" = "workspace number 5";
-              "${mod}+6" = "workspace number 6";
-              "${mod}+7" = "workspace number 7";
-              "${mod}+8" = "workspace number 8";
-              "${mod}+9" = "workspace number 9";
-              "${mod}+Shift+1" = "move container to workspace number 1";
-              "${mod}+Shift+2" = "move container to workspace number 2";
-              "${mod}+Shift+3" = "move container to workspace number 3";
-              "${mod}+Shift+4" = "move container to workspace number 4";
-              "${mod}+Shift+5" = "move container to workspace number 5";
-              "${mod}+Shift+6" = "move container to workspace number 6";
-              "${mod}+Shift+7" = "move container to workspace number 7";
-              "${mod}+Shift+8" = "move container to workspace number 8";
-              "${mod}+Shift+9" = "move container to workspace number 9";
 
               # Help: show all defined keybinds, in lexical order.
               "${mod}+F1" =
@@ -95,7 +91,15 @@ with lib;
               "XF86AudioMute" = "exec --no-startup-id ${pactl} set-sink-mute @DEFAULT_SINK@ toggle";
               "XF86KbdBrightnessUp" = "exec --no-startup-id ${brightnessctl} --device=$(${brightnessctl-device}) s 1+";
               "XF86KbdBrightnessDown" = "exec --no-startup-id ${brightnessctl} --device=$(${brightnessctl-device}) s 1-";
-            };
+                } // (builtins.listToAttrs (flatten (imap0 (i: ws:
+                  let
+                    i' = builtins.toString (i + 1);
+                  in
+                    [ (nameValuePair "${mod}+${i'}" "workspace \"${ws}\"")
+                      (nameValuePair "${mod}+Shift+${i'}" "move container to workspace \"${ws}\"")
+                      (nameValuePair "${mod}+Control+${i'}" "exec --no-startup-id ${i3-workspace-swap} -d '${ws}' -f")
+                    ]) workspaces)))
+              );
 
             bars = [ { mode = "invisible"; } ];
 
@@ -119,7 +123,7 @@ with lib;
             startup = [
               { command = "${pkgs.numlockx}/bin/numlockx on"; always = true; notification = false; }
               { command = "${pkgs.nitrogen}/bin/nitrogen --restore"; always = true; notification = false; }
-              { command = "${pkgs.bash}/bin/bash ${config.xdg.configHome}/polybar/launch.sh"; }
+              { command = "${pkgs.bash}/bin/bash ${config.xdg.configHome}/polybar/launch.sh"; always = true; notification = false; }
             ];
 
             window = {
