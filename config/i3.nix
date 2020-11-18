@@ -103,9 +103,10 @@ with lib;
           bars = [ { mode = "invisible"; } ];
 
           assigns = builtins.listToAttrs [
-            (nameValuePair (elemAt workspaces 1) [{ class = "discord"; } { class = "Microsoft Teams - Preview"; }])
-            (nameValuePair (elemAt workspaces 2) [{ class = "emacs"; } { class = "jetbrains-idea-ce"; } { class = "jetbrains-studio"; }])
-            (nameValuePair (elemAt workspaces 3) [{ class = "brave-browser"; }])
+            (nameValuePair "\"${elemAt workspaces 1}\"" [{ class = "discord"; } { class = "Microsoft Teams - Preview"; }])
+            (nameValuePair "\"${elemAt workspaces 2}\"" [{ class = "Emacs"; } { class = "jetbrains-idea-ce"; } { class = "jetbrains-studio"; }])
+            (nameValuePair "\"${elemAt workspaces 3}\"" [{ class = "Brave-browser"; }])
+
           ];
 
           focus = {
