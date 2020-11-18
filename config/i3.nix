@@ -27,7 +27,7 @@ with lib;
         mod = "Mod4";
 
         workspaces = [
-          "10"
+#          "10"
           "1: social"
           "2: code"
           "3: www"
@@ -48,7 +48,7 @@ with lib;
             let
               workspaceKeybinds = builtins.listToAttrs (flatten (imap0 (i: ws:
               let
-                i' = builtins.toString i;
+                i' = builtins.toString (i + 1);
               in
                 [ (nameValuePair "${mod}+${i'}" "workspace \"${ws}\"")
                   (nameValuePair "${mod}+Shift+${i'}" "move container to workspace \"${ws}\"")
@@ -103,8 +103,8 @@ with lib;
           bars = [ { mode = "invisible"; } ];
 
           assigns = builtins.listToAttrs [
-            (nameValuePair (elemAt workspaces 1) [{ class = "discord"; } { class = "microsoft teams - preview"; }])
-            (nameValuePair (elemAt workspaces 2) [{ class = "emacs"; } { class = "jetbrains-idea-ce"; }])
+            (nameValuePair (elemAt workspaces 1) [{ class = "discord"; } { class = "Microsoft Teams - Preview"; }])
+            (nameValuePair (elemAt workspaces 2) [{ class = "emacs"; } { class = "jetbrains-idea-ce"; } { class = "jetbrains-studio"; }])
             (nameValuePair (elemAt workspaces 3) [{ class = "brave-browser"; }])
           ];
 
