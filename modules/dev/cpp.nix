@@ -41,9 +41,13 @@ with lib;
       libgcc
 
       scons     # another build manager, scriptable in python
-
-
-      (mkIf config.modules.dev.cpp.qt.enable config.modules.dev.cpp.qt.editor)
-    ];
+    ] ++
+	(if config.modules.dev.cpp.qt.enable
+	 then [
+	   config.modules.dev.cpp.qt.editor
+           qt5.full
+           qt5.qmake
+	 ]
+	 else []);
   };
 }
