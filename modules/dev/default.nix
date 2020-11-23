@@ -9,6 +9,7 @@
     ./git.nix
     ./haskell.nix
     ./java.nix
+    ./latex.nix
     ./prolog.nix
     ./python.nix
     ./rust.nix
