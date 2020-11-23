@@ -21,5 +21,9 @@ with lib;
       config.modules.dev.java.jdk
       jetbrains.idea-community  # Java IDE, because you can't program otherwise
     ];
+
+    home.sessionVariables = {
+      "JAVA_HOME" = "${config.modules.dev.java.jdk}/lib/openjdk";
+    };
   };
 }
