@@ -11,6 +11,7 @@
     ./java.nix
     ./latex.nix
     ./mercury.nix
+    ./ocaml.nix
     ./prolog.nix
     ./python.nix
     ./rust.nix
