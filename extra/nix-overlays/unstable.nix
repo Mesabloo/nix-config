@@ -24,4 +24,6 @@ in
 
   agda = unstable.agda;
   agda-pkg = unstable.agda-pkg;
+
+  mercury = unstable.mercury;
 }

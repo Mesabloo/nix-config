@@ -10,6 +10,7 @@
     ./haskell.nix
     ./java.nix
     ./latex.nix
+    ./mercury.nix
     ./prolog.nix
     ./python.nix
     ./rust.nix
