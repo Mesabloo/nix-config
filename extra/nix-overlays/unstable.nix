@@ -26,4 +26,6 @@ in
   agda-pkg = unstable.agda-pkg;
 
   mercury = unstable.mercury;
+
+  ocaml = unstable.ocaml;
 }

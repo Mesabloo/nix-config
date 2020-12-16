@@ -13,6 +13,11 @@ with lib;
     home.packages = with pkgs; [
       ocaml
       opam
+      dune_2
+
+      gnum4
     ];
+
+    modules.dev.cpp.enable = true;
   };
 }

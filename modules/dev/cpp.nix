@@ -41,6 +41,8 @@ with lib;
       libgcc
 
       scons     # another build manager, scriptable in python
+
+      autoconf
     ] ++
 	(if config.modules.dev.cpp.qt.enable
 	 then [

@@ -3,6 +3,7 @@
 with lib;
 let 
   sysconfig = (import <nixpkgs/nixos> {}).config;
+  home = config.home.homeDirectory;
 in
 {
   config = mkIf config.modules.services.shell.zsh.enable {
@@ -23,6 +24,10 @@ in
       shellAliases = mkIf sysconfig.virtualisation.docker.enable {
         "docker_run_oraclexe" = "${pkgs.docker}/bin/docker run -d -p 49161:1521 oracleinanutshell/oracle-xe-11g";
       };
+
+      initExtra = mkIf config.modules.dev.ocaml.enable ''
+        test -r ${home}/.opam/opam-init/init.zsh && . ${home}/.opam/opam-init/init.zsh &> /dev/null || true
+      '';
     };
   };
 }
