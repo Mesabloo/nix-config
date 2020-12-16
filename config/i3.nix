@@ -31,12 +31,12 @@ with lib;
           "1: "
           "2: "
           "3: "
-          "4"
-          "5"
+          "4: "
+          "5: "
           "6: "
-          "7"
-          "8"
-          "9"
+          "7: "
+          "8: "
+          "9: "
         ];
       in {
         config = {
@@ -104,7 +104,7 @@ with lib;
 
           assigns = builtins.listToAttrs [
             (nameValuePair "\"${elemAt workspaces 0}\"" [{ class = "discord"; } { class = "Microsoft Teams - Preview"; }])
-            (nameValuePair "\"${elemAt workspaces 1}\"" [{ class = "Emacs"; } { class = "jetbrains-idea-ce"; } { class = "jetbrains-studio"; }])
+            (nameValuePair "\"${elemAt workspaces 1}\"" [{ class = "Emacs"; } { class = "jetbrains-idea-ce"; } { class = "jetbrains-studio"; } { class = "QtCreator"; }])
             (nameValuePair "\"${elemAt workspaces 2}\"" [{ class = "Brave-browser"; }])
             (nameValuePair "\"${elemAt workspaces 5}\"" [{ class = "Pulseeffects"; } { class = "Pavucontrol"; }])
           ];
