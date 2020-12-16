@@ -17,6 +17,7 @@
     ./rust.nix
     ./scala.nix
     ./vscode.nix
+    ./web.nix
   ];
 
   config = {};
