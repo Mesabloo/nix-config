@@ -28,12 +28,12 @@ with lib;
 
         workspaces = [
 #          "10"
-          "1: social"
-          "2: code"
-          "3: www"
+          "1: "
+          "2: "
+          "3: "
           "4"
           "5"
-          "6"
+          "6: "
           "7"
           "8"
           "9"
@@ -106,7 +106,7 @@ with lib;
             (nameValuePair "\"${elemAt workspaces 0}\"" [{ class = "discord"; } { class = "Microsoft Teams - Preview"; }])
             (nameValuePair "\"${elemAt workspaces 1}\"" [{ class = "Emacs"; } { class = "jetbrains-idea-ce"; } { class = "jetbrains-studio"; }])
             (nameValuePair "\"${elemAt workspaces 2}\"" [{ class = "Brave-browser"; }])
-
+            (nameValuePair "\"${elemAt workspaces 5}\"" [{ class = "Pulseeffects"; } { class = "Pavucontrol"; }])
           ];
 
           focus = {
@@ -115,7 +115,7 @@ with lib;
 
           floating = {
             border = 0;
-            criteria = [ { class = "floating"; } ];
+            criteria = [ { class = "floating"; } { title = "Microsoft Teams Notification"; } ];
           };
 
           gaps = {
@@ -138,6 +138,10 @@ with lib;
 
           workspaceAutoBackAndForth = true;
         };
+
+        extraConfig = ''
+          no_focus [title="Microsoft Teams Notification"]
+        '';
       };
   };
 }
