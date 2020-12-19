@@ -29,5 +29,7 @@ in
         test -r ${home}/.opam/opam-init/init.zsh && . ${home}/.opam/opam-init/init.zsh &> /dev/null || true
       '';
     };
+
+    programs.command-not-found.enable = true;
   };
 }
