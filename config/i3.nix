@@ -67,6 +67,8 @@ with lib;
                 "${mod}+l" = "exec --no-startup-id ${betterlockscreen} -l dim -t 'Please type your password'";
                 "${mod}+Shift+F" = "floating enable, sticky enable";
                 "${mod}+g" = "layout default";    # because we use i3-gaps, it's the gaps mode
+                "${mod}+equal" = "move scratchpad";
+                "${mod}+Shift+equal" = "scratchpad show";
 
                 # Help: show all defined keybinds, in lexical order.
                 "${mod}+F1" =
