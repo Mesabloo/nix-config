@@ -20,6 +20,4 @@ colors:
   primary:
     background: '#3f3f3f'
 
-background_opacity: 0.95
-
 live_config_reload: true
