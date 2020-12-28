@@ -6,7 +6,7 @@ This one is an exception.
 
 ### Screenshots
 
-![screenshot](./assets/screenshot-12-28-2020.png)
+![screenshot](./assets/desktop-12-28-2020.png)
 
 - Top-right corner: [`pipes.sh`](https://github.com/pipeseroni/pipes.sh) running in alacritty
 - Bottom-right corner: the NixOS logo viewed in nomacs
