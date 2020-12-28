@@ -14,6 +14,7 @@
     ./gtk.nix
     ./haskell.nix
     ./neuron.nix
+    ./qt.nix
     ./termite.nix
     ./x.nix
     ./zsh.nix
