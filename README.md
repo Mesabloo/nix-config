@@ -6,8 +6,8 @@ This one is an exception.
 
 ### Screenshots
 
-![screenshot](./assets/emacs-termite-nmtui.png)
+![screenshot](./assets/screenshot-12-28-2020.png)
 
-Left: doom emacs
-
-Right: Alacritty running `stack ghci`
+- Top-right corner: [`pipes.sh`](https://github.com/pipeseroni/pipes.sh) running in alacritty
+- Bottom-right corner: the NixOS logo viewed in nomacs
+- Left border: [`void-space`](https://github.com/ChrisPenner/void-space), a terminal game written in Haskell where you have to type non-sense fast
