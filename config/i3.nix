@@ -34,8 +34,8 @@ with lib;
           "3: "
           "4: "
           "5: "
-          "6: "
-          "7: "
+          "6: "
+          "7: "
           "8: "
           "9: "
         ];
@@ -113,7 +113,8 @@ with lib;
             (nameValuePair "\"${elemAt workspaces 0}\"" [{ class = "discord"; } { class = "Microsoft Teams - Preview"; }])
             (nameValuePair "\"${elemAt workspaces 1}\"" [{ class = "Emacs"; } { class = "jetbrains-idea-ce"; } { class = "jetbrains-studio"; } { class = "QtCreator"; }])
             (nameValuePair "\"${elemAt workspaces 2}\"" [{ class = "Brave-browser"; }])
-            (nameValuePair "\"${elemAt workspaces 5}\"" [{ class = "Pulseeffects"; } { class = "Pavucontrol"; }])
+            (nameValuePair "\"${elemAt workspaces 5}\"" [{ class = "vlc"; }])
+            (nameValuePair "\"${elemAt workspaces 6}\"" [{ class = "Pulseeffects"; } { class = "Pavucontrol"; }])
           ];
 
           focus = {
