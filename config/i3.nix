@@ -16,6 +16,7 @@ let
   pactl = "${pkgs.pulseaudio}/bin/pactl";
   column = "${pkgs.utillinux}/bin/column";
   i3-workspace-swap = "${pkgs.i3-workspace-swap}/bin/i3-workspace-swap";
+  player-mpris-tail = "${pkgs.polybar-scripts.player-mpris-tail}/bin/player-mpris-tail";
 
   brightnessctl-device = "${brightnessctl} --list | ${grep} kbd | ${awk} '{print $2}' | ${sed} -e \"s/'//g\"";
 in
@@ -99,6 +100,10 @@ with lib;
                   "XF86AudioMute" = "exec --no-startup-id ${pactl} set-sink-mute @DEFAULT_SINK@ toggle";
                   "XF86KbdBrightnessUp" = "exec --no-startup-id ${brightnessctl} --device=$(${brightnessctl-device}) s 1+";
                   "XF86KbdBrightnessDown" = "exec --no-startup-id ${brightnessctl} --device=$(${brightnessctl-device}) s 1-";
+                  "XF86AudioPrev" = "exec --no-startup-id ${player-mpris-tail} previous";
+                  "XF86AudioNext" = "exec --no-startup-id ${player-mpris-tail} next";
+                  "XF86AudioPlay" = "exec --no-startup-id ${player-mpris-tail} play-pause";
+                  "XF86AudioStop" = "exec --no-startup-id ${player-mpris-tail} stop";
               } // workspaceKeybinds
             );
 
