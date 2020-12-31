@@ -5,7 +5,7 @@
     gtk.enable = true;
 
     gtk.theme = {
-      package = pkgs.gnome-breeze;
+      package = pkgs.breeze-gtk;
       name = "Breeze-Dark";
     };
 
@@ -16,8 +16,8 @@
     };
 
     gtk.iconTheme = {
-      package = pkgs.gnome-breeze;
-      name = "breeze";
+      package = pkgs.breeze-icons;
+      name = "breeze-dark";
     };
 
     gtk.font = {
@@ -27,6 +27,8 @@
 
     home.packages = with pkgs; [
       capitaine-cursors
+      gtk_engines
+      gnome3.gnome-themes-extra
     ];
 
     /*
