@@ -11,7 +11,7 @@ in
       enableAutosuggestions = true;
       enableCompletion = true;
       localVariables = {
-        PATH = "$PATH:$HOME/.local/bin";
+        PATH = "$PATH:${home}/.local/bin";
       } // (mkIf config.modules.dev.git.enable {
         GIT_SSL_CAINFO = "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt";
       });
