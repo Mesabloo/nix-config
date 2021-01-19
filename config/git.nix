@@ -1,4 +1,4 @@
-{ config, options, lib, ... }:
+{ config, options, lib, pkgs, ... }:
 
 with lib;
 {
@@ -6,6 +6,13 @@ with lib;
     programs.git = {
       userName = "Mesabloo";
       userEmail = "22964017+Mesabloo@users.noreply.github.com";
+      # delta.enable = true;
+
+      extraConfig = {
+        http = {
+          "sslCAinfo" = "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt";
+        };
+      };
     };
   };
 }
