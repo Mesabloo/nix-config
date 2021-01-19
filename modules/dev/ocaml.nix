@@ -16,6 +16,8 @@ with lib;
       dune_2
 
       gnum4
+
+      ocamlPackages.utop
     ];
 
     modules.dev.cpp.enable = true;
