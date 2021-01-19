@@ -110,7 +110,7 @@ with lib;
           bars = [ { mode = "invisible"; } ];
 
           assigns = builtins.listToAttrs [
-            (nameValuePair "\"${elemAt workspaces 0}\"" [{ class = "discord"; } { class = "Microsoft Teams - Preview"; }])
+            (nameValuePair "\"${elemAt workspaces 0}\"" [{ class = "discord"; } { title = "^(?!Microsoft Teams Notification).*$"; class = "Microsoft Teams - Preview"; }])
             (nameValuePair "\"${elemAt workspaces 1}\"" [{ class = "Emacs"; } { class = "jetbrains-idea-ce"; } { class = "jetbrains-studio"; } { class = "QtCreator"; }])
             (nameValuePair "\"${elemAt workspaces 2}\"" [{ class = "Brave-browser"; }])
             (nameValuePair "\"${elemAt workspaces 5}\"" [{ class = "vlc"; }])
