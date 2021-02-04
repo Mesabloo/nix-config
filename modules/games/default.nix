@@ -2,6 +2,7 @@
 
 {
   imports = [
+    ./minecraft.nix
     ./powder-toy.nix
     ./void-space.nix
   ];
