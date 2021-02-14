@@ -11,19 +11,19 @@ with lib;
         follow = "mouse";
 
         # The geometry of the window
-        geometry = "450x0-20+30";
+        geometry = "450x10-10+48";
 
         # Show how many messages are currently hidden (because of geometry)
-        indicate_hidden = false;
+        indicate_hidden = true;
 
         # Draw a line of "separator_height" pixel height between two notifications
-        separator_height = 1;
+        separator_height = 0;
 
         # Padding between text and separator
-        padding = 20;
+        padding = 10;
 
         # Horizontal padding
-        horizontal_padding = 20;
+        horizontal_padding = 10;
 
         # Defines width in pixels of frame around the notification window
         # Set to 0 to disable
@@ -33,7 +33,7 @@ with lib;
         frame_color = "#363636";
 
         # Defines a color for the separator
-        separator_color = "#d62048";
+        separator_color = "#bfbfbf";
 
         # Sort messages by urgency
         sort = true;
@@ -83,7 +83,7 @@ with lib;
         #   %n  progress value if set without any extra characters
         #   %%  literal %
         # Markup is allowed
-        format = "%a – %s\\n<span foreground='#dddddd'>%b</span>";
+        format = "<big><b>%s</b></big>\\n──────────────────────────────────────────\\n%b<small><sub>\\n\\n%a</sub></small>";
 
         # Alignment of message text
         # Possible values are "left", "center" and "right"
@@ -96,7 +96,7 @@ with lib;
 
         # Split notifications into multiple lines if the don't fit into
         # geometry
-        word_wrap = false;
+        word_wrap = true;
 
         # When "word_wrap" is set to no, specify where to make an ellipsis in long lines
         # Possible values are "start", "middle" and "end"
@@ -109,7 +109,7 @@ with lib;
         stack_duplicates = true;
 
         # Hide the count of stacked notifications with the same content
-        hide_duplicate_count = false;
+        hide_duplicate_count = true;
 
         # Display indicators for URLs (U) and actions (A)
         show_indicators = false;
@@ -124,6 +124,8 @@ with lib;
         # Path to default icons
         # icon_path = "";
 
+        vertical_alignment = "top";
+
 
         # Should a notification popped up from history be sticky or timeout
         # as if it would normally do
@@ -132,6 +134,9 @@ with lib;
         # Maximum amount of notifications kept in history
         history_length = 20;
 
+
+        # Menu for commands
+        dmenu = "${pkgs.rofi}/bin/rofi -dmenu -p dunst";
 
         # Browser for opening urls in context menu
         browser = "${pkgs.brave}/bin/brave --new-tab";
@@ -166,6 +171,11 @@ with lib;
         mouse_right_click = "close_all";
       };
 
+      frame = {
+        color = "#212121";
+        width = 0;
+      };
+
       urgency_low = {
         background = "#212121";
         foreground = "#ed82b4";
@@ -174,7 +184,7 @@ with lib;
 
       urgency_normal = {
         background = "#212121";
-        foreground = "#f55ba3";
+        foreground = "#dddddd"; #"#f55ba3";
         timeout = 5;
       };
 
