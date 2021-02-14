@@ -14,7 +14,7 @@ with lib;
         geometry = "450x10-10+48";
 
         # Show how many messages are currently hidden (because of geometry)
-        indicate_hidden = true;
+        indicate_hidden = false;
 
         # Draw a line of "separator_height" pixel height between two notifications
         separator_height = 0;
@@ -83,7 +83,7 @@ with lib;
         #   %n  progress value if set without any extra characters
         #   %%  literal %
         # Markup is allowed
-        format = "<big><b>%s</b></big>\\n──────────────────────────────────────────\\n%b<small><sub>\\n\\n%a</sub></small>";
+        format = "<big><b>%s</b></big>\\n<small>\\n</small>%b<small><sub>\\n\\n%a</sub></small>";
 
         # Alignment of message text
         # Possible values are "left", "center" and "right"
@@ -92,7 +92,7 @@ with lib;
         # Show age of message if message if older than "show_age_threshold"
         # seconds
         # Set to -1 to disable
-        show_age_threshold = 60;
+        show_age_threshold = -1;
 
         # Split notifications into multiple lines if the don't fit into
         # geometry
