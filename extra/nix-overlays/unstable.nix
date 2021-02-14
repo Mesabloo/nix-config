@@ -29,4 +29,6 @@ in
   mercury = unstable.mercury;
 
   ocaml = unstable.ocaml;
+
+  dunst = unstable.dunst;
 }
