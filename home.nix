@@ -65,7 +65,9 @@
 
   modules.services.archive.enable = true;
 
-  modules.services.neuron.enable = true;
+  modules.services.neuron.enable = false;
+
+  modules.services.unipicker.enable = true;
 
   modules.apps = {
     audacity.enable = true;
