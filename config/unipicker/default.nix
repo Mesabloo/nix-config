@@ -6,8 +6,14 @@ with lib;
     home.file.".unipickerrc".text =
       let
         postProcess = builtins.replaceStrings
-          [ "##ROFI##" "##SYMBOLS##" ]
-          [ "${pkgs.rofi}/bin/rofi -dmenu" "${pkgs.unipicker}/share/unipicker/symbols" ];
+          [ "##ROFI##"
+            "##SYMBOLS##" ]
+          [ "${pkgs.rofi}/bin/rofi -dmenu -p 'Unicode character:'"
+            "${pkgs.unipicker}/share/unipicker/symbols" ];
       in postProcess (builtins.readFile ./unipickerrc);
+
+    home.packages = with pkgs; [
+      roboto
+    ];
   };
 }
