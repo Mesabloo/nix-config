@@ -18,6 +18,8 @@ let
   i3-workspace-swap = "${pkgs.i3-workspace-swap}/bin/i3-workspace-swap";
   player-mpris-tail = "${pkgs.polybar-scripts.player-mpris-tail}/bin/player-mpris-tail";
 
+  unipicker = "${pkgs.unipicker}/bin/unipicker";
+
   brightnessctl-device = "${brightnessctl} --list | ${grep} kbd | ${awk} '{print $2}' | ${sed} -e \"s/'//g\"";
 in
 with lib;
@@ -70,6 +72,7 @@ with lib;
                 "${mod}+g" = "layout default";    # because we use i3-gaps, it's the gaps mode
                 "${mod}+equal" = "move scratchpad";
                 "${mod}+Shift+equal" = "scratchpad show";
+                "${mod}+Shift+u" = "exec --no-startup-id ${unipicker} --copy";
 
                 # Help: show all defined keybinds, in lexical order.
                 "${mod}+F1" =
