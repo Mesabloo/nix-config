@@ -14,6 +14,7 @@
     ./rofi.nix
     ./shell
     ./sound
+    ./unipicker.nix
   ];
 
   options = {};

@@ -6,6 +6,7 @@
     ./alacritty
     ./polybar
     ./rofi
+    ./unipicker
 
     ./compton.nix
     ./deadd.nix
