@@ -17,7 +17,7 @@ with lib;
 
       gnum4
 
-      ocamlPackages.utop
+      # ocamlPackages.utop
     ];
 
     modules.dev.cpp.enable = true;
