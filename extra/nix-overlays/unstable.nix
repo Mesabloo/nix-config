@@ -31,4 +31,6 @@ in
   ocaml = unstable.ocaml;
 
   dunst = unstable.dunst;
+
+  coq = unstable.coq;
 }
