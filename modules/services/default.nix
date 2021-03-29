@@ -3,6 +3,7 @@
 {
   imports = [
     ./archive
+    ./asciinema.nix
     ./compton.nix
     ./deadd.nix
     ./dunst.nix
