@@ -22,6 +22,8 @@ with lib;
 
       # haskellPackages.hie
       haskell-language-server
+
+      haskellPackages.hoogle
     ];
   };
 }
