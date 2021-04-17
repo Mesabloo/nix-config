@@ -13,4 +13,5 @@ in
   void-space = pkgs.callPackage ./void-space.nix { inherit pkgs; };
   i3-workspace-swap = pkgs.callPackage ./i3-workspace-swap.nix { inherit pkgs; };
   unipicker = pkgs.callPackage ./unipicker.nix { inherit pkgs; };
+  acc = pkgs.callPackage ./acc.nix { inherit pkgs; };
 }
