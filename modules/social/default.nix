@@ -3,6 +3,7 @@
 {
   imports = [
     ./discord.nix
+    ./mattermost.nix
   ];
 
   config = {};
