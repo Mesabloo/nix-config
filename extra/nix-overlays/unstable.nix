@@ -33,4 +33,11 @@ in
   dunst = unstable.dunst;
 
   coq = unstable.coq;
+
+  nerdfonts = unstable.nerdfonts;
+
+#  glibc = unstable.glibc;
+#  gcc = unstable.gcc;
+
+  brave = unstable.brave;
 }
