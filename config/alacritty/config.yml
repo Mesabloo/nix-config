@@ -18,6 +18,31 @@ draw_bold_text_with_bright_colors: false
 
 colors:
   primary:
-    background: '#3f3f3f'
+    background: '0x212121'
+    foreground: '0xd0d0d0'
+
+  cursor:
+    text: '0xd0d0d0'
+    cursor: '0xd0d0d0'
+
+  normal:
+    black:   '0x151515'
+    red:     '0xac4142'
+    green:   '0x7e8e50'
+    yellow:  '0xe5b567'
+    blue:    '0x6c99bb'
+    magenta: '0x9f4e85'
+    cyan:    '0x7dd6cf'
+    white:   '0xd0d0d0'
+
+  bright:
+    black:   '0x505050'
+    red:     '0xac4142'
+    green:   '0x7e8e50'
+    yellow:  '0xe5b567'
+    blue:    '0x6c99bb'
+    magenta: '0x9f4e85'
+    cyan:    '0x7dd6cf'
+    white:   '0xf5f5f5'
 
 live_config_reload: true
