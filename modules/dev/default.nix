@@ -4,6 +4,7 @@
   imports = [
     ./agda.nix
     ./android.nix
+    ./ats2.nix
     ./coq.nix
     ./cpp.nix
     ./emacs.nix
