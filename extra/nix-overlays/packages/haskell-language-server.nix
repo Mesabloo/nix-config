@@ -4,11 +4,11 @@
 
 stdenv.mkDerivation rec {
   name = "haskell-language-server";
-  version = "0.5.1";
+  version = "1.1.0";
 
   src = pkgs.fetchurl {
     url = "https://github.com/haskell/haskell-language-server/releases/download/${version}/haskell-language-server-Linux-${version}.tar.gz";
-    sha256 = "1ss4p1y7d2brcyjawbxsjczpnvwy69mzirid6bcv2crhh9isd04g";
+    sha256 = "13r04b2sm8gj71zp7qjbjndra0b8ccfdfpsnixjp70m0x6qas38g";
   };
 
   buildInputs = with pkgs; [
