@@ -31,6 +31,8 @@ with lib;
       # ^^^^^ Conflicts with gcc
       cmake     # prefered build manager
 
+      ccls
+
       doxygen   # because we want to write some documentation
 
       gcc       # C and C++ compilers (mostly)
