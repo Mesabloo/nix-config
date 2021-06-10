@@ -40,4 +40,6 @@ in
 #  gcc = unstable.gcc;
 
   brave = unstable.brave;
+
+  pentablet-driver = unstable.pentablet-driver;
 }
