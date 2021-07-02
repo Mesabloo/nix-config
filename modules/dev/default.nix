@@ -15,6 +15,7 @@
     ./mercury.nix
     ./ocaml.nix
     ./prolog.nix
+    ./purescript.nix
     ./python.nix
     ./rust.nix
     ./scala.nix
