@@ -1,3 +1,5 @@
+/* -*- css -*- */
+
 configuration {
   modi: "window,drun";
   font: "Iosevka Medium 11";
@@ -11,16 +13,16 @@ configuration {
 }
 
 * {
-  background-color: rgba(33, 33, 33, 60%); /* #212121 */
-  border-color: #2e343f;
-  text-color: #8ca0aa;
+  background-color: #2E3440;
+  border-color: #4C566A;
+  text-color: #E5E9F0;
   spacing: 0;
   width: 960px;
 }
 
 inputbar {
   border: 0 0 2px 0;
-  border-color: #d62048;
+  border-color: #5E81AC;
   children: [prompt,entry];
 }
 
@@ -50,7 +52,7 @@ element {
 }
 
 element selected {
-  background-color: rgba(46, 52, 63, 65%); /* #2e343f */
+  background-color: #4C566A;
 }
 
 element-text {

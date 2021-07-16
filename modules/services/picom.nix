@@ -4,18 +4,18 @@
 
 with lib;
 {
-  options.modules.services.compton = {
+  options.modules.services.picom = {
     enable = mkOption {
       type = types.bool;
       default = false;
     };
   };
 
-  config = mkIf config.modules.services.compton.enable {
+  config = mkIf config.modules.services.picom.enable {
     services.picom.enable = true;
 
     home.packages = with pkgs; [
-      compton
+      picom
     ];
   };
 }

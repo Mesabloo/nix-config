@@ -19,7 +19,7 @@ with lib;
       gnome3.adwaita-icon-theme   # we need the icon theme else
                                   # all icons are missing in pulseeffects
 
-      pulseeffects
+      pulseeffects-legacy
     ];
 
     dconf.enable = true;

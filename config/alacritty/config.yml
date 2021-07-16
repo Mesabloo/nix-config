@@ -8,8 +8,8 @@ window:
 
 font:
   normal:
-    family: Iosevka
-    style: Medium Extended
+    family: Iosevka Nerd Font
+    style: Medium
 
   size: 10.0
   scale_with_dpi: false
@@ -18,32 +18,32 @@ draw_bold_text_with_bright_colors: false
 
 colors:
   primary:
-    background: '0x212121'
-    foreground: '0xd0d0d0'
+    background: '0x2E3440'
+    foreground: '0xE5E9F0'
 
   cursor:
-    text: '0xd0d0d0'
-    cursor: '0xd0d0d0'
+    text: '0xE5E9F0'
+    cursor: '0xE5E9F0'
 
   normal:
-    black:   '0x151515'
-    red:     '0xac4142'
-    green:   '0x7e8e50'
-    yellow:  '0xe5b567'
-    blue:    '0x6c99bb'
-    magenta: '0x9f4e85'
-    cyan:    '0x7dd6cf'
-    white:   '0xd0d0d0'
+    black:   '0x3B4252'
+    red:     '0xBF616A'
+    green:   '0xA3BE8B'
+    yellow:  '0xEBCB8B'
+    blue:    '0x5E81AC'
+    magenta: '0xB48EAD'
+    cyan:    '0x88C0D0'
+    white:   '0xECEFF4'
 
-  bright:
-    black:   '0x505050'
-    red:     '0xac4142'
-    green:   '0x7e8e50'
-    yellow:  '0xe5b567'
-    blue:    '0x6c99bb'
-    magenta: '0x9f4e85'
-    cyan:    '0x7dd6cf'
-    white:   '0xf5f5f5'
+#  bright:
+#    black:   '0x505050'
+#    red:     '0xac4142'
+#    green:   '0x7e8e50'
+#    yellow:  '0xe5b567'
+#    blue:    '0x6c99bb'
+#    magenta: '0x9f4e85'
+#    cyan:    '0x7dd6cf'
+#    white:   '0xf5f5f5'
 
 live_config_reload: true
 

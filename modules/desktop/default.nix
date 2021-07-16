@@ -3,6 +3,7 @@
 {
   imports = [
     ./i3.nix
+    ./xmonad.nix
     ./xorg.nix
   ];
 

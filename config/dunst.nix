@@ -11,7 +11,7 @@ with lib;
         follow = "mouse";
 
         # The geometry of the window
-        geometry = "450x10-10+48";
+        geometry = "450x10-25+25";
 
         # Show how many messages are currently hidden (because of geometry)
         indicate_hidden = false;
@@ -29,11 +29,8 @@ with lib;
         # Set to 0 to disable
         frame_width = 2;
 
-        # Defines color of the frame around the notification window
-        frame_color = "#363636";
-
         # Defines a color for the separator
-        separator_color = "#bfbfbf";
+        separator_color = "#D8DEE9";
 
         # Sort messages by urgency
         sort = true;
@@ -43,7 +40,7 @@ with lib;
         idle_threshold = 120;
 
 
-        font = "FontAwesome 10";
+        font = "M+ 2p Medium 9.5";
 
         # The spacing between lines. If the height is smaller than the
         # font height, it will get raised to the font height
@@ -163,7 +160,7 @@ with lib;
         verbosity = "mesg";
 
         # Define the corner radius of the notification window
-        corner_radius = 2;
+        corner_radius = 4;
 
 
         mouse_left_click = "close_current";
@@ -172,27 +169,35 @@ with lib;
       };
 
       frame = {
-        color = "#212121";
+        color = "#81A1C1";
         width = 0;
       };
 
       urgency_low = {
-        background = "#212121";
-        foreground = "#ed82b4";
+        background = "#2E3440";
+        foreground = "#E5E9F0";
+        # Defines color of the frame around the notification window
+        frame_color = "#D8DEE9";
         timeout = 5;
       };
 
       urgency_normal = {
-        background = "#212121";
-        foreground = "#dddddd"; #"#f55ba3";
+        background = "#2E3440";
+        foreground = "#E5E9F0";
+        # Defines color of the frame around the notification window
+        frame_color = "#81A1C1";
         timeout = 5;
       };
 
       urgency_critical = {
-        background = "#212121";
-        foreground = "#cf0e68";
+        background = "#2E3440";
+        foreground = "#E5E9F0";
+        # Defines color of the frame around the notification window
+        frame_color = "#BF616A";
         timeout = 0;
       };
     };
+
+    modules.services.fonts.mplus.enable = mkDefault true;
   };
 }

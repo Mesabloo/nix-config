@@ -5,19 +5,19 @@
     gtk.enable = true;
 
     gtk.theme = {
-      package = pkgs.breeze-gtk;
-      name = "Breeze-Dark";
+      package = pkgs.nordic;
+      name = "Nordic";
     };
 
     gtk.gtk3.extraConfig = {
       gtk-cursor-theme-name = "capitaine-cursors";
-      gtk-cursor-theme-size = 24;
+      gtk-cursor-theme-size = 30;
       gtk-application-prefer-dark-theme = 1;
     };
 
     gtk.iconTheme = {
-      package = pkgs.breeze-icons;
-      name = "breeze-dark";
+      package = pkgs.nordic;
+      name = "Nordic";
     };
 
     gtk.font = {

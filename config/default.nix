@@ -7,14 +7,15 @@
     ./polybar
     ./rofi
     ./unipicker
+    ./xmonad
 
-    ./compton.nix
     ./deadd.nix
     ./dunst.nix
     ./git.nix
     ./gtk.nix
     ./haskell.nix
     ./neuron.nix
+    ./picom.nix
     ./qt.nix
     ./termite.nix
     ./x.nix

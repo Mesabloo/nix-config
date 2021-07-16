@@ -6,8 +6,17 @@ This one is an exception.
 
 ### Screenshots
 
-![screenshot](./assets/desktop-12-28-2020.png)
+##### Dual screen
 
-- Top-right corner: [`pipes.sh`](https://github.com/pipeseroni/pipes.sh) running in alacritty
-- Bottom-right corner: the NixOS logo viewed in nomacs
-- Left border: [`void-space`](https://github.com/ChrisPenner/void-space), a terminal game written in Haskell where you have to type non-sense fast
+- Left screen:
+  ![left screen](./assets/desktop-07-16-2021_2.png)
+  
+  - Left: emacs
+  - Right: alacritty
+  
+- Right screen:
+  ![right screen](./assets/desktop-07-16-2021_1.png)
+  
+  - Bottom-left: pipes.sh
+  - Bottom-right: nomacs
+  - Middle: brave

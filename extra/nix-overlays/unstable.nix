@@ -42,4 +42,6 @@ in
   brave = unstable.brave;
 
   pentablet-driver = unstable.pentablet-driver;
+
+  purescript = unstable.purescript;
 }

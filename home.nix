@@ -1,5 +1,6 @@
-{ config, options, pkgs, ... }:
+{ config, options, pkgs, lib, ... }:
 
+with lib;
 {
   require = [ ./extra/nix-overlays ];
 
@@ -12,7 +13,10 @@
 
   #################################################################
 
-  modules.desktop.i3.enable = true;
+  manual.manpages.enable = false;
+
+  modules.desktop.i3.enable = false;
+  modules.desktop.xmonad.enable = true;
   modules.desktop.xorg.utils.enable = true;
 
   modules.dev.agda.enable = false;
@@ -45,8 +49,9 @@
 
   modules.social.discord.enable = true;
 
-  # modules.services.dunst.enable = true;
-  modules.services.deadd.enable = true;
+  modules.services.asciinema.enable = true;
+  modules.services.dunst.enable = true;
+  # modules.services.deadd.enable = true;
   modules.services.polybar.enable = true;
   modules.services.rofi.enable = true;
 
@@ -56,7 +61,7 @@
     oh-my-zsh.enable = true;
   };
 
-  modules.services.compton.enable = true;
+  modules.services.picom.enable = true;
 
   modules.services.sound = {
     enable = true;

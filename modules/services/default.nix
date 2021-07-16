@@ -4,18 +4,19 @@
   imports = [
     ./archive
     ./asciinema.nix
-    ./compton.nix
     ./deadd.nix
     ./dunst.nix
     ./fonts.nix
     ./net
     ./neuron.nix
     ./oracle-xe.nix
+    ./picom.nix
     ./polybar.nix
     ./rofi.nix
     ./shell
     ./sound
     ./unipicker.nix
+    ./xmobar.nix
   ];
 
   options = {};
