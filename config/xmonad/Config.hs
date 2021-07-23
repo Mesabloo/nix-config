@@ -46,7 +46,7 @@ import XMonad.Hooks.ManageHelpers
 import XMonad.Layout.Fullscreen (fullscreenManageHook)
 import XMonad.Layout.MultiToggle (Toggle(..), mkToggle, single, (??))
 import XMonad.Layout.MultiToggle.Instances (StdTransformers(..))
-import XMonad.Layout.NoBorders (borderEventHook, smartBorders)
+import XMonad.Layout.NoBorders (borderEventHook)
 import XMonad.Layout.ResizableTile
 import XMonad.Layout.Spacing (spacingRaw, Border(..))
 import XMonad.Prompt (XPConfig(..), XPPosition(..))
@@ -136,7 +136,8 @@ myConfig barLauncher =
 myLayoutHook =
   let myGaps = 7
   in mkToggle (single FULL)
-     $ smartBorders
+--     $ smartBorders
+--     $ lessBorders OnlyScreenFloat
      $ tiled myGaps ||| fullscreen
   where
     tiled myGaps = avoidStruts
