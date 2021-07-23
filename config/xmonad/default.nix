@@ -24,6 +24,7 @@ with lib;
       brightnessctl
       pulseaudio
       polybar-scripts.player-mpris-tail
+      xidlehook
     ];
   };
 }
