@@ -20,7 +20,7 @@ import Data.List (dropWhileEnd, elemIndex, find)
 import Data.Map.Strict (Map)
 import qualified Data.Map.Strict as Map
 
-import Data.Maybe (fromJust, isNothing, catMaybes, fromMaybe)
+import Data.Maybe (fromJust, isNothing, isJust, catMaybes, fromMaybe)
 
 import System.Environment.XDG.BaseDir (getUserConfigFile)
 
@@ -290,17 +290,17 @@ sendToJustAboveDesktop window = do
 
 
 viewWorkspaceOnCorrectScreen :: WorkspaceId -> X ()
-viewWorkspaceOnCorrectScreen wsid = withWindowSet \ wset -> do
-  let W.Screen{ W.screen = sid, W.workspace = ws, .. } = W.current wset
+viewWorkspaceOnCorrectScreen wsid = do
+  W.Screen{ W.screen = sid, W.workspace = ws, .. } <- withWindowSet (pure . W.current)
   sidToSpawnOn <- ES.gets (fromIntegral . Map.findWithDefault sid wsid)
-
-  -- When the current workspace is empty, remove it from the list so that
-  -- we can spawn it back anywhere.
-  when (isNothing $ W.stack ws) do
-    ES.modify (Map.delete $ W.tag ws :: WorkspaceState -> WorkspaceState)
 
   windows $ onScreen (W.view wsid) FocusNew sidToSpawnOn
   ES.modify (Map.insert wsid sidToSpawnOn)
+
+  -- NOTE: we need to remove **all** un-focused empty workspaces
+  hiddenWSs <- withWindowSet (pure . filter (isNothing . W.stack) . W.hidden)
+  forM_ hiddenWSs \ ws -> do
+    ES.modify (Map.delete $ W.tag ws :: WorkspaceState -> WorkspaceState)
 
 shiftToWorkspace :: WorkspaceId -> X ()
 shiftToWorkspace wsid = do
@@ -315,20 +315,21 @@ swapWorkspaces' :: Direction1D -> X ()
 swapWorkspaces' dir = do
   currentScreenId <- withWindowSet (pure . W.screen . W.current)
 
-  currentWSTag <- withWindowSet (pure . W.tag . W.workspace . W.current)
+  currentWS <- withWindowSet (pure . W.workspace . W.current)
   case dir of
     Prev -> prevScreen
     Next -> nextScreen
-  nextWSTag <- withWindowSet (pure . W.tag . W.workspace . W.current)
+  nextWS <- withWindowSet (pure . W.workspace . W.current)
+
+  nextSid <- ES.gets (Map.findWithDefault currentScreenId (W.tag nextWS))
+  currentSid <- ES.gets (Map.findWithDefault currentScreenId (W.tag currentWS))
+
   case dir of
     Prev -> swapNextScreen
     Next -> swapPrevScreen
 
-  nextSid <- ES.gets (Map.findWithDefault currentScreenId nextWSTag)
-  currentSid <- ES.gets (Map.findWithDefault currentScreenId currentWSTag)
-
-  ES.modify ( Map.insert currentWSTag nextSid
-            . Map.insert nextWSTag currentSid :: WorkspaceState -> WorkspaceState)
+  ES.modify (Map.insert (W.tag currentWS) nextSid :: WorkspaceState -> WorkspaceState)
+  ES.modify (Map.insert (W.tag nextWS) currentSid :: WorkspaceState -> WorkspaceState)
 
 registerDefaultWorkspaces :: X ()
 registerDefaultWorkspaces = withWindowSet \ wset ->
