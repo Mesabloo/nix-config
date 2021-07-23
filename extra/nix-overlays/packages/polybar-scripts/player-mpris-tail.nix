@@ -3,7 +3,7 @@
 let
   script = pkgs.fetchurl {
     url = https://raw.githubusercontent.com/polybar/polybar-scripts/master/polybar-scripts/player-mpris-tail/player-mpris-tail.py;
-    sha256 = "1nzvk4857wv2kcxf6h73hkf243py3ni0p86nb1kplyj5xf9s3xmr";
+    sha256 = "1224av16pczkxzavvmqaj63mpyjqzimfrk8br9vi0hpmdda6xxva";
   };
 in
 pkgs.stdenv.mkDerivation rec {
