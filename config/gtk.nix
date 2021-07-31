@@ -16,8 +16,8 @@
     };
 
     gtk.iconTheme = {
-      package = pkgs.nordic;
-      name = "Nordic";
+      package = pkgs.libsForQt5.breeze-icons; # for the Nordic theme
+      name = "breeze-dark";
     };
 
     gtk.font = {
