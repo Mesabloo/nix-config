@@ -16,10 +16,10 @@ with lib;
       purescript
       spago
 
-      dhall
-
       nodejs
       nodePackages.npm
     ];
+
+    modules.dev.dhall.enable = mkDefault true;
   };
 }

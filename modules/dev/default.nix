@@ -7,6 +7,7 @@
     ./ats2.nix
     ./coq.nix
     ./cpp.nix
+    ./dhall.nix
     ./emacs.nix
     ./git.nix
     ./haskell.nix
