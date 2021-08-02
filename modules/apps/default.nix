@@ -5,6 +5,7 @@
     ./audacity.nix
     ./flameshot.nix
     ./gimp.nix
+    ./nautilus.nix
     ./nomacs.nix
     ./obs.nix
     ./office.nix
