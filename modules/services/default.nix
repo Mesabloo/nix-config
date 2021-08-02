@@ -16,6 +16,7 @@
     ./shell
     ./sound
     ./unipicker.nix
+    ./wallet
     ./xmobar.nix
   ];
 
