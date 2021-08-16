@@ -7,7 +7,8 @@ WIFI=$(ip link | awk -F'( |:)' '$3 ~ /wl.*/ {print $3}')
 ETHE=$(ip link | awk -F'( |:)' '$3 ~ /enp.*/ {print $3}')
 
 if type 'xrandr' &> /dev/null; then
-  SCREEN_COUNT=$(xrandr --listactivemonitors | grep 'Monitors:' | awk '{print $2}')
+  SCREENS=($(xrandr --query | grep ' connected' | cut -d' ' -f1 | sort))
+  SCREEN_COUNT=${#SCREENS[@]}
 
   case $SCREEN_COUNT in
     1)
@@ -16,9 +17,8 @@ if type 'xrandr' &> /dev/null; then
     ;;
     *)
       # Let's assume that the screen numbers represent their order from left to right
-      SCREENS_INFO=($(xrandr --query | grep ' connected' | cut -d' ' -f1 | sort))
-      SCREEN_0=${SCREENS_INFO[0]}
-      SCREEN_N=${SCREENS_INFO[-1]}
+      SCREEN_0=${SCREENS[0]}
+      SCREEN_N=${SCREENS[-1]}
 
       MONITOR=$SCREEN_0 polybar -c '##POLYBAR-WMINFO##' wminfo &
       WIFI_IF="$WIFI" ETHER_IF="$ETHE" MONITOR=$SCREEN_N polybar -c '##POLYBAR-SYSINFO##' systeminfo-top &
