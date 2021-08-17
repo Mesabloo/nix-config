@@ -113,10 +113,8 @@ myConfig =
               , handleEventHook     = fullscreenEventHook <+> borderEventHook <+> handleEventHook def
               , layoutHook          = myLayoutHook
               , startupHook         = do
-                  barLauncher <- liftIO $ getUserConfigFile "polybar" "launch.sh"
-
-                  spawn "nitrogen --restore"
-                  spawn barLauncher
+                  spawnOnce "nitrogen --restore"
+                  liftIO (getUserConfigFile "polybar" "launch.sh") >>= spawn
 
                   spawnOnce "picom"
                   spawnOnce "dunst"
