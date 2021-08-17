@@ -8,6 +8,8 @@ with lib;
         containers
         xdg-basedir
         regex-tdfa
+        directory
+        filepath
       ];
       config = ./Config.hs;
       haskellPackages = pkgs.haskell.packages.ghc884;

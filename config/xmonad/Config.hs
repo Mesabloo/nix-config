@@ -22,9 +22,13 @@ import qualified Data.Map.Strict as Map
 
 import Data.Maybe (fromJust, isNothing, isJust, catMaybes, fromMaybe)
 
+import System.Directory (getHomeDirectory)
+
 import System.Environment.XDG.BaseDir (getUserConfigFile)
 
 import System.Exit (exitSuccess)
+
+import System.FilePath ((</>))
 
 import System.IO.Unsafe (unsafeDupablePerformIO)
 
@@ -94,13 +98,12 @@ base15 = xprop "*.color15"
 
 main :: IO ()
 main = do
-  barLauncher <- getUserConfigFile "polybar" "launch.sh"
-  xmonad . ewmh . docks $ myConfig barLauncher
+  xmonad . ewmh $ docks myConfig
 
 ---------------------------------------------------------------------
 
 -- myConfig :: XConfig _
-myConfig barLauncher =
+myConfig =
   let c = def { borderWidth         = 2
               , normalBorderColor   = basebg
               , focusedBorderColor  = basefg
@@ -110,8 +113,10 @@ myConfig barLauncher =
               , handleEventHook     = fullscreenEventHook <+> borderEventHook <+> handleEventHook def
               , layoutHook          = myLayoutHook
               , startupHook         = do
-                  spawnOnce "nitrogen --restore"
-                  spawnOnce barLauncher
+                  barLauncher <- liftIO $ getUserConfigFile "polybar" "launch.sh"
+
+                  spawn "nitrogen --restore"
+                  spawn barLauncher
 
                   spawnOnce "picom"
                   spawnOnce "dunst"
@@ -149,7 +154,7 @@ myLayoutHook =
 myKeys :: XConfig a -> [(String, X ())]
 myKeys c =
   [ ("M-S-e",                     confirmPrompt nordXPConfig "exit" $ io exitSuccess)
-  , ("M-S-r",                     restart "xmonad" True)
+  , ("M-S-r",                     liftIO getHomeDirectory >>= \ homeDir -> restart (homeDir </> ".nix-profile" </> "bin" </> "xmonad") True)
   , ("M-S-q",                     withFocused killWindow)
   , ("M-<Return>",                spawn (terminal c))
   , ("M-d",                       spawn "rofi -show drun")
