@@ -3,6 +3,7 @@
 {
   imports = [
     ./audacity.nix
+    ./evince.nix
     ./flameshot.nix
     ./gimp.nix
     ./nautilus.nix
