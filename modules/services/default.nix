@@ -4,6 +4,7 @@
   imports = [
     ./archive
     ./asciinema.nix
+    ./autorandr.nix
     ./deadd.nix
     ./dunst.nix
     ./fonts.nix

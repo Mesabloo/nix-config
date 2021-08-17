@@ -9,6 +9,7 @@
     ./unipicker
     ./xmonad
 
+    ./autorandr.nix
     ./deadd.nix
     ./dunst.nix
     ./git.nix
