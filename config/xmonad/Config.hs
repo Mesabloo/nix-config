@@ -119,7 +119,9 @@ myConfig =
                   spawnOnce "picom"
                   spawnOnce "dunst"
 
-                  spawnOnce "xidlehook --not-when-fullscreen --not-when-audio --timer 300 'betterlockscreen -l dim -t \"Please type your password\"' --timer 3600 'systemctl suspend'"
+                  spawnOnce "numlockx on"
+
+                  spawnOnce "xidlehook --not-when-fullscreen --not-when-audio --timer 300 'betterlockscreen -l dim -t \"Please type your password\"' '' --timer 3600 'systemctl suspend' ''"
 
                   registerDefaultWorkspaces
                   pure ()

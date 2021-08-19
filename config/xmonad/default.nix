@@ -27,6 +27,7 @@ with lib;
       pulseaudio
       polybar-scripts.player-mpris-tail
       xidlehook
+      numlockx
     ];
   };
 }
