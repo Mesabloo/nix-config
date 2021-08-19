@@ -298,6 +298,11 @@ viewWorkspaceOnCorrectScreen wsid = do
   W.Screen{ W.screen = sid, W.workspace = ws, .. } <- withWindowSet (pure . W.current)
   sidToSpawnOn <- ES.gets (fromIntegral . Map.findWithDefault sid wsid)
 
+  allScreens <- withWindowSet (pure . W.screens)
+  sidToSpawnOn <- pure case lookupScreen sidToSpawnOn allScreens of
+    Nothing -> sid
+    Just _  -> sidToSpawnOn
+
   windows $ onScreen (W.view wsid) FocusNew sidToSpawnOn
   ES.modify (Map.insert wsid sidToSpawnOn)
 
@@ -305,6 +310,11 @@ viewWorkspaceOnCorrectScreen wsid = do
   hiddenWSs <- withWindowSet (pure . filter (isNothing . W.stack) . W.hidden)
   forM_ hiddenWSs \ ws -> do
     ES.modify (Map.delete $ W.tag ws :: WorkspaceState -> WorkspaceState)
+  where
+    lookupScreen sid []        = Nothing
+    lookupScreen sid (screen:ss)
+      | W.screen screen == sid = Just screen
+      | otherwise              = lookupScreen sid ss
 
 shiftToWorkspace :: WorkspaceId -> X ()
 shiftToWorkspace wsid = do
@@ -317,9 +327,8 @@ shiftToWorkspace wsid = do
 
 swapWorkspaces' :: Direction1D -> X ()
 swapWorkspaces' dir = do
-  currentScreenId <- withWindowSet (pure . W.screen . W.current)
+  W.Screen { W.screen = currentScreenId, W.workspace = currentWS, .. } <- withWindowSet (pure . W.current)
 
-  currentWS <- withWindowSet (pure . W.workspace . W.current)
   case dir of
     Prev -> prevScreen
     Next -> nextScreen
