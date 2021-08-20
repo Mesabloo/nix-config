@@ -19,5 +19,7 @@
   xsession.initExtra = ''
     #xsetroot -cursor_name left_ptr
     setxkbmap fr
+
+    export PATH="$PATH:$HOME/.local/bin"
   '';
 }
