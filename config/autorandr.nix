@@ -8,7 +8,7 @@ with lib;
         let reload-polybar = if config.modules.services.polybar.enable then {
               "reload-polybar" = ''
                 echo "Reloading all polybars..."
-                ${config.xdg.configHome}/polybar/launch.sh &> /dev/null
+                ${config.xdg.configHome}/polybar/launch.sh
               '';
             } else {};
             reload-background = {
