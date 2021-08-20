@@ -18,6 +18,7 @@ with lib;
       xorg.xev           # get event names
       xorg.xfd
       xorg.fontmiscmisc
+      xdotool
     ];
   };
 }
