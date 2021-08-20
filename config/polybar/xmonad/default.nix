@@ -25,9 +25,17 @@ in
   config = mkIf (config.modules.services.polybar.enable && config.modules.desktop.xmonad.enable) {
     xdg.configFile = {
       "polybar/launch.sh" = {
-        source = patchFile ./launch.sh
-          ["##POLYBAR-WMINFO##" "##POLYBAR-SYSINFO##"]
-          ["${polybar-config-wminfo}" "${polybar-config-sysinfo}"];
+        source =
+          let
+            kill-polybars = ''
+              for POLYBAR in $(ls -A ${pkgs.polybar}/bin); do
+                killall $POLYBAR -w 2> /dev/null || true
+              done
+            '';
+          in
+            patchFile ./launch.sh
+              ["##POLYBAR-WMINFO##" "##POLYBAR-SYSINFO##" "##KILL_POLYBARS##"]
+              ["${polybar-config-wminfo}" "${polybar-config-sysinfo}" kill-polybars];
         executable = true;
       };
     };
