@@ -143,7 +143,7 @@ disabled = false
 description = "Show errors number from kak-lsp if any"
 format = "[  %opt{lsp_diagnostic_error_count}]($style)"
 style = "red bold"
-when = '[ -n "$kak_opt_lsp_diagnostic_error_count" -a "$kak_opt_lsp_diagnostic_error_count" -ne 0 ]'
+when = '' # '[ -n "$kak_opt_lsp_diagnostic_error_count" -a "$kak_opt_lsp_diagnostic_error_count" -ne 0 ]'
 shell = ['sh']
 disabled = false
 
@@ -151,6 +151,6 @@ disabled = false
 description = "Show warnings number from kak-lsp if any"
 format = "[  %opt{lsp_diagnostic_warning_count}]($style)"
 style = "yellow bold"
-when = '[ -n "$kak_opt_lsp_diagnostic_warning_count" -a "$kak_opt_lsp_diagnostic_warning_count" -ne 0 ]'
+when = '' # '[ -n "$kak_opt_lsp_diagnostic_warning_count" -a "$kak_opt_lsp_diagnostic_warning_count" -ne 0 ]'
 shell = ['sh']
 disabled = false
