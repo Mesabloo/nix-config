@@ -55,27 +55,26 @@ plug "andreyorst/kaktree" defer kaktree %{
   map global user t ": kaktree-toggle<ret>" -docstring "toggle kaktree"
 } config %{
   hook global WinSetOption filetype=kaktree %{
-    remove-highlighter buffer/numbers
+    remove-highlighter buffer/number-lines
     remove-highlighter buffer/matching
     remove-highlighter buffer/wrap
     remove-highlighter buffer/show-whitespaces
-    remove-highlighter buffer/number-lines
   }
   kaktree-enable
 }
 
 
 # -- rainbow braces
-plug "listentolist/kakoune-rainbow" domain "gitlab.com" config %{
-  require-module rainbow
+#plug "listentolist/kakoune-rainbow" domain "gitlab.com" config %{
+#  require-module rainbow
   # suggested mapping
   # map global user r ": rainbow<ret>" -docstring "rainbow brackets"
   # map global user R ": rmhl window/ranges_rainbow_specs<ret>" \
   #     -docstring "remove rainbow highlighter"
-  hook global WinSetOption filetype=(c|cpp|cc|rust|javascript|typescript|haskell|kak) %{
-    rainbow
-  }
-}
+#  hook global WinSetOption filetype=(c|cpp|cc|rust|javascript|typescript|haskell|kak) %{
+#    rainbow
+#  }
+#}
 
 
 # -- crosshair for the cursor
@@ -172,7 +171,8 @@ plug "chambln/kakoune-kit" config %{
     map window normal r ': -- %val{selections}<a-!><home> git reset '
     map window normal R ': -- %val{selections}<a-!><home> repl git reset -p '
     map window normal o ': -- %val{selections}<a-!><home> git checkout '
-    map window normal p ': git push '
+
+  	remove-highlighter buffer/number-lines
   }
   hook global WinSetOption filetype=git-log %{
     map window normal d     ': %val{selections}<a-!><home> git diff '
@@ -180,23 +180,40 @@ plug "chambln/kakoune-kit" config %{
     map window normal r     ': %val{selections}<a-!><home> git reset '
     map window normal R     ': %val{selections}<a-!><home> repl git reset -p '
     map window normal o     ': %val{selections}<a-!><home> git checkout '
+
+		remove-highlighter buffer/number-lines
   }
 }
 
 
 # ------------------------------------------------------------------------------------------------------------------
 
+
+# -- set line numbers on all buffer
+hook global WinCreate .* %{
+  hook -always global ModeChange push:.*:insert %{
+    add-highlighter -override buffer/number-lines number-lines -separator ' │ ' -hlcursor
+  }
+  hook -always global ModeChange pop:insert:.* %{
+		add-highlighter -override buffer/number-lines number-lines -separator ' │ ' -hlcursor -relative
+  }
+
+  add-highlighter buffer/number-lines number-lines -separator ' │ ' -hlcursor -relative
+  add-highlighter buffer/wrap wrap -word -indent
+}
+
+
 # -- set <tab> for autocompletion
 hook global InsertCompletionShow .* %{
-    try %{
-        execute-keys -draft 'h<a-K>\h<ret>'
-        map window insert <tab> <c-n>
-        map window insert <s-tab> <c-p>
-        hook -once -always window InsertCompletionHide .* %{
-            map window insert <tab> <tab>
-            map window insert <s-tab> <s-tab>
-        }
+  try %{
+    execute-keys -draft 'h<a-K>\h<ret>'
+    map window insert <tab> <c-n>
+    map window insert <s-tab> <c-p>
+    hook -once -always window InsertCompletionHide .* %{
+      map window insert <tab> <tab>
+      map window insert <s-tab> <s-tab>
     }
+  }
 }
 
 
@@ -210,7 +227,8 @@ set global ui_options ncurses_status_on_top=yes
 
 
 # -- custom movements keymaps
-map global normal <c-left> b
-map global normal <c-right> w
+map global normal <c-left> 'b;'
+map global normal <c-right> 'w;'
 map global normal <c-up> <c-u>
 map global normal <c-down> <c-d>
+map global insert <c-backspace> '<esc>bc'
