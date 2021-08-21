@@ -231,4 +231,5 @@ map global normal <c-left> 'b;'
 map global normal <c-right> 'w;'
 map global normal <c-up> <c-u>
 map global normal <c-down> <c-d>
-map global insert <c-backspace> '<esc>bc'
+# ↓↓↓ this one does not work in alacritty...
+# map global insert <c-backspace> '<esc>b<a-c>'

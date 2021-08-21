@@ -68,3 +68,6 @@ cursor:
 
 env:
   WINIT_X11_SCALE_FACTOR: '1'
+
+key_bindings:
+  - { key: Back, mods: Control, action: None }
