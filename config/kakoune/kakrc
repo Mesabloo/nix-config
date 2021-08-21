@@ -48,8 +48,8 @@ plug "delapouite/kakoune-buffers" %{
 plug "andreyorst/kaktree" defer kaktree %{
   set-option global kaktree_double_click_duration '0.5'
   set-option global kaktree_indentation 2
-  set-option global kaktree_dir_icon_open  '▾ ﱮ '
-  set-option global kaktree_dir_icon_close '▸  '
+  set-option global kaktree_dir_icon_open  '▾ ﱮ'
+  set-option global kaktree_dir_icon_close '▸ '
   set-option global kaktree_file_icon      '⠀⠀'
 
   map global user t ": kaktree-toggle<ret>" -docstring "toggle kaktree"
@@ -96,6 +96,7 @@ plug "caksoylar/kakoune-smooth-scroll" config %{
 
 
 # -- kakship modeline
+declare-option str lsp_progress ""
 plug "mesabloo/kakship" do %{
   cargo install --force --path . --root ~/.local
 } config %{
@@ -119,6 +120,17 @@ plug "kak-lsp/kak-lsp" do %{
   define-command lsp-restart -docstring 'restart lsp server' %{ lsp-stop; lsp-start }
 
   hook global WinSetOption filetype=(c|cpp|cc|rust|javascript|typescript|haskell) %{
+    define-command -hidden -params 4 -override lsp-handle-progress %{
+      echo -debug %sh{ echo "kak-lsp: %opt{filetype} language server: $1" }
+      set global lsp_progress %sh{
+        if [ "$4" = "" ]; then
+          echo " …"
+        else
+	        echo " ✓"
+        fi
+      }
+    }
+
     set-option window lsp_auto_highlight_references true
     set-option window lsp_hover_anchor false
     lsp-auto-hover-enable
@@ -138,9 +150,14 @@ plug "kak-lsp/kak-lsp" do %{
     }
   }
 
-  hook global KakEnd .* lsp-exit
+  hook global KakEnd .* %{
+		set global lsp_progress ""
+    
+    lsp-exit
+  }
 
   map global user l ": enter-user-mode lsp<ret>" -docstring "LSP mode"
+} defer kak-lsp %{
 }
 
 
@@ -184,6 +201,13 @@ plug "chambln/kakoune-kit" config %{
     remove-highlighter buffer/number-lines
   }
 }
+
+
+# -- add surrounding capabilities
+#plug "alexherbo2/surround.kak" config %{
+# map global normal <c-s> ':surround<ret>' -docstring 'surround with...'
+#}
+
 
 
 # ------------------------------------------------------------------------------------------------------------------
