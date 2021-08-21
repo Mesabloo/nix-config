@@ -172,7 +172,7 @@ plug "chambln/kakoune-kit" config %{
     map window normal R ': -- %val{selections}<a-!><home> repl git reset -p '
     map window normal o ': -- %val{selections}<a-!><home> git checkout '
 
-  	remove-highlighter buffer/number-lines
+    remove-highlighter buffer/number-lines
   }
   hook global WinSetOption filetype=git-log %{
     map window normal d     ': %val{selections}<a-!><home> git diff '
@@ -181,7 +181,7 @@ plug "chambln/kakoune-kit" config %{
     map window normal R     ': %val{selections}<a-!><home> repl git reset -p '
     map window normal o     ': %val{selections}<a-!><home> git checkout '
 
-		remove-highlighter buffer/number-lines
+    remove-highlighter buffer/number-lines
   }
 }
 
@@ -233,3 +233,10 @@ map global normal <c-up> <c-u>
 map global normal <c-down> <c-d>
 # ↓↓↓ this one does not work in alacritty...
 # map global insert <c-backspace> '<esc>b<a-c>'
+
+
+# -- set some custom colors
+set-face global Information white,rgb:434C5E
+set-face global MenuBackground white,rgb:3B4252
+set-face global MenuForeground default,rgb:3B4252+r
+set-face global StatusLine default,rgb:3B4252
