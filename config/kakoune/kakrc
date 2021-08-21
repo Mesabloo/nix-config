@@ -239,4 +239,4 @@ map global normal <c-down> <c-d>
 set-face global Information white,rgb:434C5E
 set-face global MenuBackground white,rgb:3B4252
 set-face global MenuForeground default,rgb:3B4252+r
-set-face global StatusLine default,rgb:3B4252
+#set-face global StatusLine default,rgb:3B4252
