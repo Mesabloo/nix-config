@@ -13,6 +13,7 @@
     ./git.nix
     ./haskell.nix
     ./java.nix
+    ./kakoune.nix
     ./latex.nix
     ./mercury.nix
     ./ocaml.nix
