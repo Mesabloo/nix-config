@@ -12,6 +12,8 @@ with lib;
   config = mkIf config.modules.dev.latex.enable {
     home.packages = with pkgs; [
       texlive.combined.scheme-full
+
+      texlab
     ];
   };
 }

@@ -20,6 +20,7 @@ with lib;
          cargo2nix.package   # Converts `Cargo.toml` files into Nix expressions
          cargo
          rustc
+         rls
        ];
   };
 }
