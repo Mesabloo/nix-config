@@ -1,0 +1,156 @@
+
+add_newline = false
+format = """\
+[${custom.kakcursor}\
+${custom.kakposition}\
+${custom.kakmode}\
+${custom.kakcontext}\
+$directory\
+${custom.kakfile}\
+${custom.kakfiletype}\
+${custom.kaklsp_err}\
+${custom.kaklsp_warn}\
+$git_branch\
+$git_commit\
+$git_state\
+$git_status\
+${custom.kaksession}](bg:none)"""
+
+[git_branch]
+format = '[ ]($style bold)[  $branch]($style)'
+style = 'fg:bright-blue'
+truncation_length = 9223372036854775807
+truncation_symbol = '…'
+only_attached = false
+always_show_remote = true
+disabled = false
+
+[git_commit]
+format = '[\($hash$tag\)]($style)'
+style = 'fg:blue dimmed'
+commit_hash_length = 7
+only_detached = false
+tag_symbol = ' 笠'
+tag_disabled = false
+disabled = false
+
+[git_state]
+format = '\( [$state($progress_current/$progress_total)]($style)\)'
+style = 'fg:blue dimmed'
+rebase = 'REBASING'
+merge = 'MERGING'
+revert = 'REVERTING'
+cherry_pick = 'CHERRY-PICKING'
+bisect = 'BISECTING'
+am = 'AM'
+am_or_rebase = 'AM/REBASE'
+disabled = false
+
+[git_status]
+format = '[\[$all_status$ahead_behind\]]($style)'
+style = 'fg:cyan dimmed bold'
+stashed = '\$'
+ahead = '⇡${count}'
+behind = '⇣${count}'
+diverged = '⇕⇡${ahead_count}⇣${behind_count}'
+conflicted = '='
+deleted = '✘'
+renamed = '»'
+modified = '!'
+staged = '+'
+untracked = '?'
+disabled = false
+
+[directory]
+format = '[  ]($style bold)[ ]($style)[$read_only]($read_only_style)[$path/]($style)'
+truncation_length = 3
+truncate_to_repo = false
+fish_style_pwd_dir_length = 0
+use_logical_path = true
+style = 'fg:bright-black'
+read_only_style = 'fg:bright-red bold'
+read_only = '[] '
+truncation_symbol = '…'
+disabled = false
+
+#[directory.substitutions]
+#"~/.config" = ""
+#"~/projects" = ""
+#"~/Documents" = ""
+#"~/Downloads" = ""
+#"~/Pictures" = ""
+#"~" = ""
+
+[custom.kakfile]
+description = 'The current Kakoune buffername'
+format = '[$output]($style)'
+style = 'bold fg:bright-black'
+command = 'echo -n ${kak_buffile##*/}'
+when = 'true'
+shell = ['sh']
+disabled = false
+
+[custom.kaksession]
+description = 'The current Kakoune session'
+format = '[ ]($style)[  %val{client}:%val{session}]($style)'
+style = 'fg:green bg:none italic'
+when = ''
+shell = ['true']
+disabled = false
+
+[custom.kakcursor]
+description = 'The current Kakoune cursor position'
+format = '[ ]($style bold)[ %val{cursor_line}:%val{cursor_char_column}]($style)'
+style = 'fg:bright-white bold'
+when = ''
+shell = ['true']
+disabled = false
+
+[custom.kakmode]
+description = 'The current Kakoune mode'
+format = '[ ](fg:blue bold)[ {{mode_info}}]($style)'
+style = 'bg:none'
+when = ''
+shell = ['true']
+disabled = false
+
+[custom.kakcontext]
+description = 'The current Kakoune context'
+format = '[ {{context_info}}]($style)'
+style = 'bg:none'
+when = ''
+shell = ['true']
+disabled = false
+
+[custom.kakfiletype]
+description = 'The current buffer filetype'
+format = '[ \[%opt{filetype}\]]($style)'
+style = 'bg:none fg:purple'
+when = ''
+shell = ['true']
+disabled = false
+
+[custom.kakposition]
+description = 'Relative position of the cursor inside the buffer'
+format = '[  $output]($style bold)'
+style = 'fg:bright-white'
+command = 'echo -n $(($kak_cursor_line * 100 / $kak_buf_line_count))%'
+when = '[ -n "$kak_cursor_line" ]'
+shell = ['sh']
+disabled = false
+
+[custom.kaklsp_err]
+description = "Show errors number from kak-lsp if any"
+format = "[  %opt{lsp_diagnostic_error_count}]($style)"
+style = "red bold"
+when = '[ -n "$kak_opt_lsp_diagnostic_error_count" -a "$kak_opt_lsp_diagnostic_error_count" -ne 0 ]'
+shell = ['sh']
+disabled = false
+
+[custom.kaklsp_warn]
+description = "Show warnings number from kak-lsp if any"
+format = "[  %opt{lsp_diagnostic_warning_count}]($style)"
+style = "yellow bold"
+when = '[ -n "$kak_opt_lsp_diagnostic_warning_count" -a "$kak_opt_lsp_diagnostic_warning_count" -ne 0 ]'
+shell = ['sh']
+disabled = false

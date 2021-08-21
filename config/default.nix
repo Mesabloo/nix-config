@@ -4,6 +4,7 @@
   imports = [
     ./i3.nix
     ./alacritty
+    ./kakoune
     ./polybar
     ./rofi
     ./unipicker

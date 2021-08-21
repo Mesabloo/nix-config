@@ -1,0 +1,213 @@
+evaluate-commands %sh{
+  plugins="$kak_config/plugins"
+  mkdir -p "$plugins"
+
+  [ ! -e "$plugins/plug.kak" ] && \
+    git clone -q https://github.com/andreyorst/plug.kak.git "$plugins/plug.kak"
+
+  printf "%s\n" "source '$plugins/plug.kak/rc/plug.kak'"
+}
+plug "andreyortst/plug.kak" noload
+
+
+
+
+# -- prelude
+plug "kakounedotcom/prelude.kak"
+
+
+# -- Alacritty integration
+plug "alexherbo2/alacritty.kak"
+
+
+# -- Connect programs to clients
+#plug "kakounedotcom/connect.kak"
+
+
+# -- clipboard integration
+plug "lePerdu/kakboard" %{
+  hook global WinCreate .* %{ kakboard-enable }
+}
+
+
+# -- buffer management
+plug "delapouite/kakoune-buffers" %{
+  map global user b ": enter-buffers-mode<ret>" -docstring "buffers"
+#  map global user B ": enter-user-mode -lock buffers<ret>" -docstring "buffers (lock)"
+}
+
+
+# -- line numbers
+plug "evanrelf/number-toggle.kak" config %{
+  require-module "number-toggle"
+  set-option global number_toggle_params -hlcursor -separator ' │ '
+}
+
+
+# -- file explorer
+plug "andreyorst/kaktree" defer kaktree %{
+  set-option global kaktree_double_click_duration '0.5'
+  set-option global kaktree_indentation 1
+  set-option global kaktree_dir_icon_open  '▾ ﱮ '
+  set-option global kaktree_dir_icon_close '▸  '
+  set-option global kaktree_file_icon      '⠀⠀'
+
+  map global user t ": kaktree-toggle<ret>" -docstring "toggle kaktree"
+} config %{
+  hook global WinSetOption filetype=kaktree %{
+    remove-highlighter buffer/numbers
+    remove-highlighter buffer/matching
+    remove-highlighter buffer/wrap
+    remove-highlighter buffer/show-whitespaces
+  }
+  kaktree-enable
+}
+
+
+# -- rainbow braces
+plug "listentolist/kakoune-rainbow" domain "gitlab.com" config %{
+  require-module rainbow
+  # suggested mapping
+  # map global user r ": rainbow<ret>" -docstring "rainbow brackets"
+  # map global user R ": rmhl window/ranges_rainbow_specs<ret>" \
+  #     -docstring "remove rainbow highlighter"
+  hook global WinSetOption filetype=(c|cpp|cc|rust|javascript|typescript|haskell|kak) %{
+    rainbow
+  }
+}
+
+
+# -- crosshair for the cursor
+# plug "insipx/kak-crosshairs" config %{
+#   hook global WinCreate .* %{
+#     crosshairs
+#   }
+# }
+
+
+# -- smooth autoscroll
+plug "caksoylar/kakoune-smooth-scroll" config %{
+  hook global WinCreate [^*].* %{
+    hook -once window WinDisplay .* %{
+      smooth-scroll-enable
+    }
+  }
+}
+
+
+# -- kakship modeline
+plug "mesabloo/kakship" do %{
+  cargo install --force --path . --root ~/.local
+} config %{
+  kakship-enable
+}
+
+
+# -- LSP
+plug "kak-lsp/kak-lsp" do %{
+#  cargo build --release --locked
+#  cargo install --force --path .
+} config %{
+  set global lsp_diagnostic_line_error_sign '║'
+  set global lsp_diagnostic_line_warning_sign '┊'
+
+  define-command ne -docstring 'go to next error/warning from lsp' %{ lsp-find-error --include-warnings }
+  define-command pe -docstring 'go to previous error/warning from lsp' %{ lsp-find-error --previous --include-warnings }
+  define-command ee -docstring 'go to current error/warning from lsp' %{ lsp-find-error --include-warnings; lsp-find-error --previous --include-warnings }
+
+  define-command lsp-restart -docstring 'restart lsp server' %{ lsp-stop; lsp-start }
+
+  hook global WinSetOption filetype=(c|cpp|cc|rust|javascript|typescript|haskell) %{
+    set-option window lsp_auto_highlight_references true
+    set-option window lsp_hover_anchor false
+    lsp-auto-hover-enable
+    echo -debug "Enabling LSP for filetype %opt{filetype}"
+    lsp-enable-window
+  }
+
+  hook global WinSetOption filetype=(rust) %{
+    set window lsp_server_configuration rust.clippy_preference="on"
+  }
+
+  hook global WinSetOption filetype=rust %{
+    hook window BufWritePre .* %{
+      evaluate-commands %sh{
+        test -f rustfmt.toml && printf lsp-formatting-sync
+      }
+    }
+  }
+
+  hook global KakEnd .* lsp-exit
+
+  map global user l ": enter-user-mode lsp<ret>" -docstring "LSP mode"
+}
+
+
+# -- auto pairs
+plug "alexherbo2/auto-pairs.kak" config %{
+  set-option global auto_pairs ( ) { } [ ] '"' '"' "'" "'" ` ` “ ” ‘ ’ « » ‹ ›
+
+  hook global WinCreate .* %{
+    enable-auto-pairs
+  }
+}
+
+
+# -- extra file types handling
+plug "kakoune-editor/kakoune-extra-filetypes"
+
+
+# -- git integration
+plug "chambln/kakoune-kit" config %{
+  map global user g ': git status -bs<ret>' -docstring 'git status'
+  hook global WinSetOption filetype=git-status %{
+    map window normal c ': git commit --verbose '
+    map window normal l ': git log --oneline --graph<ret>'
+    map window normal d ': -- %val{selections}<a-!><home> git diff '
+    map window normal D ': -- %val{selections}<a-!><home> git diff --cached '
+    map window normal a ': -- %val{selections}<a-!><home> git add '
+    map window normal A ': -- %val{selections}<a-!><home> repl git add -p '
+    map window normal r ': -- %val{selections}<a-!><home> git reset '
+    map window normal R ': -- %val{selections}<a-!><home> repl git reset -p '
+    map window normal o ': -- %val{selections}<a-!><home> git checkout '
+  }
+  hook global WinSetOption filetype=git-log %{
+    map window normal d     ': %val{selections}<a-!><home> git diff '
+    map window normal <ret> ': %val{selections}<a-!><home> git show '
+    map window normal r     ': %val{selections}<a-!><home> git reset '
+    map window normal R     ': %val{selections}<a-!><home> repl git reset -p '
+    map window normal o     ': %val{selections}<a-!><home> git checkout '
+  }
+}
+
+
+# ------------------------------------------------------------------------------------------------------------------
+
+# -- set <tab> for autocompletion
+hook global InsertCompletionShow .* %{
+    try %{
+        execute-keys -draft 'h<a-K>\h<ret>'
+        map window insert <tab> <c-n>
+        map window insert <s-tab> <c-p>
+        hook -once -always window InsertCompletionHide .* %{
+            map window insert <tab> <tab>
+            map window insert <s-tab> <s-tab>
+        }
+    }
+}
+
+
+# -- set indent to 2 spaces 
+set global indentwidth 2
+set global tabstop 2
+
+
+# -- set modeline on the top
+set global ui_options ncurses_status_on_top=yes
+
+
+# -- custom movements keymaps
+map global normal <c-left> b
+map global normal <c-right> w
+map global normal <c-up> <c-u>
+map global normal <c-down> <c-d>
