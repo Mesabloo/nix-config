@@ -55,13 +55,13 @@ plug "andreyorst/kaktree" defer kaktree %{
   map global user t ": kaktree-toggle<ret>" -docstring "toggle kaktree"
 } config %{
   hook global WinSetOption filetype=kaktree %{
-    remove-highlighter buffer/number-lines
+    remove-highlighter buffer/line_numbers
     remove-highlighter buffer/matching
-    remove-highlighter buffer/wrap
+    remove-highlighter buffer/wrap_lines
     remove-highlighter buffer/show-whitespaces
 
     hook buffer=*kaktree* ModeChange .*:.*:.* %{
-      try %{ remove-highlighter buffer/number-lines }
+      try %{ remove-highlighter buffer/line_numbers }
     }
   }
   
@@ -194,7 +194,7 @@ plug "chambln/kakoune-kit" config %{
     map window normal R ': -- %val{selections}<a-!><home> repl git reset -p '
     map window normal o ': -- %val{selections}<a-!><home> git checkout '
 
-    remove-highlighter buffer/number-lines
+    remove-highlighter buffer/line_numbers
   }
   hook global WinSetOption filetype=git-log %{
     map window normal d     ': %val{selections}<a-!><home> git diff '
@@ -203,7 +203,7 @@ plug "chambln/kakoune-kit" config %{
     map window normal R     ': %val{selections}<a-!><home> repl git reset -p '
     map window normal o     ': %val{selections}<a-!><home> git checkout '
 
-    remove-highlighter buffer/number-lines
+    remove-highlighter buffer/line_numbers
   }
 }
 
@@ -221,14 +221,14 @@ plug "chambln/kakoune-kit" config %{
 # -- set line numbers on all buffer
 hook global BufSetOption filetype=(?!\*kaktree\*).* %{
   hook -always buffer ModeChange push:.*:insert %{
-    add-highlighter -override buffer/number-lines number-lines -separator ' │ ' -hlcursor
+    add-highlighter -override buffer/line_numbers number-lines -separator ' │ ' -hlcursor
   }
   hook -always buffer ModeChange pop:insert:.* %{
-		add-highlighter -override buffer/number-lines number-lines -separator ' │ ' -hlcursor -relative
+		add-highlighter -override buffer/line_numbers number-lines -separator ' │ ' -hlcursor -relative
   }
 
-  add-highlighter buffer/number-lines number-lines -separator ' │ ' -hlcursor -relative
-  add-highlighter buffer/wrap wrap -word -indent
+  add-highlighter -override buffer/line_numbers number-lines -separator ' │ ' -hlcursor -relative
+  add-highlighter buffer/wrap_lines wrap -word -indent
 }
 
 
