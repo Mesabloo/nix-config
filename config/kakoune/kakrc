@@ -59,7 +59,12 @@ plug "andreyorst/kaktree" defer kaktree %{
     remove-highlighter buffer/matching
     remove-highlighter buffer/wrap
     remove-highlighter buffer/show-whitespaces
+
+    hook buffer=*kaktree* ModeChange .*:.*:.* %{
+      try %{ remove-highlighter buffer/number-lines }
+    }
   }
+  
   kaktree-enable
 }
 
@@ -214,11 +219,11 @@ plug "chambln/kakoune-kit" config %{
 
 
 # -- set line numbers on all buffer
-hook global WinCreate .* %{
-  hook -always global ModeChange push:.*:insert %{
+hook global BufSetOption filetype=(?!\*kaktree\*).* %{
+  hook -always buffer ModeChange push:.*:insert %{
     add-highlighter -override buffer/number-lines number-lines -separator ' │ ' -hlcursor
   }
-  hook -always global ModeChange pop:insert:.* %{
+  hook -always buffer ModeChange pop:insert:.* %{
 		add-highlighter -override buffer/number-lines number-lines -separator ' │ ' -hlcursor -relative
   }
 
