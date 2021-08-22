@@ -219,6 +219,7 @@ plug "chambln/kakoune-kit" config %{
 
 
 # -- set line numbers on all buffer
+declare-option -docstring "The position in the buffer, in percent" int buf_position 0
 hook global BufSetOption filetype=(?!\*kaktree\*).* %{
   hook -always buffer ModeChange push:.*:insert %{
     add-highlighter -override buffer/line_numbers number-lines -separator ' │ ' -hlcursor
@@ -229,6 +230,12 @@ hook global BufSetOption filetype=(?!\*kaktree\*).* %{
 
   add-highlighter -override buffer/line_numbers number-lines -separator ' │ ' -hlcursor -relative
   add-highlighter buffer/wrap_lines wrap -word -indent
+
+  hook buffer RawKey .* %{
+    set-option buffer buf_position %sh{
+      echo -n $(($kak_cursor_line * 100 / $kak_buf_line_count))
+    }
+  }
 }
 
 

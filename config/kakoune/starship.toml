@@ -133,11 +133,10 @@ disabled = false
 
 [custom.kakposition]
 description = 'Relative position of the cursor inside the buffer'
-format = '[  $output]($style bold)'
-style = 'fg:bright-white'
-command = 'echo -n $(($kak_cursor_line * 100 / $kak_buf_line_count))%'
-when = '[ -n "$kak_cursor_line" ]'
-shell = ['sh']
+format = '[  %opt{buf_position}%]($style)'
+style = 'fg:bright-white bold'
+when = '' # '[ -n "$kak_cursor_line" ]'
+shell = ['true']
 disabled = false
 
 [custom.kaklsp_status]
