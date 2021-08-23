@@ -1,24 +1,28 @@
 
 add_newline = false
 format = """\
-[${custom.kakcursor}\
+${custom.kakcursor}\
 ${custom.kakposition}\
+${custom.separator}\
+${custom.kakcontext} \
 ${custom.kakmode}\
-${custom.kakcontext}\
+${custom.separator}\
 $directory\
 ${custom.kakfile}\
 ${custom.kakfiletype}\
 ${custom.kaklsp_status}\
 ${custom.kaklsp_err}\
 ${custom.kaklsp_warn}\
+${custom.separator}\
 $git_branch\
 $git_commit\
 $git_state\
 $git_status\
-${custom.kaksession}](bg:none)"""
+${custom.separator}\
+${custom.kaksession}"""
 
 [git_branch]
-format = '[ ]($style bold)[  $branch]($style)'
+format = '[ $branch]($style)'
 style = 'fg:bright-blue'
 truncation_length = 9223372036854775807
 truncation_symbol = '…'
@@ -63,7 +67,7 @@ untracked = '?'
 disabled = false
 
 [directory]
-format = '[  ]($style bold)[ ]($style)[$read_only]($read_only_style)[$path/]($style)'
+format = '[ ]($style)[$read_only]($read_only_style)[$path/]($style)'
 truncation_length = 1
 truncate_to_repo = false
 fish_style_pwd_dir_length = 1
@@ -93,7 +97,7 @@ disabled = false
 
 [custom.kaksession]
 description = 'The current Kakoune session'
-format = '[ ]($style)[  %val{client}:%val{session}]($style)'
+format = '[ %val{client}:%val{session}]($style)'
 style = 'fg:green bg:none italic'
 when = ''
 shell = ['true']
@@ -101,7 +105,7 @@ disabled = false
 
 [custom.kakcursor]
 description = 'The current Kakoune cursor position'
-format = '[ ]($style bold)[ %val{cursor_line}:%val{cursor_char_column}]($style)'
+format = '[%val{cursor_line}:%val{cursor_char_column}]($style)'
 style = 'fg:bright-white bold'
 when = ''
 shell = ['true']
@@ -109,7 +113,7 @@ disabled = false
 
 [custom.kakmode]
 description = 'The current Kakoune mode'
-format = '[ ](fg:blue bold)[ {{mode_info}}]($style)'
+format = '[{{mode_info}}]($style)'
 style = 'bg:none'
 when = ''
 shell = ['true']
@@ -117,7 +121,7 @@ disabled = false
 
 [custom.kakcontext]
 description = 'The current Kakoune context'
-format = '[ {{context_info}}]($style)'
+format = '[{{context_info}}]($style)'
 style = 'bg:none'
 when = ''
 shell = ['true']
@@ -161,4 +165,12 @@ format = "[  %opt{lsp_diagnostic_warning_count}]($style)"
 style = "fg:yellow bold"
 when = '' # '[ -n "$kak_opt_lsp_diagnostic_warning_count" -a "$kak_opt_lsp_diagnostic_warning_count" -ne 0 ]'
 shell = ['sh']
+disabled = false
+
+[custom.separator]
+description = "Module separator"
+format = "[ ┃ ]($style)" # 
+style = "fg:bright-black dimmed bold"
+when = ''
+shell = ['true']
 disabled = false
