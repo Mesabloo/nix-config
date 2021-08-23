@@ -238,6 +238,22 @@ plug "h-youhei/kakoune-surround" config %{
 }
 
 
+# -- put pairs in rainbow colors for easier distinction
+#plug "Bodhizafa/kak-rainbow" config %{
+#  # set-option rainbow_colors color1,color2,...,colorN
+#  
+#  hook global WinSetOption filetype=(rust|python|c|cpp|scheme|lisp|clojure|javascript|json|kak|haskell) %{
+#    rainbow-enable-window
+#  }
+#}
+
+
+# -- zettelkasten-like wiki pages
+plug "TeddyDD/kakoune-wiki" config %{
+  wiki-setup %sh{ echo $HOME/.wiki }
+}
+
+
 # ------------------------------------------------------------------------------------------------------------------
 
 
