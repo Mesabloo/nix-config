@@ -81,13 +81,15 @@ plug "andreyorst/kaktree" defer kaktree %{
 #  }
 #}
 
-
 # -- crosshair for the cursor
-# plug "insipx/kak-crosshairs" config %{
-#   hook global WinCreate .* %{
-#     crosshairs
-#   }
-# }
+#plug "insipx/kak-crosshairs" config %{
+#  set-face global crosshairs_line default,rgb:3B4252+d
+#  set-face global crosshairs_column default,rgb:3B4252+d
+#  
+#  hook global WinDisplay .* %{
+#    cursorline
+#  }
+#}
 
 
 # -- smooth autoscroll
@@ -214,6 +216,14 @@ plug "chambln/kakoune-kit" config %{
 #}
 
 
+# -- smart tabs
+plug "andreyorst/smarttab.kak" defer smarttab %{
+    # when `backspace' is pressed, 4 spaces are deleted at once
+    set-option global softtabstop %opt{indentwidth}
+} config %{
+    hook global WinSetOption filetype=(rust|markdown|kak|lisp|scheme|sh|perl|c|cpp|haskell) expandtab
+    hook global WinSetOption filetype=(makefile|gas) noexpandtab
+}
 
 # ------------------------------------------------------------------------------------------------------------------
 
@@ -281,3 +291,4 @@ set-face global MenuForeground default,rgb:3B4252+r
 # -- load the closest editorconfig to the newly opened buffer
 hook global BufOpenFile .* editorconfig-load
 hook global BufNewFile .* editorconfig-load
+
