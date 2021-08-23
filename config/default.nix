@@ -13,6 +13,7 @@
     ./autorandr.nix
     ./deadd.nix
     ./dunst.nix
+    ./editor.nix
     ./git.nix
     ./gtk.nix
     ./haskell.nix
