@@ -64,14 +64,14 @@ disabled = false
 
 [directory]
 format = '[  ]($style bold)[ ]($style)[$read_only]($read_only_style)[$path/]($style)'
-truncation_length = 3
+truncation_length = 0
 truncate_to_repo = false
-fish_style_pwd_dir_length = 0
+fish_style_pwd_dir_length = 1
 use_logical_path = true
 style = 'fg:bright-black'
 read_only_style = 'fg:bright-red bold'
 read_only = '[] '
-truncation_symbol = '…'
+truncation_symbol = '…/'
 disabled = false
 
 #[directory.substitutions]
