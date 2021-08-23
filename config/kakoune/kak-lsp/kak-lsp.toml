@@ -17,3 +17,10 @@ args = []
 filetypes = ["rust"]
 roots = ["Cargo.toml"]
 command = "rls"
+
+[language.c_cpp]
+filetypes = ["c", "cpp"]
+roots = ["compile_commands.json", ".ccls", ".git"]
+command = "ccls"
+# Disable additional information in autocompletion menus that Kakoune inserts into the buffer until https://github.com/ul/kak-lsp/issues/40 gets fixed
+args = ["--init={\"completion\":{\"detailedLabel\":false}}"]
