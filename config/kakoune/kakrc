@@ -276,3 +276,8 @@ set-face global Information white,rgb:434C5E
 set-face global MenuBackground white,rgb:3B4252
 set-face global MenuForeground default,rgb:3B4252+r
 #set-face global StatusLine default,rgb:3B4252
+
+
+# -- load the closest editorconfig to the newly opened buffer
+hook global BufOpenFile .* editorconfig-load
+hook global BufNewFile .* editorconfig-load
