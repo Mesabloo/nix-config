@@ -64,7 +64,7 @@ disabled = false
 
 [directory]
 format = '[  ]($style bold)[ ]($style)[$read_only]($read_only_style)[$path/]($style)'
-truncation_length = 0
+truncation_length = 1
 truncate_to_repo = false
 fish_style_pwd_dir_length = 1
 use_logical_path = true
