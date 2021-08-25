@@ -16,6 +16,7 @@
     ./kakoune.nix
     ./latex.nix
     ./mercury.nix
+    ./nix.nix
     ./ocaml.nix
     ./prolog.nix
     ./purescript.nix

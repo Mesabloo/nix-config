@@ -221,7 +221,7 @@ plug "andreyorst/smarttab.kak" defer smarttab %{
     # when `backspace' is pressed, 4 spaces are deleted at once
     set-option global softtabstop %opt{indentwidth}
 } config %{
-    hook global WinSetOption filetype=(rust|markdown|kak|lisp|scheme|sh|perl|c|cpp|haskell) expandtab
+    hook global WinSetOption filetype=(rust|markdown|kak|lisp|scheme|sh|perl|c|cpp|haskell|nix) expandtab
     hook global WinSetOption filetype=(makefile|gas) noexpandtab
 }
 
@@ -251,6 +251,22 @@ plug "h-youhei/kakoune-surround" config %{
 # -- zettelkasten-like wiki pages
 plug "TeddyDD/kakoune-wiki" config %{
   wiki-setup %sh{ echo $HOME/.wiki }
+}
+
+
+# -- LaTeX input in insert mode
+
+# -- new keyboard user mode
+declare-user-mode keyboard
+map global normal <c-k> ': enter-user-mode keyboard<ret>'
+
+plug "tex-input.kak" load-path "~/projects/tex-input.kak/" config %{  
+  tex-input-setup
+  map global keyboard t ': tex-input-toggle<ret>' -docstring "toggle LaTeX input"
+
+  hook global WinSetOption filetype=(agda|markdown)) %{
+    tex-input-enable
+  }
 }
 
 
@@ -320,4 +336,3 @@ set-face global MenuForeground default,rgb:3B4252+r
 # -- load the closest editorconfig to the newly opened buffer
 hook global BufOpenFile .* editorconfig-load
 hook global BufNewFile .* editorconfig-load
-
