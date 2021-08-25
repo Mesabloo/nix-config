@@ -22,6 +22,7 @@
     ./qt.nix
     ./termite.nix
     ./x.nix
+    ./xob.nix
     ./zsh.nix
   ];
 }

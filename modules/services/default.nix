@@ -19,6 +19,7 @@
     ./unipicker.nix
     ./wallet
     ./xmobar.nix
+    ./xob.nix
   ];
 
   options = {};

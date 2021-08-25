@@ -17,4 +17,5 @@ in
   icomoon-feather = pkgs.callPackage ./icomoon-feather.nix { inherit pkgs; };
   nord-xresources = pkgs.callPackage ./nord-xresources.nix { inherit pkgs; };
   picom = pkgs.callPackage ./picom.nix { inherit pkgs; };
+  xob-scripts = pkgs.callPackage ./xob-scripts { inherit pkgs; };
 }
