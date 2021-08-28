@@ -123,6 +123,9 @@ myConfig =
 
                   spawnOnce "xidlehook --not-when-fullscreen --not-when-audio --timer 300 'betterlockscreen -l dim -t \"Please type your password\"' '' --timer 3600 'systemctl suspend' ''"
 
+                  spawnOnce "pulse-listener | xob -s default 1> /dev/null"
+                  spawnOnce "brightness-listener | xob -s brightness 1> /dev/null"
+
                   registerDefaultWorkspaces
                   pure ()
               , keys                = \ c -> mkKeymap c (myKeys c)

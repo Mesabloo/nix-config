@@ -8,10 +8,10 @@ with lib;
       xob-scripts.pulse-listener
     ];
 
-		xsession.initExtra = with pkgs; ''
-		  (${xob-scripts.brightness-listener}/bin/brightness-listener | ${xob}/bin/xob -s brightness) 1> /dev/null &
-		  (${xob-scripts.pulse-listener}/bin/pulse-listener | ${xob}/bin/xob -s default) 1> /dev/null &
-		'';
+#		xsession.initExtra = with pkgs; ''
+#		  (${xob-scripts.brightness-listener}/bin/brightness-listener | ${xob}/bin/xob -s brightness) 1> /dev/null &
+#		  (${xob-scripts.pulse-listener}/bin/pulse-listener | ${xob}/bin/xob -s default) 1> /dev/null &
+#		'';
 
 		modules.services.xob.styles =
       let
