@@ -76,7 +76,7 @@ plug "andreyorst/kaktree" defer kaktree %{
   # map global user r ": rainbow<ret>" -docstring "rainbow brackets"
   # map global user R ": rmhl window/ranges_rainbow_specs<ret>" \
   #     -docstring "remove rainbow highlighter"
-#  hook global WinSetOption filetype=(c|cpp|cc|rust|javascript|typescript|haskell|kak) %{
+#  hook global WinSetOption filetype=(c|cpp|cc|rust|javascript|typescript|haskell|kak|python|tex) %{
 #    rainbow
 #  }
 #}
@@ -240,13 +240,13 @@ plug "h-youhei/kakoune-surround" config %{
 
 
 # -- put pairs in rainbow colors for easier distinction
-#plug "Bodhizafa/kak-rainbow" config %{
-#  # set-option rainbow_colors color1,color2,...,colorN
-#  
-#  hook global WinSetOption filetype=(rust|python|c|cpp|scheme|lisp|clojure|javascript|json|kak|haskell) %{
-#    rainbow-enable-window
-#  }
-#}
+plug "Bodhizafa/kak-rainbow" config %{
+  set-option global rainbow_colors rgb:5E81AC+db rgb:BF616A+db rgb:D08770+db rgb:EBCB8B+db rgb:A3BE8C+db rgb:B48EAD+db
+ 
+  hook global WinSetOption filetype=(rust|python|c|cpp|scheme|lisp|clojure|javascript|json|kak|haskell|python|latex|nix) %{
+    rainbow-enable-window
+  }
+}
 
 
 # -- zettelkasten-like wiki pages
