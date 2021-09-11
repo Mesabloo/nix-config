@@ -29,3 +29,8 @@ args = ["--init={\"completion\":{\"detailedLabel\":false}}"]
 filetypes = ["nix"]
 roots = ["shell.nix", "default.nix", "home.nix", ".git"]
 command = "rnix-lsp"
+
+[language.python]
+filetypes = ["python"]
+roots = []
+command = "pylsp"

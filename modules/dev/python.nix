@@ -15,6 +15,8 @@ with lib;
     home.packages = with pkgs; [
       python38
       python38Packages.pip   # Package installer
+      yapf
+      python38Packages.python-lsp-server
     ];
   };
 }

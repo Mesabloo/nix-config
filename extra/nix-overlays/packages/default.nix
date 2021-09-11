@@ -1,7 +1,7 @@
 self: super:
 
 let
-  pkgs = import <nixpkgs> {};
+  pkgs = super;
 in
 {
   deadd-notification-center = pkgs.callPackage ./deadd-notification-center.nix { inherit pkgs; };
@@ -18,4 +18,8 @@ in
   nord-xresources = pkgs.callPackage ./nord-xresources.nix { inherit pkgs; };
   picom = pkgs.callPackage ./picom.nix { inherit pkgs; };
   xob-scripts = pkgs.callPackage ./xob-scripts { inherit pkgs; };
+  python38Packages = super.python38Packages // {
+#    python-lsp-jsonrpc = pkgs.callPackage ./python-lsp-jsonrpc.nix { inherit pkgs; };
+    python-lsp-server = pkgs.callPackage ./python-lsp-server.nix { inherit pkgs; };
+  };
 }
