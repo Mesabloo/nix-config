@@ -341,8 +341,21 @@ set-face global MenuForeground default,rgb:3B4252+r
 hook global BufOpenFile .* editorconfig-load
 hook global BufNewFile .* editorconfig-load
 
-# output a simple "-- INSERT --" when entering insert mode
+
+# -- output a simple "-- INSERT --" when entering insert mode
 hook global ModeChange push:.*:insert %{
   echo -markup "{+b}-- INSERT --"
 }
 hook global ModeChange pop:insert:.* echo
+
+
+# -- set formatters
+declare-user-mode format
+map global format s ': format-selections<ret>' -docstring 'selections'
+map global format b ': format-buffer<ret>' -docstring 'buffer'
+
+map global user f ': enter-user-mode format<ret>' -docstring 'format'
+
+hook global WinSetOption filetype=python %{ set-option buffer formatcmd 'yapf' }
+hook global WinSetOption filetype=nix %{ set-option buffer formatcmd 'nixpkgs-fmt' }
+
