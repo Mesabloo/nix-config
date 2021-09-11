@@ -44,4 +44,6 @@ in
   pentablet-driver = unstable.pentablet-driver;
 
   purescript = unstable.purescript;
+
+  kakoune = unstable.kakoune;
 }
