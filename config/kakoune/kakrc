@@ -105,6 +105,7 @@ plug "caksoylar/kakoune-smooth-scroll" config %{
 # -- kakship modeline
 declare-option str lsp_progress ""
 plug "mesabloo/kakship" do %{
+  cargo build --release --locked
   cargo install --force --path . --root ~/.local
 } config %{
   kakship-enable
@@ -113,8 +114,8 @@ plug "mesabloo/kakship" do %{
 
 # -- LSP
 plug "kak-lsp/kak-lsp" do %{
-#  cargo build --release --locked
-#  cargo install --force --path .
+  cargo build --release --locked
+  cargo install --force --path . --root ~/.local
 } config %{
   set global lsp_diagnostic_line_error_sign ''
   set global lsp_diagnostic_line_warning_sign ''
@@ -221,7 +222,7 @@ plug "andreyorst/smarttab.kak" defer smarttab %{
     # when `backspace' is pressed, 4 spaces are deleted at once
     set-option global softtabstop %opt{indentwidth}
 } config %{
-    hook global WinSetOption filetype=(rust|markdown|kak|lisp|scheme|sh|perl|c|cpp|haskell|nix) expandtab
+    hook global WinSetOption filetype=(rust|markdown|kak|lisp|scheme|sh|perl|c|cpp|haskell|nix|python) expandtab
     hook global WinSetOption filetype=(makefile|gas) noexpandtab
 }
 
@@ -339,3 +340,9 @@ set-face global MenuForeground default,rgb:3B4252+r
 # -- load the closest editorconfig to the newly opened buffer
 hook global BufOpenFile .* editorconfig-load
 hook global BufNewFile .* editorconfig-load
+
+# output a simple "-- INSERT --" when entering insert mode
+hook global ModeChange push:.*:insert %{
+  echo -markup "{+b}-- INSERT --"
+}
+hook global ModeChange pop:insert:.* echo

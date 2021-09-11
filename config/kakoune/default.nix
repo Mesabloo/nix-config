@@ -15,9 +15,10 @@ with lib;
     home.packages = with pkgs; [
       starship
 
-      kak-lsp
+#      kak-lsp
     ];
 
+    modules.dev.cpp.enable = true;
     modules.dev.rust.enable = true;
   };
 }
