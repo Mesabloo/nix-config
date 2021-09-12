@@ -43,6 +43,8 @@ with lib;
               border = "#B48EAD";
             };
           };
+
+          y = { relative = 0.5; offset = 0; };
         };
 
         brightness = default // {

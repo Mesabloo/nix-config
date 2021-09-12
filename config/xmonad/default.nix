@@ -19,6 +19,7 @@ with lib;
     modules.services.picom.enable = mkDefault true;
     modules.services.polybar.enable = mkDefault true;
     modules.services.unipicker.enable = mkDefault true;
+    modules.services.xob.enable = mkDefault true;
 
     home.packages = with pkgs; [
       betterlockscreen
