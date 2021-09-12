@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+{ config, lib, pkgs, ... }:
 
 with lib;
 {
@@ -15,5 +15,14 @@ with lib;
       {
         "rofi/config.rasi".source = ./config.rasi;
       } // themes-config;
+
+    home.packages = with pkgs; [
+      papirus-icon-theme
+    ];
+
+    modules.services.fonts.nerdfonts = {
+      enable = mkDefault true;
+      fonts = mkDefault [ "FantasqueSansMono" ];
+    };
   };
 }

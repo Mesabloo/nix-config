@@ -1,4 +1,4 @@
 configuration {
-  theme: "slate";
+  theme: "launchpad";
   disable-history: true;
 }
