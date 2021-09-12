@@ -15,7 +15,18 @@ with lib;
 
       backend = "glx";
       experimentalBackends = true;
-      refreshRate = 75;
+      refreshRate = 0;
+
+      # Blur on rofi
+      blur = config.modules.services.rofi.enable;
+      blurExclude = [ "class_g != 'Rofi'" ];
+      extraOptions = ''
+        blur:
+        {
+          method = "dual_kawase";
+          strength = 3;
+        };
+      '';
     };
   };
 }

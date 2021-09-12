@@ -9,8 +9,8 @@ pkgs.stdenv.mkDerivation rec {
   src = pkgs.fetchFromGitHub {
     owner = "yshui";
     repo = "picom";
-    rev = "v${version}";
-    sha256 = "0asp2hg1jx909kl7i876mcx00vwg9w2swr9i6d786iwgs247dc9i";
+    rev = "1dbffec3aef33c6c6d6c4f248009cccaf01226cb";
+    sha256 = "13fam0k20sd2xbkia70rb2jvxyl6g5r2bvdd9bcnr0n6isz60ais";
     fetchSubmodules = true;
   };
 

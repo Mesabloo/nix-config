@@ -8,6 +8,7 @@
  */
 
 configuration {
+  modi: "window,drun";
 	font:							"Noto Sans Bold 10";
     show-icons:                     true;
 	icon-theme: 					"Papirus";
