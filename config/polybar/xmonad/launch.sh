@@ -6,8 +6,8 @@ echo "polybar> killing all running instances:"
 
 # killall -r 'polybar*' -w || true
 
-WIFI=$(ip link | awk -F'( |:)' '$3 ~ /wl.*/ {print $3}')
-ETHE=$(ip link | awk -F'( |:)' '$3 ~ /enp.*/ {print $3}')
+WIFI=$(ip link | grep --color=never UP | awk -F'( |:)' '$3 ~ /wl.*/ {print $3}' | head -1)
+ETHE=$(ip link | grep --color=never UP | awk -F'( |:)' '$3 ~ /enp.*/ {print $3}' | head -1)
 
 if type 'xrandr' &> /dev/null; then
   SCREENS=($(xrandr --query | grep ' connected' | cut -d' ' -f1 | sort))
