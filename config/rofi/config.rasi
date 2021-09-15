@@ -1,4 +1,4 @@
 configuration {
-  theme: "launchpad";
+  theme: "applauncher";
   disable-history: true;
 }

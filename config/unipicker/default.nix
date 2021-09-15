@@ -8,7 +8,7 @@ with lib;
         postProcess = builtins.replaceStrings
           [ "##ROFI##"
             "##SYMBOLS##" ]
-          [ "${pkgs.rofi}/bin/rofi -dmenu -p 'Unicode character:'"
+          [ "${pkgs.rofi}/bin/rofi -dmenu -p '' -theme unipicker"
             "${pkgs.unipicker}/share/unipicker/symbols" ];
       in postProcess (builtins.readFile ./unipickerrc);
 
