@@ -34,3 +34,8 @@ command = "rnix-lsp"
 filetypes = ["python"]
 roots = []
 command = "pylsp"
+
+[language.ocaml]
+filetypes = ["ocaml"]
+roots = []
+command = "ocamllsp"
