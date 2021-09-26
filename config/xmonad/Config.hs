@@ -229,7 +229,8 @@ myWorkspaces =
 
 defaultWorkspaceManageHook :: ManageHook
 defaultWorkspaceManageHook = composeAll
-  [      className =?  "Emacs"                --> doShift "dev"
+  [      className =?  "Emacs"
+    <||> className =?  "jetbrains-idea-ce"    --> doShift "dev"
   ,      className =?  "discord"              --> doShift "chat"
   ,      className =?  "Brave-browser"        --> doShift "www"
   ,      className =?  "vlc"
