@@ -1,7 +1,12 @@
 self: super:
 
 let
-  unstable = import <nixpkgs-unstable> {};
+  unstable = import (builtins.fetchTarball {
+    name = "nixpkgs-pinned";
+    url = "https://github.com/nixos/nixpkgs/archive/3d85bb08106a3d32350df2786fda62aa7fd49cd8.tar.gz";
+    # Use `nix-prefetch-url --unpack <url>`
+    sha256 = "0g5yg292ixbv4lilc11fr754ym702a2h833am9hxi3ir5flwb3ah";
+  }) {};
 in
 {
   stack = unstable.stack;
