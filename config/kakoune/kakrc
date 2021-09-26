@@ -222,7 +222,7 @@ plug "andreyorst/smarttab.kak" defer smarttab %{
     # when `backspace' is pressed, 4 spaces are deleted at once
     set-option global softtabstop %opt{indentwidth}
 } config %{
-    hook global WinSetOption filetype=(rust|markdown|kak|lisp|scheme|sh|perl|c|cpp|haskell|nix|python) expandtab
+    hook global WinSetOption filetype=(rust|markdown|kak|lisp|scheme|sh|perl|c|cpp|haskell|nix|python|coq) expandtab
     hook global WinSetOption filetype=(makefile|gas) noexpandtab
 }
 
@@ -265,13 +265,71 @@ plug "tex-input.kak" load-path "~/projects/tex-input.kak/" config %{
   tex-input-setup
   map global keyboard t ': tex-input-toggle<ret>' -docstring "toggle LaTeX input"
 
-  hook global WinSetOption filetype=(agda|markdown)) %{
+  hook global WinSetOption filetype=(agda|markdown|coq)) %{
     tex-input-enable
   }
 }
 
 plug "zilch.kak" load-path "~/projects/zilch/zilch.kak/" config %{
 
+}
+
+# -- CoqIDE for kakoune
+plug "guest0x0/coqoune" config %{
+  set-option global coqoune_shell "bash"
+
+  hook global WinSetOption filetype=coq %{
+    coq-start
+    nop %sh{
+      buffer_cmd() {
+        echo "try %{
+          buffer *$1*
+          rename-client %{coq-$1-client}
+
+          remove-highlighter buffer/line_numbers
+          remove-highlighter buffer/matching
+          remove-highlighter buffer/wrap_lines
+          remove-highlighter buffer/show-whitespaces
+        }"
+      }
+      
+      if [ -n "${kak_ot_termcmd}"]; then
+        (${kak_opt_termcmd} "sh -c 'kak -c ${kak_session} -e \"$(buffer_cmd "goal")\"'") > /dev/null 2>&1 < /dev/null &
+        (${kak_opt_termcmd} "sh -c 'kak -c ${kak_session} -e \"$(buffer_cmd "result")\"'") > /dev/null 2>&1 < /dev/null &
+      fi
+    }
+    hook global ClientClose .* %{
+      try %{
+        evaluate-commands -client coq-goal-client "quit!"
+        evaluate-commands -client coq-result-client "quit!"
+      }
+    }
+
+    set-face buffer coqoune_processed default,default+id
+
+    declare-user-mode coq
+
+    map buffer user c ": enter-user-mode coq<ret>" \
+        -docstring "enter the Coq user mode"
+
+    map buffer coq c ": enter-user-mode -lock coq<ret>" \
+        -docstring "stay in the Coq user mode"
+
+    map buffer coq k ": coq-back<ret>" \
+        -docstring "undo last sent command"
+
+    map buffer coq j ": coq-next<ret>" \
+        -docstring "send the next command to Coq"
+
+    map buffer coq <ret> ": coq-to-cursor<ret>" \
+        -docstring "move tip to main cursor"
+
+    map buffer coq h ": coq-hints<ret>" \
+        -docstring "receive hints at current tip"
+
+    map buffer coq q ": coq-query ''<left>" \
+        -docstring "send a query to Coq"
+  }
 }
 
 # ------------------------------------------------------------------------------------------------------------------
