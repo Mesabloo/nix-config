@@ -21,6 +21,7 @@ with lib;
          #cargo
          #rustc
          #rls
+         rust-analyzer
        ];
   };
 }

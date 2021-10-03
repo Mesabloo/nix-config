@@ -16,7 +16,10 @@ args = []
 [language.rust]
 filetypes = ["rust"]
 roots = ["Cargo.toml"]
-command = "rls"
+command = "rust-analyzer"
+settings_section = "rust-analyzer"
+[language.rust.settings.rust-analyzer]
+"procMacro.enable" = true
 
 [language.c_cpp]
 filetypes = ["c", "cpp"]
