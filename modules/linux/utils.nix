@@ -16,6 +16,7 @@ with lib;
       bat          # `cat`, but actually better
       cloc         # count my lines of code
       dialog       # terminal dialog boxes
+      file
       hyperfine    # gotta go fast
       ltrace       # function call tracer
       mount-helper # See the overlays. Makes it easy to mount a disk
