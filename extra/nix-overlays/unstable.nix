@@ -3,9 +3,9 @@ self: super:
 let
   unstable = import (builtins.fetchTarball {
     name = "nixpkgs-pinned";
-    url = "https://github.com/nixos/nixpkgs/archive/3d85bb08106a3d32350df2786fda62aa7fd49cd8.tar.gz";
+    url = "https://github.com/nixos/nixpkgs/archive/cf6e529bfb538ac3863982470263a3a11132e8e2.tar.gz";
     # Use `nix-prefetch-url --unpack <url>`
-    sha256 = "0g5yg292ixbv4lilc11fr754ym702a2h833am9hxi3ir5flwb3ah";
+    sha256 = "1q4ky8jxgihb6rlz0szlbbhynnv5k64fgn5bx5gr5gzxvbakdbd7";
   }) {};
 in
 {
@@ -51,4 +51,6 @@ in
   purescript = unstable.purescript;
 
   kakoune = unstable.kakoune;
+
+  rust-analyzer = unstable.rust-analyzer;
 }
