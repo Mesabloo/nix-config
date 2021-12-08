@@ -20,6 +20,7 @@ with lib;
       xorg.fontmiscmisc
       xdotool
       xorg.xmessage
+      xsel
     ];
   };
 }
