@@ -119,21 +119,21 @@ plug "kak-lsp/kak-lsp" do %{
   cargo build --release --locked
   cargo install --force --path . --root ~/.local
 } config %{
-  set global lsp_diagnostic_line_error_sign ''
-  set global lsp_diagnostic_line_warning_sign ''
-  set global lsp_diagnostic_line_info_sign ''
-  set global lsp_diagnostic_line_hint_sign ''
+  set global lsp_diagnostic_line_error_sign ''
+  set global lsp_diagnostic_line_warning_sign ''
+  set global lsp_diagnostic_line_info_sign ''
+  set global lsp_diagnostic_line_hint_sign ''
   set global lsp_hover_max_lines 30
 
-  set-face global LineFlagError bright-red
-  set-face global LineFlagWarning bright-yellow
-  set-face global LineFlagInfo bright-blue
-  set-face global LineFlagInfo bright-green
+  set-face global LineFlagError bright-red+b
+  set-face global LineFlagWarning bright-yellow+b
+  set-face global LineFlagInfo bright-blue+b
+  set-face global LineFlagHint bright-green+b
 
   # change L&F of markdown boxes
   set-face global InfoMono default+d
   set-face global InfoLink blue+u
-  set-face global InfoLinkMono blue+ud
+  set-face global InfoLinkMono blue+u
   set-face global InfoBlockQuote black
   set-face global InfoBlock @InfoMono
 
@@ -302,78 +302,6 @@ plug "zilch.kak" load-path "~/projects/zilch/zilch.kak/" config %{
 
 }
 
-# # -- CoqIDE for kakoune
-# plug "coqoune" load-path "~/projects/coqoune/" config %{  
-#   set-option global coqoune_shell "bash"
-
-#   hook global BufSetOption filetype=coq %{
-#     set-option global coqoune_coqproject %sh{
-#       curpath="${kak_buffile%/*}"
-#       if ! [ -d "$curpath" ]; then
-#         echo ""
-#       else     
-#         while ! [ "$curpath" = "/" ];
-#         do
-#             find "$curpath" -maxdepth 1 -mindepth 1 -iname '_CoqProject'
-#             # Note: if you want to ignore symlinks, use "$(realpath -s "$path"/..)"
-#             curpath="$(readlink -f "$curpath"/..)"
-#         done
-#       fi
-#     }
-    
-#     coq-start
-#     nop %sh{
-#       buffer_cmd() {
-#         echo "try %{
-#           buffer *$1*
-#           rename-client %{coq-$1-client}
-
-#           remove-highlighter buffer/line_numbers
-#           remove-highlighter buffer/matching
-#           remove-highlighter buffer/wrap_lines
-#           remove-highlighter buffer/show-whitespaces
-#         }"
-#       }
-      
-#       if [ -n "${kak_ot_termcmd}"]; then
-#         (${kak_opt_termcmd} "sh -c 'kak -c ${kak_session} -e \"$(buffer_cmd "goal")\"'") > /dev/null 2>&1 < /dev/null &
-#         (${kak_opt_termcmd} "sh -c 'kak -c ${kak_session} -e \"$(buffer_cmd "result")\"'") > /dev/null 2>&1 < /dev/null &
-#       fi
-#     }
-#     hook global ClientClose .* %{
-#       try %{
-#         evaluate-commands -client coq-goal-client "quit!"
-#         evaluate-commands -client coq-result-client "quit!"
-#       }
-#     }
-
-#     set-face buffer coqoune_processed default,default+id
-
-#     declare-user-mode coq
-
-#     map buffer user c ": enter-user-mode coq<ret>" \
-#         -docstring "enter the Coq user mode"
-
-#     map buffer coq c ": enter-user-mode -lock coq<ret>" \
-#         -docstring "stay in the Coq user mode"
-
-#     map buffer coq k ": coq-back<ret>" \
-#         -docstring "undo last sent command"
-
-#     map buffer coq j ": coq-next<ret>" \
-#         -docstring "send the next command to Coq"
-
-#     map buffer coq <ret> ": coq-to-cursor<ret>" \
-#         -docstring "move tip to main cursor"
-
-#     map buffer coq h ": coq-hints<ret>" \
-#         -docstring "receive hints at current tip"
-
-#     map buffer coq q ": coq-query ''<left>" \
-#         -docstring "send a query to Coq"
-#   }
-# }
-
 
 # CoqIDE for kakoune
 plug "coqide.kak" load-path "~/projects/coqide.kak" config %{
@@ -442,6 +370,12 @@ plug "coqide.kak" load-path "~/projects/coqide.kak" config %{
     hook global -group "coqide-%opt{coqide_pid}" BufClose "%val{buffile}" %{ try %opt{coqide_close_panels} }
     hook global -group "coqide-%opt{coqide_pid}" ClientClose .* %{ try %opt{coqide_close_panels} }
   }
+}
+
+
+# PlantUML
+plug "KJ_Duncan/kakoune-plantuml.kak" domain "bitbucket.org" config %{
+  
 }
 
 
