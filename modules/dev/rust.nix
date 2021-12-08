@@ -17,7 +17,7 @@ with lib;
          cargo2nix = import (fetchTarball https://github.com/tenx-tech/cargo2nix/archive/master.tar.gz) {};
        in with pkgs; [
          rustup
-         cargo2nix.package   # Converts `Cargo.toml` files into Nix expressions
+         # cargo2nix.package   # Converts `Cargo.toml` files into Nix expressions
          #cargo
          #rustc
          #rls
