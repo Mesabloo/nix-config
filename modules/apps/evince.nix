@@ -12,6 +12,8 @@ with lib;
   config = mkIf config.modules.apps.evince.enable {
     home.packages = with pkgs; [
       evince
+      gvfs
+      dconf
     ];
   };
 }
