@@ -302,63 +302,148 @@ plug "zilch.kak" load-path "~/projects/zilch/zilch.kak/" config %{
 
 }
 
-# -- CoqIDE for kakoune
-plug "guest0x0/coqoune" config %{
-  set-option global coqoune_shell "bash"
+# # -- CoqIDE for kakoune
+# plug "coqoune" load-path "~/projects/coqoune/" config %{  
+#   set-option global coqoune_shell "bash"
 
-  hook global WinSetOption filetype=coq %{
-    coq-start
-    nop %sh{
-      buffer_cmd() {
-        echo "try %{
-          buffer *$1*
-          rename-client %{coq-$1-client}
+#   hook global BufSetOption filetype=coq %{
+#     set-option global coqoune_coqproject %sh{
+#       curpath="${kak_buffile%/*}"
+#       if ! [ -d "$curpath" ]; then
+#         echo ""
+#       else     
+#         while ! [ "$curpath" = "/" ];
+#         do
+#             find "$curpath" -maxdepth 1 -mindepth 1 -iname '_CoqProject'
+#             # Note: if you want to ignore symlinks, use "$(realpath -s "$path"/..)"
+#             curpath="$(readlink -f "$curpath"/..)"
+#         done
+#       fi
+#     }
+    
+#     coq-start
+#     nop %sh{
+#       buffer_cmd() {
+#         echo "try %{
+#           buffer *$1*
+#           rename-client %{coq-$1-client}
 
+#           remove-highlighter buffer/line_numbers
+#           remove-highlighter buffer/matching
+#           remove-highlighter buffer/wrap_lines
+#           remove-highlighter buffer/show-whitespaces
+#         }"
+#       }
+      
+#       if [ -n "${kak_ot_termcmd}"]; then
+#         (${kak_opt_termcmd} "sh -c 'kak -c ${kak_session} -e \"$(buffer_cmd "goal")\"'") > /dev/null 2>&1 < /dev/null &
+#         (${kak_opt_termcmd} "sh -c 'kak -c ${kak_session} -e \"$(buffer_cmd "result")\"'") > /dev/null 2>&1 < /dev/null &
+#       fi
+#     }
+#     hook global ClientClose .* %{
+#       try %{
+#         evaluate-commands -client coq-goal-client "quit!"
+#         evaluate-commands -client coq-result-client "quit!"
+#       }
+#     }
+
+#     set-face buffer coqoune_processed default,default+id
+
+#     declare-user-mode coq
+
+#     map buffer user c ": enter-user-mode coq<ret>" \
+#         -docstring "enter the Coq user mode"
+
+#     map buffer coq c ": enter-user-mode -lock coq<ret>" \
+#         -docstring "stay in the Coq user mode"
+
+#     map buffer coq k ": coq-back<ret>" \
+#         -docstring "undo last sent command"
+
+#     map buffer coq j ": coq-next<ret>" \
+#         -docstring "send the next command to Coq"
+
+#     map buffer coq <ret> ": coq-to-cursor<ret>" \
+#         -docstring "move tip to main cursor"
+
+#     map buffer coq h ": coq-hints<ret>" \
+#         -docstring "receive hints at current tip"
+
+#     map buffer coq q ": coq-query ''<left>" \
+#         -docstring "send a query to Coq"
+#   }
+# }
+
+
+# CoqIDE for kakoune
+plug "coqide.kak" load-path "~/projects/coqide.kak" config %{
+  declare-option -hidden str coqide_close_panels
+
+    declare-user-mode coq
+    map global coq c ": enter-user-mode -lock coq<ret>" \
+      -docstring "stay in the Coq user mode"
+    map global coq k ": coqide-previous<ret>" \
+      -docstring "unprove the last statement"
+    map global coq j ": coqide-next<ret>" \
+      -docstring "prove the next statement"
+    map global coq <ret> ": coqide-move-to<ret>" \
+      -docstring "move tip to main cursor"
+    map global coq l ": coqide-dump-log<ret>" \
+      -docstring "dump logs"
+    map global coq q ": coqide-query<ret>" \
+      -docstring "send a query to coqtop"
+
+  # Create two additional clients to show goals and results
+  hook global BufCreate \*coqide-(.*)-(goal|result)\* %{
+    evaluate-commands %sh{
+      client_name="coq-${kak_hook_param_capture_1}-${kak_hook_param_capture_2}"
+      regex_safe="$(sed 's/\*/\\*/g' <<< "$kak_hook_param_capture_0")"
+
+      switch_to_buffer="
+        buffer $kak_hook_param_capture_0
+        rename-client $client_name
+
+        try %{
           remove-highlighter buffer/line_numbers
           remove-highlighter buffer/matching
           remove-highlighter buffer/wrap_lines
           remove-highlighter buffer/show-whitespaces
-        }"
-      }
-      
-      if [ -n "${kak_ot_termcmd}"]; then
-        (${kak_opt_termcmd} "sh -c 'kak -c ${kak_session} -e \"$(buffer_cmd "goal")\"'") > /dev/null 2>&1 < /dev/null &
-        (${kak_opt_termcmd} "sh -c 'kak -c ${kak_session} -e \"$(buffer_cmd "result")\"'") > /dev/null 2>&1 < /dev/null &
-      fi
+        }
+      "
+      ${kak_opt_termcmd} "kak -c $kak_session -e '$switch_to_buffer'" &>/dev/null </dev/null &
+
+      echo "hook -once global BufClose '$regex_safe' %{
+        evaluate-commands -client '$client_name' 'quit!'
+      }"
     }
-    hook global ClientClose .* %{
-      try %{
-        evaluate-commands -client coq-goal-client "quit!"
-        evaluate-commands -client coq-result-client "quit!"
-      }
-    }
+  }
 
-    set-face buffer coqoune_processed default,default+id
 
-    declare-user-mode coq
+  hook global WinSetOption filetype=coq %{ 
+    coqide-start
 
+    # User mode to interact with CoqIDE only in Coq files
     map buffer user c ": enter-user-mode coq<ret>" \
-        -docstring "enter the Coq user mode"
+      -docstring "enter the Coq user mode"
 
-    map buffer coq c ": enter-user-mode -lock coq<ret>" \
-        -docstring "stay in the Coq user mode"
+    # Better looking face
+    set-face global coqide_processed default,black+id
 
-    map buffer coq k ": coq-back<ret>" \
-        -docstring "undo last sent command"
+    # Commands to execute when the buffer is closed.
+    # These are declared here as a string in order to have the value of `%opt{coqide_pid}`
+    # (which is an internal option)
+    set-option buffer coqide_close_panels "
+      evaluate-commands -client coq-%opt{coqide_pid}-goal 'quit!'
+      evaluate-commands -client coq-%opt{coqide_pid}-result 'quit!'
+      remove-hooks coqide-%opt{coqide_pid}
+    "
 
-    map buffer coq j ": coq-next<ret>" \
-        -docstring "send the next command to Coq"
-
-    map buffer coq <ret> ": coq-to-cursor<ret>" \
-        -docstring "move tip to main cursor"
-
-    map buffer coq h ": coq-hints<ret>" \
-        -docstring "receive hints at current tip"
-
-    map buffer coq q ": coq-query ''<left>" \
-        -docstring "send a query to Coq"
+    # Remove the side panels when closing the buffer
+    hook global -group "coqide-%opt{coqide_pid}" BufClose "%val{buffile}" %{ try %opt{coqide_close_panels} }
+    hook global -group "coqide-%opt{coqide_pid}" ClientClose .* %{ try %opt{coqide_close_panels} }
   }
 }
+
 
 # ------------------------------------------------------------------------------------------------------------------
 

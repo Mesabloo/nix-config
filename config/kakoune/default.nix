@@ -16,7 +16,7 @@ with lib;
       starship
 
 #      kak-lsp
-    ] ++ (if config.modules.dev.coq.enable then [ libxml2 ] else []);
+    ] ++ (if config.modules.dev.coq.enable then [ libxml2 socat ] else []);
 
     modules.dev.cpp.enable = true;
     modules.dev.rust.enable = true;
