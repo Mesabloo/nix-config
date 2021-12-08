@@ -11,6 +11,8 @@ plug "andreyortst/plug.kak" noload
 
 
 
+# -- Prolog syntax highlighting
+source "~/.config/kak/prolog.kak"
 
 # -- prelude
 plug "kakounedotcom/prelude.kak"
@@ -139,6 +141,8 @@ plug "kak-lsp/kak-lsp" do %{
   set-face global InfoDiagnosticHint @LineFlagHint
   set-face global InfoDiagnosticInformation @LineFlagInformation
   set-face global InfoDiagnosticWarning @LineFlagWarning
+
+  set-face global InlayHint bright-black,default+i
 
   define-command ne -docstring 'go to next error/warning from lsp' %{ lsp-find-error --include-warnings }
   define-command pe -docstring 'go to previous error/warning from lsp' %{ lsp-find-error --previous --include-warnings }
