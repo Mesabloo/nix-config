@@ -241,7 +241,7 @@ plug "chambln/kakoune-kit" config %{
 
 # -- add surrounding capabilities
 #plug "alexherbo2/surround.kak" config %{
-# map global normal <c-s> ':surround<ret>' -docstring 'surround with...'
+# map global normal <c-s> ': surround<ret>' -docstring 'surround with...'
 #}
 
 
@@ -258,16 +258,16 @@ plug "andreyorst/smarttab.kak" defer smarttab %{
 # -- easy surrounding of selection
 plug "h-youhei/kakoune-surround" config %{
   declare-user-mode surround
-  map global surround s ':surround<ret>' -docstring 'surround'
-  map global surround c ':change-surround<ret>' -docstring 'change'
-  map global surround d ':delete-surround<ret>' -docstring 'delete'
-  map global surround t ':select-surrounding-tag<ret>' -docstring 'select tag'
+  map global surround s ': surround<ret>' -docstring 'surround'
+  map global surround c ': change-surround<ret>' -docstring 'change'
+  map global surround d ': delete-surround<ret>' -docstring 'delete'
+  map global surround t ': select-surrounding-tag<ret>' -docstring 'select tag'
 
   map global normal <a-s> ': enter-user-mode surround<ret>'
 }
 
 
-# -- put pairs in rainbow colors for easier distinction
+# # -- put pairs in rainbow colors for easier distinction
 plug "Bodhizafa/kak-rainbow" config %{
   set-option global rainbow_colors rgb:5E81AC+db rgb:BF616A+db rgb:D08770+db rgb:EBCB8B+db rgb:A3BE8C+db rgb:B48EAD+db
  
@@ -277,15 +277,15 @@ plug "Bodhizafa/kak-rainbow" config %{
 }
 
 
-# -- zettelkasten-like wiki pages
-plug "TeddyDD/kakoune-wiki" config %{
-  wiki-setup %sh{ echo $HOME/.wiki }
-}
+# # -- zettelkasten-like wiki pages
+# plug "TeddyDD/kakoune-wiki" config %{
+#   wiki-setup %sh{ echo $HOME/.wiki }
+# }
 
 
-# -- LaTeX input in insert mode
+# # -- LaTeX input in insert mode
 
-# -- new keyboard user mode
+# # -- new keyboard user mode
 declare-user-mode keyboard
 map global normal <c-k> ': enter-user-mode keyboard<ret>'
 
