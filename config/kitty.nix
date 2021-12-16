@@ -24,9 +24,12 @@ with lib;
       '';
 
       settings = {
+        allow_remote_control = "yes";
+        enabled_layouts = "tall";
+        
         disable_ligatures = "always";
         
-        scrollback_lines = -1;
+        scrollback_lines = 2000;
 
         window_padding_width = 10;
 

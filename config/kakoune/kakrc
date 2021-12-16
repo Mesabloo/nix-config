@@ -389,7 +389,13 @@ plug "KJ_Duncan/kakoune-plantuml.kak" domain "bitbucket.org" config %{
 
 
 # Only on kitty
-declare-option -docstring "The command to launch a new terminal" str termcmd "kitty"
+declare-option -docstring "The command to launch a new terminal" str termcmd "kitty sh -c"
+# ^^^ This SUCKS so much because most plugins do '${kak_opt_termcmd} "command with args"' but kitty
+# treats the string as a single program name
+# As a temporary fix, we spawn an instance of sh to interpret that string
+hook global GlobalSetOption kitty_window_type=.* %{
+  set-option global kitty_window_type "os-window"
+}
 
 
 # -- set line numbers on all buffer
