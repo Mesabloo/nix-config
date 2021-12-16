@@ -11,7 +11,11 @@ with lib;
         follow = "mouse";
 
         # The geometry of the window
-        geometry = "450x10-25+25";
+        # geometry = "650x10-25+25";
+        width = "500";
+        height = "(100, 500)";
+        origin = "(top, right)";
+        offset = "25x50";
 
         # Show how many messages are currently hidden (because of geometry)
         indicate_hidden = false;
@@ -148,7 +152,7 @@ with lib;
         class = "Dunst";
 
         # Print a notification on startup
-        startup_notification = false;
+        # startup_notification = false;
 
         # Manage dunst's desire for talking
         # Can be one of the following values:
@@ -157,7 +161,7 @@ with lib;
         #  mesg: Important messages
         #  info: all unimportant stuff
         # debug: all less than unimportant stuff
-        verbosity = "mesg";
+        # verbosity = "mesg";
 
         # Define the corner radius of the notification window
         corner_radius = 4;
@@ -166,12 +170,16 @@ with lib;
         mouse_left_click = "close_current";
         mouse_middle_click = "do_action";
         mouse_right_click = "close_all";
+
+
+
+        color = "#81A1C1";
       };
 
-      frame = {
-        color = "#81A1C1";
-        width = 0;
-      };
+      #frame = {
+      #  color = "#81A1C1";
+      #  width = 0;
+      #};
 
       urgency_low = {
         background = "#2E3440";
