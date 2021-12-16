@@ -23,6 +23,7 @@ with lib;
       neofetch     # please tell me my system information
       psmisc       # some misc functions on processes
       texinfo      # if one day I want to write some documentation...
+      tree
       wget         # `curl` is better
     ];
   };
