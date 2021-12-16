@@ -5,6 +5,7 @@
 with lib;
 {
   imports = [
+    ./rar.nix
     ./tar.nix
     ./zip.nix
   ];
@@ -17,6 +18,7 @@ with lib;
   };
 
   config = mkIf config.modules.services.archive.enable {
+    modules.services.archive.rar.enable = true;
     modules.services.archive.tar.enable = true;
     modules.services.archive.zip.enable = true;
 
