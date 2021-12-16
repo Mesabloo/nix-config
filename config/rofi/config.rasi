@@ -1,4 +1,6 @@
 configuration {
-  theme: "applauncher";
+/*  theme: "applauncher"; */
   disable-history: true;
 }
+
+@theme "applauncher"
