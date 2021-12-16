@@ -12,7 +12,7 @@ with lib;
 
         # The geometry of the window
         # geometry = "650x10-25+25";
-        width = "500";
+        width = "(250, 500)";
         height = "(100, 500)";
         origin = "(top, right)";
         offset = "25x50";
