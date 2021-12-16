@@ -17,6 +17,7 @@
     ./git.nix
     ./gtk.nix
     ./haskell.nix
+    ./kitty.nix
     ./neuron.nix
     ./picom.nix
     ./qt.nix
