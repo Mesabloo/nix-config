@@ -3,9 +3,9 @@ self: super:
 let
   unstable = import (builtins.fetchTarball {
     name = "nixpkgs-pinned";
-    url = "https://github.com/nixos/nixpkgs/archive/cf6e529bfb538ac3863982470263a3a11132e8e2.tar.gz";
+    url = "https://github.com/nixos/nixpkgs/archive/3c52ea8c9216a0d5b7a7b4d74a9d2e858b06df5c.tar.gz";
     # Use `nix-prefetch-url --unpack <url>`
-    sha256 = "1q4ky8jxgihb6rlz0szlbbhynnv5k64fgn5bx5gr5gzxvbakdbd7";
+    sha256 = "1sqg1rkkhcq4hg7gl2yrciv1w2b805mnxqnhlll3qvbs4lcw2x36";
   }) {};
 in
 {
