@@ -19,7 +19,7 @@ plug "kakounedotcom/prelude.kak"
 
 
 # -- Alacritty integration
-plug "alexherbo2/alacritty.kak"
+# plug "alexherbo2/alacritty.kak"
 
 
 # -- Connect programs to clients
@@ -129,6 +129,12 @@ plug "kak-lsp/kak-lsp" do %{
   set-face global LineFlagWarning bright-yellow+b
   set-face global LineFlagInfo bright-blue+b
   set-face global LineFlagHint bright-green+b
+
+  # change L&F of reports in code
+  set-face global DiagnosticError default,default,bright-red+c
+  set-face global DiagnosticWarning default,default,bright-yellow+c
+  set-face global DiagnosticHint default,default,bright-blue+c
+  set-face global DiagnosticInfo default,default,bright-green+c
 
   # change L&F of markdown boxes
   set-face global InfoMono default+d
@@ -380,6 +386,10 @@ plug "KJ_Duncan/kakoune-plantuml.kak" domain "bitbucket.org" config %{
 
 
 # ------------------------------------------------------------------------------------------------------------------
+
+
+# Only on kitty
+declare-option -docstring "The command to launch a new terminal" str termcmd "kitty"
 
 
 # -- set line numbers on all buffer
