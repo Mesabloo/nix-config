@@ -107,7 +107,7 @@ myConfig =
   let c = def { borderWidth         = 2
               , normalBorderColor   = basebg
               , focusedBorderColor  = basefg
-              , terminal            = "alacritty"
+              , terminal            = "kitty"
               , modMask             = mod4Mask
               , manageHook          = defaultWorkspaceManageHook <+> myManageHook <+> manageHook def
               , handleEventHook     = fullscreenEventHook <+> borderEventHook <+> handleEventHook def
