@@ -53,4 +53,6 @@ in
   kakoune = unstable.kakoune;
 
   rust-analyzer = unstable.rust-analyzer;
+
+  betterlockscreen = unstable.betterlockscreen;
 }

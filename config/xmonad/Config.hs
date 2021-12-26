@@ -121,7 +121,7 @@ myConfig =
 
                   spawnOnce "numlockx on"
 
-                  spawnOnce "xidlehook --not-when-fullscreen --not-when-audio --timer 300 'betterlockscreen -l dim -t \"Please type your password\"' '' --timer 3600 'systemctl suspend' ''"
+                  spawnOnce "xidlehook --not-when-fullscreen --not-when-audio --timer 300 'betterlockscreen -l dim' '' --timer 3600 'systemctl suspend' ''"
 
                   spawnOnce "pulse-listener | xob -s default 1> /dev/null"
                   spawnOnce "brightness-listener | xob -s brightness 1> /dev/null"
@@ -165,7 +165,7 @@ myKeys c =
   , ("M-S-b",                     withFocused toggleBorder)
   , ("M-<Print>",                 spawn "flameshot gui")
   , ("M-S-<Space>",               withFocused floatOrUnfloat)
-  , ("M-l",                       spawn "betterlockscreen -l dim -t 'Please type your password'")
+  , ("M-l",                       spawn "betterlockscreen -l dim")
   , ("M-S-u",                     spawn "unipicker --copy")
   , ("M-f",                       sendMessage (Toggle FULL))
   , ("M-C-<Right>",               swapWorkspaces' Next)
