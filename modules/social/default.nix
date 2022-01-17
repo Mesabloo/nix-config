@@ -4,6 +4,7 @@
   imports = [
     ./discord.nix
     ./mattermost.nix
+    ./teams.nix
   ];
 
   config = {};
