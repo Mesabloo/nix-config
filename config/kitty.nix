@@ -21,11 +21,24 @@ with lib;
 
       extraConfig = ''
         include ${nord-kitty}
+
+        map ctrl+enter launch --location=vsplit
+        map ctrl+shift+enter launch --location=hsplit
+
+        map shift+up neighboring_window up
+        map shift+left neighboring_window left
+        map shift+right neighboring_window right
+        map shift+down neighboring_window down
+
+        map ctrl+shift+up move_window up
+        map ctrl+shift+left move_window left
+        map ctrl+shift+right move_window right
+        map ctrl+shift+down move_window down
       '';
 
       settings = {
         allow_remote_control = "yes";
-        enabled_layouts = "tall";
+        enabled_layouts = "splits:split_axis=horizontal";
         
         disable_ligatures = "always";
         
