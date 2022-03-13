@@ -22,4 +22,5 @@ in
 #    python-lsp-jsonrpc = pkgs.callPackage ./python-lsp-jsonrpc.nix { inherit pkgs; };
     python-lsp-server = pkgs.callPackage ./python-lsp-server.nix { inherit pkgs; };
   };
+  nbtexplorer = pkgs.callPackage ./nbtexplorer.nix { inherit pkgs; };
 }
