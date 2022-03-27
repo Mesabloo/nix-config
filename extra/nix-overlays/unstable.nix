@@ -55,4 +55,6 @@ in
   rust-analyzer = unstable.rust-analyzer;
 
   betterlockscreen = unstable.betterlockscreen;
+
+  haskell-language-server = unstable.haskell-language-server;
 }
