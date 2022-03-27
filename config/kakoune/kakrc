@@ -184,9 +184,9 @@ plug "kak-lsp/kak-lsp" do %{
     }
     
     set window lsp_server_configuration rust.clippy_preference="on"
-
-    hook window BufWritePre .* lsp-formatting-sync
   }
+
+  hook window BufWritePre .* lsp-formatting-sync
 
   hook global KakEnd .* %{
 		set global lsp_progress ""
