@@ -15,7 +15,7 @@ plug "andreyortst/plug.kak" noload
 source "~/.config/kak/prolog.kak"
 
 # -- prelude
-plug "kakounedotcom/prelude.kak"
+# plug "kakounedotcom/prelude.kak"
 
 
 # -- Alacritty integration
@@ -95,13 +95,13 @@ plug "andreyorst/kaktree" defer kaktree %{
 
 
 # -- smooth autoscroll
-plug "caksoylar/kakoune-smooth-scroll" config %{
-  hook global WinCreate [^*].* %{
-    hook -once window WinDisplay .* %{
-      smooth-scroll-enable
-    }
-  }
-}
+# plug "caksoylar/kakoune-smooth-scroll" config %{
+#   hook global WinCreate [^*].* %{
+#     hook -once window WinDisplay .* %{
+#       smooth-scroll-enable
+#     }
+#   }
+# }
 
 
 # -- kakship modeline
@@ -172,6 +172,9 @@ plug "kak-lsp/kak-lsp" do %{
     set-option window lsp_hover_anchor false
     lsp-auto-hover-enable
     echo -debug "Enabling LSP for filetype %opt{filetype}"
+  
+    hook window BufWritePre .* lsp-formatting-sync
+    
     lsp-enable-window
   }
 
@@ -186,7 +189,6 @@ plug "kak-lsp/kak-lsp" do %{
     set window lsp_server_configuration rust.clippy_preference="on"
   }
 
-  hook window BufWritePre .* lsp-formatting-sync
 
   hook global KakEnd .* %{
 		set global lsp_progress ""
@@ -200,13 +202,13 @@ plug "kak-lsp/kak-lsp" do %{
 
 
 # -- auto pairs
-plug "alexherbo2/auto-pairs.kak" config %{
-  set-option global auto_pairs ( ) { } [ ] '"' '"' "'" "'" ` ` “ ” ‘ ’ « » ‹ ›
+# plug "alexherbo2/auto-pairs.kak" config %{
+#   set-option global auto_pairs ( ) { } [ ] '"' '"' "'" "'" ` ` “ ” ‘ ’ « » ‹ ›
 
-  hook global WinCreate .* %{
-    enable-auto-pairs
-  }
-}
+#   hook global WinCreate .* %{
+#     enable-auto-pairs
+#   }
+# }
 
 
 # -- extra file types handling
@@ -309,24 +311,28 @@ plug "zilch.kak" load-path "~/projects/zilch/zilch.kak/" config %{
 plug "coqide.kak" load-path "~/projects/coqide.kak" config %{
   declare-option -hidden str coqide_close_panels
 
-    declare-user-mode coq
-    map global coq c ": enter-user-mode -lock coq<ret>" \
-      -docstring "stay in the Coq user mode"
-    map global coq k ": coqide-previous<ret>" \
-      -docstring "unprove the last statement"
-    map global coq j ": coqide-next<ret>" \
-      -docstring "prove the next statement"
-    map global coq <ret> ": coqide-move-to<ret>" \
-      -docstring "move tip to main cursor"
-    map global coq l ": coqide-dump-log<ret>" \
-      -docstring "dump logs"
-    map global coq q ": coqide-query<ret>" \
-      -docstring "send a query to coqtop"
+  declare-user-mode coq
+  map global coq c ": enter-user-mode -lock coq<ret>" \
+    -docstring "stay in the Coq user mode"
+  map global coq k ": coqide-previous<ret>" \
+    -docstring "unprove the last statement"
+  map global coq j ": coqide-next<ret>" \
+    -docstring "prove the next statement"
+  map global coq <ret> ": coqide-move-to<ret>" \
+    -docstring "move tip to main cursor"
+  map global coq t ": coqide-goto-tip<ret>" \
+    -docstring "go to the document tip"
+  map global coq h ": coqide-hints<ret>" \
+    -docstring "ask for some hints"
+  map global coq q ": coqide-query<ret>" \
+    -docstring "send a query to coqtop"
+  map global coq l ": coqide-dump-log<ret>" \
+    -docstring "dump logs"
 
   # Create two additional clients to show goals and results
-  hook global BufCreate \*coqide-(.*)-(goal|result)\* %{
+  hook global BufCreate (goal|result)-(.*) %{
     evaluate-commands %sh{
-      client_name="coq-${kak_hook_param_capture_1}-${kak_hook_param_capture_2}"
+      client_name="${kak_hook_param_capture_1}-${kak_hook_param_capture_2}"
       regex_safe="$(sed 's/\*/\\*/g' <<< "$kak_hook_param_capture_0")"
 
       switch_to_buffer="
@@ -349,28 +355,41 @@ plug "coqide.kak" load-path "~/projects/coqide.kak" config %{
   }
 
 
-  hook global WinSetOption filetype=coq %{ 
-    coqide-start
+  hook global WinCreate .* %{
+    hook window WinSetOption filetype=coq %{
+      require-module coqide
 
-    # User mode to interact with CoqIDE only in Coq files
-    map buffer user c ": enter-user-mode coq<ret>" \
-      -docstring "enter the Coq user mode"
+      # User mode to interact with CoqIDE only in Coq files
+      map buffer user c ": enter-user-mode coq<ret>" \
+        -docstring "enter the Coq user mode"
 
-    # Better looking face
-    set-face global coqide_processed default,black+id
+      # Enable symbols in the gutter for errors/axioms
+      coqide-enable-gutter-symbols
+      # -> To disable: coqide-disable-gutter symbols
+      set-option global coqide_gutter_error_symbol "█"
+      set-option global coqide_gutter_admitted_symbol "▒"     # I quite like these ones
+      set-face global coqide_gutter_error_face red+b
+      set-face global coqide_gutter_admitted_face yellow+b
 
-    # Commands to execute when the buffer is closed.
-    # These are declared here as a string in order to have the value of `%opt{coqide_pid}`
-    # (which is an internal option)
-    set-option buffer coqide_close_panels "
-      evaluate-commands -client coq-%opt{coqide_pid}-goal 'quit!'
-      evaluate-commands -client coq-%opt{coqide_pid}-result 'quit!'
-      remove-hooks coqide-%opt{coqide_pid}
-    "
+      # Better looking face
+      set-face global coqide_processed_face default,black
+      set-face global coqide_error_face default,default,bright-red+c
+      set-face global coqide_admitted_face default,default,yellow+cd
+      set-face global coqide_to_be_processed_face default,default,black+u
 
-    # Remove the side panels when closing the buffer
-    hook global -group "coqide-%opt{coqide_pid}" BufClose "%val{buffile}" %{ try %opt{coqide_close_panels} }
-    hook global -group "coqide-%opt{coqide_pid}" ClientClose .* %{ try %opt{coqide_close_panels} }
+      # Commands to execute when the buffer is closed.
+      # These are declared here as a string in order to have the value of `%opt{coqide_pid}`
+      # (which is an internal option)
+      set-option buffer coqide_close_panels "
+        evaluate-commands -client goal-%opt{coqide_pid} 'quit!'
+        evaluate-commands -client result-%opt{coqide_pid} 'quit!'
+        remove-hooks coqide-%opt{coqide_pid}
+      "
+
+      # Remove the side panels when closing the buffer
+      hook global -group "coqide-%opt{coqide_pid}" BufClose "%val{buffile}" %{ try %opt{coqide_close_panels} }
+      hook global -group "coqide-%opt{coqide_pid}" ClientClose .* %{ try %opt{coqide_close_panels} }
+    }
   }
 }
 
