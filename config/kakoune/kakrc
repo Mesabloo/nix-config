@@ -333,7 +333,6 @@ plug "coqide.kak" load-path "~/projects/coqide.kak" config %{
   hook global BufCreate (goal|result)-(.*) %{
     evaluate-commands %sh{
       client_name="${kak_hook_param_capture_1}-${kak_hook_param_capture_2}"
-      regex_safe="$(sed 's/\*/\\*/g' <<< "$kak_hook_param_capture_0")"
 
       switch_to_buffer="
         buffer $kak_hook_param_capture_0
@@ -346,9 +345,10 @@ plug "coqide.kak" load-path "~/projects/coqide.kak" config %{
           remove-highlighter buffer/show-whitespaces
         }
       "
-      ${kak_opt_termcmd} "kak -c $kak_session -e '$switch_to_buffer'" &>/dev/null </dev/null &
 
-      echo "hook -once global BufClose '$regex_safe' %{
+      # ${kak_opt_termcmd} "kak -c $kak_session -e '$switch_to_buffer'" &>/dev/null </dev/null &
+      echo "new '$switch_to_buffer'"
+      echo "hook -once global BufClose '$kak_hook_param_capture_0' %{
         evaluate-commands -client '$client_name' 'quit!'
       }"
     }
