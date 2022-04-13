@@ -47,9 +47,20 @@ plug "delapouite/kakoune-buffers" %{
 
 
 # -- file explorer
-plug "Vurich/ranger-kak" %{
-  map global user r ": ranger<ret>" -docstring "open files with ranger"
+define-command \
+    -params .. -file-completion \
+    -docstring %{ranger [<arguments>]: open the file system explorer to select buffers to open
+    All the optional arguments are forwarded to the ranger utility} \
+    ranger %{
+      terminal-tab ranger %arg{@} --cmd %sh[
+        cmd="map <return> chain eval fm.execute_console(f\"shell kak -p "
+        cmd="${cmd}$kak_session <<< 'evaluate-commands -client $kak_client edit {fm.thisfile.path}'\") "
+        cmd="${cmd}if fm.thisfile.is_file else fm.execute_console(\"move right=1\") ; quit!"
+        echo "$cmd"
+      ]
 }
+map global user r ": ranger<ret>" -docstring "open files with ranger"
+
 # plug "Crote/kakoune-ranger" %{
 #   map global user t ": ranger-select<ret>" -docstring "open ranger"
 # }
