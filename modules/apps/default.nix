@@ -12,10 +12,12 @@
     ./office.nix
     ./okular.nix
     ./pandoc.nix
+    ./ranger.nix
     ./teams.nix
     ./vlc.nix
   ];
 
-  config = {};
-  options = {};
+  config = { };
+  options = { };
 }
+

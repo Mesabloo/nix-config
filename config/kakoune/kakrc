@@ -47,28 +47,34 @@ plug "delapouite/kakoune-buffers" %{
 
 
 # -- file explorer
-plug "andreyorst/kaktree" defer kaktree %{
-  set-option global kaktree_double_click_duration '0.5'
-  set-option global kaktree_indentation 2
-  set-option global kaktree_dir_icon_open  '▾ ﱮ'
-  set-option global kaktree_dir_icon_close '▸ '
-  set-option global kaktree_file_icon      '⠀⠀'
-
-  map global user t ": kaktree-toggle<ret>" -docstring "toggle kaktree"
-} config %{
-  hook global WinSetOption filetype=kaktree %{
-    remove-highlighter buffer/line_numbers
-    remove-highlighter buffer/matching
-    remove-highlighter buffer/wrap_lines
-    remove-highlighter buffer/show-whitespaces
-
-    hook buffer=*kaktree* ModeChange .*:.*:.* %{
-      try %{ remove-highlighter buffer/line_numbers }
-    }
-  }
-  
-  kaktree-enable
+plug "Vurich/ranger-kak" %{
+  map global user r ": ranger<ret>" -docstring "open files with ranger"
 }
+# plug "Crote/kakoune-ranger" %{
+#   map global user t ": ranger-select<ret>" -docstring "open ranger"
+# }
+# plug "andreyorst/kaktree" defer kaktree %{
+#   set-option global kaktree_double_click_duration '0.5'
+#   set-option global kaktree_indentation 2
+#   set-option global kaktree_dir_icon_open  '▾ ﱮ'
+#   set-option global kaktree_dir_icon_close '▸ '
+#   set-option global kaktree_file_icon      '⠀⠀'
+
+#   map global user t ": kaktree-toggle<ret>" -docstring "toggle kaktree"
+# } config %{
+#   hook global WinSetOption filetype=kaktree %{
+#     remove-highlighter buffer/line_numbers
+#     remove-highlighter buffer/matching
+#     remove-highlighter buffer/wrap_lines
+#     remove-highlighter buffer/show-whitespaces
+
+#     hook buffer=*kaktree* ModeChange .*:.*:.* %{
+#       try %{ remove-highlighter buffer/line_numbers }
+#     }
+#   }
+  
+#   kaktree-enable
+# }
 
 
 # -- rainbow braces
