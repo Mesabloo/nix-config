@@ -434,13 +434,13 @@ hook global GlobalSetOption kitty_window_type=.* %{
 declare-option -docstring "The position in the buffer, in percent" int buf_position 0
 hook global BufSetOption filetype=(?!\*kaktree\*).* %{
   hook -always buffer ModeChange push:.*:insert %{
-    add-highlighter -override buffer/line_numbers number-lines -separator ' │ ' -hlcursor
+    add-highlighter -override buffer/line_numbers number-lines -separator ' ▎' -hlcursor -min-digits 4
   }
   hook -always buffer ModeChange pop:insert:.* %{
-		add-highlighter -override buffer/line_numbers number-lines -separator ' │ ' -hlcursor -relative
+		add-highlighter -override buffer/line_numbers number-lines -separator ' ▎' -hlcursor -relative -min-digits 4
   }
 
-  add-highlighter -override buffer/line_numbers number-lines -separator ' │ ' -hlcursor -relative
+  add-highlighter -override buffer/line_numbers number-lines -separator ' ▎' -hlcursor -relative -min-digits 4
   add-highlighter buffer/wrap_lines wrap -word -indent
 
   hook buffer RawKey .* %{
