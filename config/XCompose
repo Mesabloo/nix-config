@@ -1,0 +1,184 @@
+include "%L"
+
+### Greek symbols
+<Multi_key> <g> <A> : "Α" # Capital greek letter Alpha
+<Multi_key> <g> <B> : "Β" # Capital greek letter Beta
+<Multi_key> <g> <G> : "Γ" # Capital greek letter Gamma
+<Multi_key> <g> <D> : "Δ" # Capital greek letter Delta
+<Multi_key> <g> <E> : "Ε" # Capital greek letter Epsilon
+<Multi_key> <g> <Z> : "Ζ" # Capital greek letter Zeta
+<Multi_key> <g> <grave> <E> : "Η" # Capital greek letter Eta
+<Multi_key> <g> <minus> <T> : "Θ" # Capital greek letter Theta
+<Multi_key> <g> <I> : "Ι" # Capital greek letter Iota
+<Multi_key> <g> <K> : "Κ" # Capital greek letter Kappa
+<Multi_key> <g> <L> : "Λ" # Capital greek letter Lamda
+<Multi_key> <g> <M> : "Μ" # Capital greek letter Mu
+<Multi_key> <g> <N> : "Ν" # Capital greek letter Nu
+<Multi_key> <g> <X> : "Ξ" # Capital greek letter Xi
+<Multi_key> <g> <O> : "Ο" # Capital greek letter Omicron
+<Multi_key> <g> <P> <space> : "Π" # Capital greek letter Pi
+<Multi_key> <g> <R> : "Ρ" # Capital greek letter Rho
+<Multi_key> <g> <S> : "Σ" # Capital greek letter Sigma
+<Multi_key> <g> <T> : "Τ" # Capital greek letter Tau
+<Multi_key> <g> <U> : "Υ" # Capital greek letter Upsilon
+<Multi_key> <g> <P> <h> : "Φ" # Capital greek letter Phi
+<Multi_key> <g> <C> <h> : "Χ" # Capital greek letter Chi
+<Multi_key> <g> <P> <s> : "Ψ" # Capital greek letter Psi
+<Multi_key> <g> <W> : "Ω" # Capital greek letter Omega
+<Multi_key> <g> <a> : "α" # Small greek letter Alpha
+<Multi_key> <g> <b> : "β" # Small greek letter Beta
+<Multi_key> <g> <g> : "γ" # Small greek letter Gamma
+<Multi_key> <g> <d> : "δ" # Small greek letter Delta
+<Multi_key> <g> <e> : "ε" # Small greek letter Epsilon
+<Multi_key> <g> <z> : "ζ" # Small greek letter Zeta
+<Multi_key> <g> <grave> <e> : "η" # Small greek letter Eta
+<Multi_key> <g> <minus> <t> : "θ" # Small greek letter Theta
+<Multi_key> <g> <i> : "ι" # Small greek letter Iota
+<Multi_key> <g> <k> : "κ" # Small greek letter Kappa
+<Multi_key> <g> <l> : "λ" # Small greek letter Lamda
+<Multi_key> <g> <m> : "μ" # Small greek letter Mu
+<Multi_key> <g> <n> : "ν" # Small greek letter Nu
+<Multi_key> <g> <x> : "ξ" # Small greek letter Xi
+<Multi_key> <g> <o> : "ο" # Small greek letter Omicron
+<Multi_key> <g> <p> <space> : "π" # Small greek letter Pi
+<Multi_key> <g> <r> : "ρ" # Small greek letter Rho
+<Multi_key> <g> <s> : "σ" # Small greek letter Sigma
+<Multi_key> <g> <t> : "τ" # Small greek letter Tau
+<Multi_key> <g> <u> : "υ" # Small greek letter Upsilon
+<Multi_key> <g> <p> <h> : "φ" # Small greek letter Phi
+<Multi_key> <g> <c> <h> : "χ" # Small greek letter Chi
+<Multi_key> <g> <p> <s> : "ψ" # Small greek letter Psi
+<Multi_key> <g> <w> : "ω" # Small greek letter Omega
+
+### Mathematical symbols
+<Multi_key> <plus> <minus> : "±" # Plus/minus
+<Multi_key> <plus> <KP_Subtract> : "±" # Plus/minus
+<Multi_key> <KP_Add> <minus> : "±" # Plus/minus
+<Multi_key> <KP_Add> <KP_Subtract> : "±" # Plus/minus
+<Multi_key> <p> <m> : "±" # Plus/minus
+<Multi_key> <s> <u> <m> : "∑" # N-ary sum
+<Multi_key> <p> <r> <o> <d> : "∏" # N-ary product
+<Multi_key> <c> <o> <p> <r> <o> <d> : "∐" # N-ary coproduct
+<Multi_key> <parenleft> <plus> <parenright> : "⊕" # Circled plus
+<Multi_key> <parenleft> <KP_Add> <parenright> : "⊕" # Circled plus
+<Multi_key> <parenleft> <minus> <parenright> : "⊖" # Circled minus
+<Multi_key> <parenleft> <KP_Subtract> <parenright> : "⊖" # Circled minus
+<Multi_key> <parenleft> <x> <parenright> : "⊗" # Circled times
+<Multi_key> <parenleft> <slash> <parenright> : "⊘" # Circled divide
+<Multi_key> <parenleft> <KP_Divide> <parenright> : "⊘" # Circled divide
+<Multi_key> <parenleft> <period> <parenright> : "⊙" # Circled dot
+<Multi_key> <asterisk> <space> : "⋆" # Star
+<Multi_key> <KP_Multiply> <space> : "⋆" # Star
+<Multi_key> <minus> <o> : "⊸" # Multimap
+<Multi_key> <KP_Subtract> <o> : "⊸" # Multimap
+<Multi_key> <o> <space> : "∘" # Ring operator
+<Multi_key> <asciitilde> <asciitilde> : "≈" # Approximately equal to
+<Multi_key> <asciitilde> <equal> : "≅" # Approximately identical to
+<Multi_key> <equal> <equal> : "≡" # Identical to
+<Multi_key> <equal> <slash> <equal> : "≢" # Not identical to
+<Multi_key> <colon> <equal> : "≔" # Colon equals
+<Multi_key> <equal> <colon> : "≕" # Equals colon
+<Multi_key> <equal> <question> : "≟" # Probably equal to
+<Multi_key> <equal> <d> <e> <f> : "≝" # Equal by definition
+<Multi_key> <less> <parenleft> : "〈" # Left angle
+<Multi_key> <parenright> <greater> : "〉" # Right angle
+<Multi_key> <less> <greater> : "⋄" # Diamond operator
+<Multi_key> <b> <o> <x> : "□" # Box
+<Multi_key> <q> <e> <d> : "∎" # Qed
+<Multi_key> <8> <8> : "∞" # Infinity
+<Multi_key> <i> <n> : "∈" # Element of
+<Multi_key> <n> <i> : "∋" # Fo tnemele (contains)
+
+<Multi_key> <bar> <N> : "ℕ" # Natural set
+<Multi_key> <bar> <R> : "ℝ" # Real set
+<Multi_key> <bar> <Q> : "ℚ" # Fractions set
+<Multi_key> <bar> <P> : "ℙ" # Prime number set
+<Multi_key> <bar> <Z> : "ℤ" # Integer set
+<Multi_key> <bar> <H> : "ℍ" # Quaternion set
+<Multi_key> <bar> <C> : "ℂ" # Complex set
+
+### Logical symbols
+<Multi_key> <l> <A> <A> : "∀" # For all
+<Multi_key> <l> <E> <E> : "∃" # Exists
+<Multi_key> <l> <E> <slash> <E> : "∄" # Not exists
+<Multi_key> <l> <t> <o> <p> : "⊤" # Truthy value
+<Multi_key> <l> <b> <o> <t> : "⊥" # Falsy value
+<Multi_key> <l> <bar> <minus> : "⊢" # Entails
+<Multi_key> <l> <minus> <bar> : "⊣" # Entails but reversed
+<Multi_key> <l> <bar> <equal> : "⊧" # Models
+<Multi_key> <l> <asciitilde> : "¬" # Negation
+<Multi_key> <l> <exclam> : "¬" # Negation
+<Multi_key> <slash> <backslash> : "∧" # And
+<Multi_key> <backslash> <slash> : "∨" # Or
+
+### Arrows
+<Multi_key> <asciitilde> <Right> : "↝" # Wavy right arrow
+<Multi_key> <asciitilde> <Left> : "↜" # Wavy left arrow
+<Multi_key> <equal> <Right> : "⇒" # Double right arrow
+<Multi_key> <equal> <Left> : "⇐" # Double left arrow
+<Multi_key> <equal> <Up> : "⇑" # Double up arrow
+<Multi_key> <equal> <Down> : "⇓" # Double left arrow
+<Multi_key> <less> <equal> <greater> : "⇔" # Logical equivalence
+
+### Brackets
+<Multi_key> <bracketleft> <bar> : "⟦" # White left bracket
+<Multi_key> <bar> <bracketright> : "⟧" # White left bracket
+<Multi_key> <braceleft> <bar> : "⦃" # White left brace
+<Multi_key> <bar> <braceright> : "⦄" # White right brace
+<Multi_key> <parenleft> <bar> : "⦅" # White left parenthesis
+<Multi_key> <bar> <parenright> : "⦆" # White right parenthesis
+<Multi_key> <parenleft> <parenleft> : "⸨" # Double left parenthesis
+<Multi_key> <parenright> <parenright> : "⸩" # Double right parenthesis
+<Multi_key> <bar> <asciicircum> : "⌈" # Left ceil
+<Multi_key> <asciicircum> <bar> : "⌉" # Right ceil
+<Multi_key> <bar> <underscore> : "⌊" # Left floor
+<Multi_key> <underscore> <bar> : "⌋" # Right floor
+
+### Superscript
+<dead_circumflex> <minus> : "⁻" # Superscript minus
+<dead_circumflex> <KP_Subtract> : "⁻" # Superscript minus
+
+<Multi_key> <asciicircum> <a> : "ᵃ" # Superscript a
+<Multi_key> <asciicircum> <b> : "ᵇ" # Superscript b
+<Multi_key> <asciicircum> <c> : "ᶜ" # Superscript c
+<Multi_key> <asciicircum> <d> : "ᵈ" # Superscript d
+<Multi_key> <asciicircum> <e> : "ᵉ" # Superscript e
+<Multi_key> <asciicircum> <f> : "ᶠ" # Superscript f
+<Multi_key> <asciicircum> <g> : "ᶢ" # Superscript g
+<Multi_key> <asciicircum> <i> : "ⁱ" # Superscript i
+<Multi_key> <asciicircum> <k> : "ᵏ" # Superscript k
+<Multi_key> <asciicircum> <m> : "ᵐ" # Superscript m
+<Multi_key> <asciicircum> <n> : "ⁿ" # Superscript n
+<Multi_key> <asciicircum> <o> : "ᵒ" # Superscript o
+<Multi_key> <asciicircum> <p> : "ᵖ" # Superscript p
+<Multi_key> <asciicircum> <t> : "ᵗ" # Superscript t
+<Multi_key> <asciicircum> <u> : "ᵘ" # Superscript u
+<Multi_key> <asciicircum> <v> : "ᵛ" # Superscript v
+<Multi_key> <asciicircum> <z> : "ᶻ" # Superscript z
+<Multi_key> <dead_circumflex> <a> : "ᵃ" # Superscript a
+<Multi_key> <dead_circumflex> <b> : "ᵇ" # Superscript b
+<Multi_key> <dead_circumflex> <c> : "ᶜ" # Superscript c
+<Multi_key> <dead_circumflex> <d> : "ᵈ" # Superscript d
+<Multi_key> <dead_circumflex> <e> : "ᵉ" # Superscript e
+<Multi_key> <dead_circumflex> <f> : "ᶠ" # Superscript f
+<Multi_key> <dead_circumflex> <g> : "ᶢ" # Superscript g
+<Multi_key> <dead_circumflex> <i> : "ⁱ" # Superscript i
+<Multi_key> <dead_circumflex> <k> : "ᵏ" # Superscript k
+<Multi_key> <dead_circumflex> <m> : "ᵐ" # Superscript m
+<Multi_key> <dead_circumflex> <n> : "ⁿ" # Superscript n
+<Multi_key> <dead_circumflex> <o> : "ᵒ" # Superscript o
+<Multi_key> <dead_circumflex> <p> : "ᵖ" # Superscript p
+<Multi_key> <dead_circumflex> <t> : "ᵗ" # Superscript t
+<Multi_key> <dead_circumflex> <u> : "ᵘ" # Superscript u
+<Multi_key> <dead_circumflex> <v> : "ᵛ" # Superscript v
+<Multi_key> <dead_circumflex> <z> : "ᶻ" # Superscript z
+
+### Subscript
+<Multi_key> <underscore> <a> : "ₐ" # Subscript a
+<Multi_key> <underscore> <e> : "ₑ" # Subscript e
+<Multi_key> <underscore> <i> : "ᵢ" # Subscript i
+<Multi_key> <underscore> <o> : "ₒ" # Subscript o
+<Multi_key> <underscore> <r> : "ᵣ" # Subscript r
+<Multi_key> <underscore> <u> : "ᵤ" # Subscript u
+<Multi_key> <underscore> <v> : "ᵥ" # Subscript v
+<Multi_key> <underscore> <x> : "ₓ" # Subscript x
