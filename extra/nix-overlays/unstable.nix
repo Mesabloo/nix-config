@@ -1,12 +1,14 @@
 self: super:
 
 let
-  unstable = import (builtins.fetchTarball {
-    name = "nixpkgs-pinned";
-    url = "https://github.com/nixos/nixpkgs/archive/38346f64616c3176f73ad0f20e51557ec0f3d75d.tar.gz";
-    # Use `nix-prefetch-url --unpack <url>`
-    sha256 = "0kxs5z821hl23v3vp2sjdx9m2hk43448nzi3nsfc1wmqlflv1rsr";
-  }) {};
+  unstable = import
+    (builtins.fetchTarball {
+      name = "nixpkgs-pinned";
+      url = "https://github.com/nixos/nixpkgs/archive/1712ecaa5118815292f57d6669c3c81d84d842b3.tar.gz";
+      # Use `nix-prefetch-url --unpack <url>`
+      sha256 = "0yb0v1zml6jwzbc8sknbml82mqf6000ad66v8z26jnxfc6dp1kk6";
+    })
+    { };
 in
 {
   stack = unstable.stack;
@@ -41,8 +43,8 @@ in
 
   nerdfonts = unstable.nerdfonts;
 
-#  glibc = unstable.glibc;
-#  gcc = unstable.gcc;
+  #  glibc = unstable.glibc;
+  #  gcc = unstable.gcc;
 
   brave = unstable.brave;
 
@@ -57,4 +59,6 @@ in
   betterlockscreen = unstable.betterlockscreen;
 
   haskell-language-server = unstable.haskell-language-server;
+
+  visualvm = unstable.visualvm;
 }

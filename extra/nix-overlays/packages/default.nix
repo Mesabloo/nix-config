@@ -19,8 +19,10 @@ in
   picom = pkgs.callPackage ./picom.nix { inherit pkgs; };
   xob-scripts = pkgs.callPackage ./xob-scripts { inherit pkgs; };
   python38Packages = super.python38Packages // {
-#    python-lsp-jsonrpc = pkgs.callPackage ./python-lsp-jsonrpc.nix { inherit pkgs; };
+    #    python-lsp-jsonrpc = pkgs.callPackage ./python-lsp-jsonrpc.nix { inherit pkgs; };
     python-lsp-server = pkgs.callPackage ./python-lsp-server.nix { inherit pkgs; };
   };
   nbtexplorer = pkgs.callPackage ./nbtexplorer.nix { inherit pkgs; };
+  mdfmt = pkgs.callPackage ./mdfmt.nix { inherit pkgs; };
+  jprofiler = pkgs.callPackage ./jprofiler.nix { inherit pkgs; };
 }
