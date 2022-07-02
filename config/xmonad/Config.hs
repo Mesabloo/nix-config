@@ -1,45 +1,32 @@
 {-# LANGUAGE BlockArguments #-}
 {-# LANGUAGE DeriveDataTypeable #-}
+{-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE MultiWayIf #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE TypeSynonymInstances #-}
-{-# LANGUAGE FlexibleInstances #-}
 
 module Main where
 
-import Control.Monad (when, filterM, forM_)
-
+import Control.Monad (filterM, forM_, when)
 import Data.Bifunctor (bimap)
-
 import Data.Bool (bool)
-
 import Data.Char (isSpace)
-
 import Data.List (dropWhileEnd, elemIndex, find)
-
 import Data.Map.Strict (Map)
 import qualified Data.Map.Strict as Map
-
-import Data.Maybe (fromJust, isNothing, isJust, catMaybes, fromMaybe)
-
+import Data.Maybe (catMaybes, fromJust, fromMaybe, isJust, isNothing)
 import System.Directory (getHomeDirectory)
-
 import System.Environment.XDG.BaseDir (getUserConfigFile)
-
 import System.Exit (exitSuccess)
-
 import System.FilePath ((</>))
-
 import System.IO.Unsafe (unsafeDupablePerformIO)
-
 import Text.Regex.TDFA ((=~))
-
 import XMonad
 import XMonad.Actions.CycleWS
 import XMonad.Actions.FloatKeys (keysResizeWindow)
 import XMonad.Actions.Navigation2D
 import XMonad.Actions.NoBorders (toggleBorder)
-import XMonad.Actions.OnScreen (onScreen, Focus(..))
+import XMonad.Actions.OnScreen (Focus (..), onScreen)
 import XMonad.Actions.Submap
 import XMonad.Actions.SwapWorkspaces
 import XMonad.Hooks.DynamicLog
@@ -47,18 +34,19 @@ import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.InsertPosition
 import XMonad.Hooks.ManageDocks (avoidStruts, docks, manageDocks)
 import XMonad.Hooks.ManageHelpers
+import XMonad.Hooks.SetWMName (setWMName)
 import XMonad.Layout.Fullscreen (fullscreenManageHook)
-import XMonad.Layout.MultiToggle (Toggle(..), mkToggle, single, (??))
-import XMonad.Layout.MultiToggle.Instances (StdTransformers(..))
+import XMonad.Layout.MultiToggle (Toggle (..), mkToggle, single, (??))
+import XMonad.Layout.MultiToggle.Instances (StdTransformers (..))
 import XMonad.Layout.NoBorders (borderEventHook)
 import XMonad.Layout.ResizableTile
-import XMonad.Layout.Spacing (spacingRaw, Border(..))
-import XMonad.Prompt (XPConfig(..), XPPosition(..))
+import XMonad.Layout.Spacing (Border (..), spacingRaw)
+import XMonad.Prompt (XPConfig (..), XPPosition (..))
 import XMonad.Prompt.ConfirmPrompt
 import qualified XMonad.StackSet as W
 import XMonad.Util.Cursor (setDefaultCursor, xC_left_ptr)
-import qualified XMonad.Util.ExtensibleState as ES
 import XMonad.Util.EZConfig
+import qualified XMonad.Util.ExtensibleState as ES
 import XMonad.Util.Run (runProcessWithInput)
 import XMonad.Util.SpawnOnce (spawnOnce)
 
@@ -107,12 +95,14 @@ myConfig =
   let c = def { borderWidth         = 2
               , normalBorderColor   = basebg
               , focusedBorderColor  = basefg
-              , terminal            = "kitty"
+              , terminal            = "alacritty"
               , modMask             = mod4Mask
               , manageHook          = defaultWorkspaceManageHook <+> myManageHook <+> manageHook def
               , handleEventHook     = fullscreenEventHook <+> borderEventHook <+> handleEventHook def
               , layoutHook          = myLayoutHook
               , startupHook         = do
+                  setWMName "LG3D"
+                
                   spawnOnce "nitrogen --restore"
                   liftIO (getUserConfigFile "polybar" "launch.sh") >>= spawn
 

@@ -3,13 +3,13 @@ window:
     x: 10
     y: 10
 
-  dynamic_padding: true
-  dynamic_title: false
+  dynamic_padding: false
+  dynamic_title: true
 
 font:
   normal:
     family: Iosevka Nerd Font Mono
-    style: Light
+    style: Regular
   bold:
     style: Bold
   italic:
@@ -32,42 +32,37 @@ draw_bold_text_with_bright_colors: false
 
 colors:
   primary:
-    background: '0x2E3440'
-    foreground: '0xE5E9F0'
+    background: '#2E3440'
+    foreground: '#E5E9F0'
 
   cursor:
-    text: '0xE5E9F0'
-    cursor: '0xE5E9F0'
+    text: CellBackground
+    cursor: CellForeground
+
+  selection:
+    text: CellBackground
+    background: CellForeground
+    
+  vi_mode_cursor:
+    text: CellBackground
+    background: CellForeground
 
   normal:
-    black:   '0x3B4252'
-    red:     '0xBF616A'
-    green:   '0xA3BE8B'
-    yellow:  '0xEBCB8B'
-    blue:    '0x5E81AC'
-    magenta: '0xB48EAD'
-    cyan:    '0x88C0D0'
-    white:   '0xECEFF4'
-
-#  bright:
-#    black:   '0x505050'
-#    red:     '0xac4142'
-#    green:   '0x7e8e50'
-#    yellow:  '0xe5b567'
-#    blue:    '0x6c99bb'
-#    magenta: '0x9f4e85'
-#    cyan:    '0x7dd6cf'
-#    white:   '0xf5f5f5'
+    black:   '#3B4252'
+    red:     '#BF616A'
+    green:   '#A3BE8B'
+    yellow:  '#EBCB8B'
+    blue:    '#5E81AC'
+    magenta: '#B48EAD'
+    cyan:    '#88C0D0'
+    white:   '#ECEFF4'
 
 live_config_reload: true
 
 cursor:
   style:
-    shape: Beam
+    shape: Block
 
 
 env:
   WINIT_X11_SCALE_FACTOR: '1'
-
-key_bindings:
-  - { key: Back, mods: Control, action: None }

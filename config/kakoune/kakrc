@@ -52,14 +52,28 @@ define-command \
     -docstring %{ranger [<arguments>]: open the file system explorer to select buffers to open
     All the optional arguments are forwarded to the ranger utility} \
     ranger %{
-      terminal-tab ranger %arg{@} --cmd %sh[
-        cmd="map <return> chain eval fm.execute_console(f\"shell kak -p "
-        cmd="${cmd}$kak_session <<< 'evaluate-commands -client $kak_client edit {fm.thisfile.path}'\") "
-        cmd="${cmd}if fm.thisfile.is_file else fm.execute_console(\"move right=1\") ; quit!"
-        echo "$cmd"
-      ]
+      try %{
+        terminal-tab ranger %arg{@} --cmd %sh[
+          cmd="map <return> chain eval fm.execute_console(f\"shell kak -p "
+          cmd="${cmd}$kak_session <<< 'evaluate-commands -client $kak_client edit {fm.thisfile.path}'\") "
+          cmd="${cmd}if fm.thisfile.is_file else fm.execute_console(\"move right=1\") ; quit!"
+          echo "$cmd"
+        ]
+      } catch %{
+        terminal ranger %arg{@} --cmd %sh[
+          cmd="map <return> chain eval fm.execute_console(f\"shell kak -p "
+          cmd="${cmd}$kak_session <<< 'evaluate-commands -client $kak_client edit {fm.thisfile.path}'\") "
+          cmd="${cmd}if fm.thisfile.is_file else fm.execute_console(\"move right=1\") ; quit!"
+          echo "$cmd"
+        ]
+      }
 }
-map global user r ": ranger<ret>" -docstring "open files with ranger"
+define-command -docstring %{
+  Open ranger, selecting the file of the current buffer if it has one.
+} open-ranger-on-current-file %{
+  ranger --selectfile %val{bufname}
+}
+map global user r ": open-ranger-on-current-file<ret>" -docstring "open files with ranger"
 
 # plug "Crote/kakoune-ranger" %{
 #   map global user t ": ranger-select<ret>" -docstring "open ranger"
@@ -511,6 +525,14 @@ map global user f ': enter-user-mode format<ret>' -docstring 'format'
 
 hook global WinSetOption filetype=python %{ set-option buffer formatcmd 'yapf' }
 hook global WinSetOption filetype=nix %{ set-option buffer formatcmd 'nixpkgs-fmt' }
+hook global WinSetOption filetype=markdown %{ set-option buffer formatcmd 'mdfmt' }
 
 # -- small tweaks
 set-face global comment default+d
+
+
+# -- colors
+set-face global PrimarySelection black,white+d
+set-face global PrimaryCursor black,white
+set-face global SecondarySelection black,white+d
+set-face global SecondaryCursor black,white
