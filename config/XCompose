@@ -80,14 +80,16 @@ include "%L"
 <Multi_key> <equal> <colon> : "≕" # Equals colon
 <Multi_key> <equal> <question> : "≟" # Probably equal to
 <Multi_key> <equal> <d> <e> <f> : "≝" # Equal by definition
-<Multi_key> <less> <parenleft> : "〈" # Left angle
-<Multi_key> <parenright> <greater> : "〉" # Right angle
+<Multi_key> <less> <parenleft> : "⟨" # Left angle
+<Multi_key> <parenright> <greater> : "⟩" # Right angle
 <Multi_key> <less> <greater> : "⋄" # Diamond operator
 <Multi_key> <b> <o> <x> : "□" # Box
 <Multi_key> <q> <e> <d> : "∎" # Qed
 <Multi_key> <8> <8> : "∞" # Infinity
 <Multi_key> <i> <n> : "∈" # Element of
 <Multi_key> <n> <i> : "∋" # Fo tnemele (contains)
+<Multi_key> <less> <equal> : "⩽" # Less than or equal to (slanted)
+<Multi_key> <greater> <equal> : "⩾" # Greater than or equal to (slanted)
 
 <Multi_key> <bar> <N> : "ℕ" # Natural set
 <Multi_key> <bar> <R> : "ℝ" # Real set
@@ -96,6 +98,27 @@ include "%L"
 <Multi_key> <bar> <Z> : "ℤ" # Integer set
 <Multi_key> <bar> <H> : "ℍ" # Quaternion set
 <Multi_key> <bar> <C> : "ℂ" # Complex set
+
+<Multi_key> <bar> <0> : "𝟘" # Double struck 0
+<Multi_key> <bar> <KP_0> : "𝟘" # Double struck 0
+<Multi_key> <bar> <1> : "𝟙" # Double struck 1
+<Multi_key> <bar> <KP_1> : "𝟙" # Double struck 1
+<Multi_key> <bar> <2> : "𝟚" # Double struck 2
+<Multi_key> <bar> <KP_2> : "𝟚" # Double struck 2
+<Multi_key> <bar> <3> : "𝟛" # Double struck 3
+<Multi_key> <bar> <KP_3> : "𝟛" # Double struck 3
+<Multi_key> <bar> <4> : "𝟜" # Double struck 4
+<Multi_key> <bar> <KP_4> : "𝟜" # Double struck 4
+<Multi_key> <bar> <5> : "𝟝" # Double struck 5
+<Multi_key> <bar> <KP_5> : "𝟝" # Double struck 5
+<Multi_key> <bar> <6> : "𝟞" # Double struck 6
+<Multi_key> <bar> <KP_6> : "𝟞" # Double struck 6
+<Multi_key> <bar> <7> : "𝟟" # Double struck 7
+<Multi_key> <bar> <KP_7> : "𝟟" # Double struck 7
+<Multi_key> <bar> <8> : "𝟠" # Double struck 8
+<Multi_key> <bar> <KP_8> : "𝟠" # Double struck 8
+<Multi_key> <bar> <9> : "𝟡" # Double struck 9
+<Multi_key> <bar> <KP_9> : "𝟡" # Double struck 9
 
 ### Logical symbols
 <Multi_key> <l> <A> <A> : "∀" # For all
