@@ -88,8 +88,8 @@ include "%L"
 <Multi_key> <8> <8> : "∞" # Infinity
 <Multi_key> <i> <n> : "∈" # Element of
 <Multi_key> <n> <i> : "∋" # Fo tnemele (contains)
-<Multi_key> <less> <equal> : "⩽" # Less than or equal to (slanted)
-<Multi_key> <greater> <equal> : "⩾" # Greater than or equal to (slanted)
+<Multi_key> <less> <equal> <space> : "⩽" # Less than or equal to (slanted)
+<Multi_key> <greater> <equal> <space> : "⩾" # Greater than or equal to (slanted)
 
 <Multi_key> <bar> <N> : "ℕ" # Natural set
 <Multi_key> <bar> <R> : "ℝ" # Real set
@@ -137,10 +137,10 @@ include "%L"
 ### Arrows
 <Multi_key> <asciitilde> <Right> : "↝" # Wavy right arrow
 <Multi_key> <asciitilde> <Left> : "↜" # Wavy left arrow
-<Multi_key> <equal> <Right> : "⇒" # Double right arrow
-<Multi_key> <equal> <Left> : "⇐" # Double left arrow
-<Multi_key> <equal> <Up> : "⇑" # Double up arrow
-<Multi_key> <equal> <Down> : "⇓" # Double left arrow
+<Multi_key> <equal> <rightarrow> : "⇒" # Double right arrow
+<Multi_key> <equal> <leftarrow> : "⇐" # Double left arrow
+<Multi_key> <equal> <uparrow> : "⇑" # Double up arrow
+<Multi_key> <equal> <downarrow> : "⇓" # Double left arrow
 <Multi_key> <less> <equal> <greater> : "⇔" # Logical equivalence
 
 ### Brackets
