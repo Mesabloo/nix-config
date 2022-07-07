@@ -23,13 +23,13 @@
   '';
 
   xsession.profileExtra = ''
-    export XMODIFIERS="@im=uim"
-    export XMODIFIER="@im=uim"
-    export GTK_IM_MODULE=uim
-    export QT_IM_MODULE=uim
-    export QT4_IM_MODULE=uim
+    # export XMODIFIERS="@im=uim"
+    # export XMODIFIER="@im=uim"
+    # export GTK_IM_MODULE=uim
+    # export QT_IM_MODULE=uim
+    # export QT4_IM_MODULE=uim
   '';
 
-  home.packages = [ pkgs.uim ]; # This is needed to set the compose key
+  home.packages = [ pkgs.uim ];
   home.file.".XCompose".source = ./XCompose;
 }

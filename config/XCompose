@@ -87,6 +87,7 @@ include "%L"
 <Multi_key> <q> <e> <d> : "∎" # Qed
 <Multi_key> <8> <8> : "∞" # Infinity
 <Multi_key> <i> <n> : "∈" # Element of
+<Multi_key> <i> <slash> <n> : "∉" # Not element of
 <Multi_key> <n> <i> : "∋" # Fo tnemele (contains)
 <Multi_key> <less> <equal> <space> : "⩽" # Less than or equal to (slanted)
 <Multi_key> <greater> <equal> <space> : "⩾" # Greater than or equal to (slanted)
@@ -142,6 +143,14 @@ include "%L"
 <Multi_key> <equal> <uparrow> : "⇑" # Double up arrow
 <Multi_key> <equal> <downarrow> : "⇓" # Double left arrow
 <Multi_key> <less> <equal> <greater> : "⇔" # Logical equivalence
+<Multi_key> <Left> : "←" # Left arrow
+<Multi_key> <Right> : "→" # Right arrow
+<Multi_key> <Up> : "↑" # Up arrow
+<Multi_key> <Down> : "↓" # Down arrow
+<Multi_key> <equal> <Right> : "⇒" # Double right arrow
+<Multi_key> <equal> <Left> : "⇐" # Double left arrow
+<Multi_key> <equal> <Up> : "⇑" # Double up arrow
+<Multi_key> <equal> <Down> : "⇓" # Double left arrow
 
 ### Brackets
 <Multi_key> <bracketleft> <bar> : "⟦" # White left bracket
