@@ -86,6 +86,7 @@ include "%L"
 <Multi_key> <b> <o> <x> : "□" # Box
 <Multi_key> <q> <e> <d> : "∎" # Qed
 <Multi_key> <8> <8> : "∞" # Infinity
+<Multi_key> <KP_8> <KP_8> : "∞" # Infinity
 <Multi_key> <i> <n> : "∈" # Element of
 <Multi_key> <i> <slash> <n> : "∉" # Not element of
 <Multi_key> <n> <i> : "∋" # Fo tnemele (contains)
@@ -151,6 +152,10 @@ include "%L"
 <Multi_key> <equal> <Left> : "⇐" # Double left arrow
 <Multi_key> <equal> <Up> : "⇑" # Double up arrow
 <Multi_key> <equal> <Down> : "⇓" # Double left arrow
+<Multi_key> <bar> <Right> : "↦" # Right arrow from bar
+<Multi_key> <bar> <Left> : "↤" # Left arrow from bar
+<Multi_key> <bar> <Up> : "↥" # Up arrow from bar
+<Multi_key> <bar> <Down> : "↧" # Down arrow from bar
 
 ### Brackets
 <Multi_key> <bracketleft> <bar> : "⟦" # White left bracket
