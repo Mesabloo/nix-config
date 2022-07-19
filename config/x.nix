@@ -20,6 +20,8 @@
     #xsetroot -cursor_name left_ptr
     setxkbmap fr
     setxkbmap -option compose:rctrl
+
+    ${pkgs.ibus}/bin/ibus-daemon -drxR
   '';
 
   xsession.profileExtra = ''
@@ -30,6 +32,6 @@
     # export QT4_IM_MODULE=uim
   '';
 
-  home.packages = [ pkgs.uim ];
+  home.packages = [ pkgs.ibus ];
   home.file.".XCompose".source = ./XCompose;
 }
