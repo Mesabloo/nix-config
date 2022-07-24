@@ -213,9 +213,18 @@ include "%L"
 ### Subscript
 <Multi_key> <underscore> <a> : "ₐ" # Subscript a
 <Multi_key> <underscore> <e> : "ₑ" # Subscript e
+<Multi_key> <underscore> <h> : "ₕ" # Subscript h
 <Multi_key> <underscore> <i> : "ᵢ" # Subscript i
+<Multi_key> <underscore> <j> : "ⱼ" # Subscript j
+<Multi_key> <underscore> <k> : "ₖ" # Subscript k
+<Multi_key> <underscore> <l> : "ₗ" # Subscript l
+<Multi_key> <underscore> <m> : "ₘ" # Subscript m
+<Multi_key> <underscore> <n> : "ₙ" # Subscript n
 <Multi_key> <underscore> <o> : "ₒ" # Subscript o
+<Multi_key> <underscore> <p> : "ₚ" # Subscript p
 <Multi_key> <underscore> <r> : "ᵣ" # Subscript r
+<Multi_key> <underscore> <s> : "ₛ" # Subscript s
+<Multi_key> <underscore> <t> : "ₜ" # Subscript t
 <Multi_key> <underscore> <u> : "ᵤ" # Subscript u
 <Multi_key> <underscore> <v> : "ᵥ" # Subscript v
 <Multi_key> <underscore> <x> : "ₓ" # Subscript x
