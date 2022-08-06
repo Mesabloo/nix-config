@@ -226,6 +226,7 @@ defaultWorkspaceManageHook = composeAll
   ,      className =?  "vlc"
     <||> className =?  "Audacity"             --> doShift "music"
   ,      className =?  "Pulseeffects"
+    <||> className =?  "easyeffects"
     <||> className =?  "Pavucontrol"          --> doShift "settings"
   ,      className =?  "minecraft-launcher"
     <||> className =~? "Minecraft.*"          --> doShift "games"
