@@ -4,6 +4,7 @@ with lib;
 {
   config = mkIf config.modules.desktop.xmonad.enable {
     xsession.windowManager.xmonad = {
+      enableContribAndExtras = true;
       extraPackages = ps: with ps; [
         containers
         xdg-basedir
@@ -12,7 +13,7 @@ with lib;
         filepath
       ];
       config = ./Config.hs;
-      haskellPackages = pkgs.haskell.packages.ghc884;
+      haskellPackages = pkgs.haskell.packages.ghc923;
     };
 
     modules.services.rofi.enable = mkDefault true;

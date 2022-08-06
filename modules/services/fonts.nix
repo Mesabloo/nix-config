@@ -30,7 +30,7 @@ with lib;
 
       fonts = mkOption {
         type = types.listOf types.str;
-        default = [];
+        default = [ ];
       };
     };
 
@@ -49,7 +49,7 @@ with lib;
       (mkIf config.modules.services.fonts.iosevka.enable iosevka)
       (mkIf config.modules.services.fonts.font_awesome.enable font-awesome)
       (mkIf config.modules.services.fonts.nerdfonts.enable (nerdfonts.override { fonts = config.modules.services.fonts.nerdfonts.fonts; }))
-      (mkIf config.modules.services.fonts.mplus.enable mplus-outline-fonts)
+      (mkIf config.modules.services.fonts.mplus.enable mplus-outline-fonts.githubRelease)
     ];
   };
 }

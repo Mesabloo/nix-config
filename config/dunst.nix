@@ -44,7 +44,7 @@ with lib;
         idle_threshold = 120;
 
 
-        font = "M+ 2p Medium 9.5";
+        font = "MPlus Nerd Font Medium 9.5";
 
         # The spacing between lines. If the height is smaller than the
         # font height, it will get raised to the font height

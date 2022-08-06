@@ -23,6 +23,6 @@ in
     python-lsp-server = pkgs.callPackage ./python-lsp-server.nix { inherit pkgs; };
   };
   nbtexplorer = pkgs.callPackage ./nbtexplorer.nix { inherit pkgs; };
-  mdfmt = pkgs.callPackage ./mdfmt.nix { inherit pkgs; };
+  # mdfmt = pkgs.callPackage ./mdfmt.nix { inherit pkgs; };
   jprofiler = pkgs.callPackage ./jprofiler.nix { inherit pkgs; };
 }

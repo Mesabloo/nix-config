@@ -86,7 +86,7 @@ base15 = xprop "*.color15"
 
 main :: IO ()
 main = do
-  xmonad . ewmh $ docks myConfig
+  xmonad . ewmh . ewmhFullscreen $ docks myConfig
 
 ---------------------------------------------------------------------
 
@@ -98,7 +98,7 @@ myConfig =
               , terminal            = "alacritty"
               , modMask             = mod4Mask
               , manageHook          = defaultWorkspaceManageHook <+> myManageHook <+> manageHook def
-              , handleEventHook     = fullscreenEventHook <+> borderEventHook <+> handleEventHook def
+              , handleEventHook     = borderEventHook <+> handleEventHook def
               , layoutHook          = myLayoutHook
               , startupHook         = do
                   setWMName "LG3D"

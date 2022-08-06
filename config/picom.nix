@@ -15,7 +15,7 @@ with lib;
 
       backend = "glx";
       experimentalBackends = true;
-      refreshRate = 0;
+      # refreshRate = 0;
 
       # Blur on rofi
       blur = config.modules.services.rofi.enable;

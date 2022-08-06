@@ -16,8 +16,8 @@ let
   polybar-config-sysinfo = pkgs.writeTextFile {
     name = "polybar-config-sysinfo";
     text = builtins.replaceStrings
-      ["##POLYBAR_BLUETOOTH##" "##PLAYER_MPRIS_TAIL##"]
-      ["${pkgs.polybar-scripts.bluetooth}" "${pkgs.polybar-scripts.player-mpris-tail}/bin/player-mpris-tail"]
+      [ "##POLYBAR_BLUETOOTH##" "##PLAYER_MPRIS_TAIL##" ]
+      [ "${pkgs.polybar-scripts.bluetooth}" "${pkgs.polybar-scripts.player-mpris-tail}/bin/player-mpris-tail" ]
       (concatStrings [ (builtins.readFile ./colors.ini) (builtins.readFile ./common.ini) (builtins.readFile ./systeminfo.ini) ]);
   };
 in
@@ -33,9 +33,9 @@ in
               done
             '';
           in
-            patchFile ./launch.sh
-              ["##POLYBAR-WMINFO##" "##POLYBAR-SYSINFO##" "##KILL_POLYBARS##"]
-              ["${polybar-config-wminfo}" "${polybar-config-sysinfo}" kill-polybars];
+          patchFile ./launch.sh
+            [ "##POLYBAR-WMINFO##" "##POLYBAR-SYSINFO##" "##KILL_POLYBARS##" ]
+            [ "${polybar-config-wminfo}" "${polybar-config-sysinfo}" kill-polybars ];
         executable = true;
       };
     };
@@ -44,6 +44,7 @@ in
       xcbutilxrm
     ];
 
+    modules.services.fonts.mplus.enable = mkDefault true;
     modules.services.fonts.font_awesome.enable = mkDefault true;
     modules.services.fonts.nerdfonts = {
       enable = mkDefault true;

@@ -3,11 +3,15 @@
 {
   xsession.enable = true;
 
-  xsession.pointerCursor = {
+  home.pointerCursor = {
     package = pkgs.capitaine-cursors;
     name = "capitaine-cursors";
     size = 30;
-    defaultCursor = "default";
+
+    x11 = {
+      defaultCursor = "default";
+      enable = true;
+    };
   };
 
   xresources.extraConfig = ''

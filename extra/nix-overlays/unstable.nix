@@ -61,4 +61,6 @@ in
   haskell-language-server = unstable.haskell-language-server;
 
   visualvm = unstable.visualvm;
+
+  xmonad = unstable.xmonad;
 }

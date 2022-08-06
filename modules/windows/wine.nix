@@ -14,8 +14,8 @@ with lib;
 
   config = mkIf config.modules.windows.wine.enable {
     home.packages = with pkgs; [
-      wineWowPackages.stable  # support both 32- and 64-bit apps
-      (winetricks.override { wine = wineWowPackages.stable; })
+      wineWowPackages.stable # support both 32- and 64-bit apps
+      winetricks
       # winetricks   # Configure wine, but with a windows XP window style
     ];
   };
