@@ -13,7 +13,7 @@ with lib;
         filepath
       ];
       config = ./Config.hs;
-      haskellPackages = pkgs.haskell.packages.ghc923;
+      haskellPackages = pkgs.haskell.packages.ghc884;
     };
 
     modules.services.rofi.enable = mkDefault true;
