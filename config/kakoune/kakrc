@@ -71,7 +71,12 @@ define-command \
 define-command -docstring %{
   Open ranger, selecting the file of the current buffer if it has one.
 } open-ranger-on-current-file %{
-  ranger --selectfile %val{bufname}
+  ranger --selectfile %val{buffile}
+  # evaluate-commands %sh{
+  #   relpath_to_bufname=$(python -c 'import os, sys; print(os.path.relpath(*sys.argv[1:]))' "$kak_buffile" "$(pwd)")
+  #   echo "echo -debug 'Opening ranger with file $relpath_to_bufname'"
+  #   echo "ranger --selectfile $relpath_to_bufname"
+  # }
 }
 map global user r ": open-ranger-on-current-file<ret>" -docstring "open files with ranger"
 

@@ -51,3 +51,8 @@ filetypes = ["prolog"]
 roots = []
 command = "swipl"
 args = ["-g", "use_module(library(lsp_server)).", "-g", "lsp_server:main", "-t", "halt", "--", "stdio"]
+
+[language.dhall]
+filetypes = ["dhall"]
+roots = []
+command = "dhall-lsp-server"

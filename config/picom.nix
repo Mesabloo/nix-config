@@ -13,7 +13,7 @@ with lib;
       fadeDelta = 4;
       fadeSteps = [ "0.028" "0.03" ];
 
-      backend = "xrender";
+      backend = "glx";
       experimentalBackends = true;
       # refreshRate = 0;
 

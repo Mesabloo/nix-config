@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   xsession.enable = true;
@@ -38,4 +38,8 @@
 
   home.packages = [ pkgs.ibus ];
   home.file.".XCompose".source = ./XCompose;
+
+  systemd.user.services.setxkbmap = {
+    Service.ExecStart = lib.mkForce "${pkgs.coreutils}/bin/true";
+  };
 }
