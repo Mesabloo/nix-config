@@ -92,6 +92,7 @@ include "%L"
 <Multi_key> <n> <i> : "∋" # Fo tnemele (contains)
 <Multi_key> <less> <equal> <space> : "⩽" # Less than or equal to (slanted)
 <Multi_key> <greater> <equal> <space> : "⩾" # Greater than or equal to (slanted)
+<Multi_key> <colon> <colon> : "∷" # Proportion
 
 <Multi_key> <bar> <N> : "ℕ" # Natural set
 <Multi_key> <bar> <R> : "ℝ" # Real set

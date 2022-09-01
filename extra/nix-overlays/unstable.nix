@@ -4,9 +4,9 @@ let
   unstable = import
     (builtins.fetchTarball {
       name = "nixpkgs-pinned";
-      url = "https://github.com/nixos/nixpkgs/archive/1712ecaa5118815292f57d6669c3c81d84d842b3.tar.gz";
+      url = "https://github.com/nixos/nixpkgs/archive/0e304ff0d9db453a4b230e9386418fd974d5804a.tar.gz";
       # Use `nix-prefetch-url --unpack <url>`
-      sha256 = "0yb0v1zml6jwzbc8sknbml82mqf6000ad66v8z26jnxfc6dp1kk6";
+      sha256 = "0c91rbax0yh9xbg2l6qx9nfmisz4g6c36rlg8zjclfm3yqc8hkfl";
     })
     { };
 in
@@ -43,8 +43,11 @@ in
 
   nerdfonts = unstable.nerdfonts;
 
-  #  glibc = unstable.glibc;
-  #  gcc = unstable.gcc;
+  # glibc_multi = unstable.glibc_multi;
+  # gcc = unstable.gcc;
+
+  # cargo = unstable.cargo;
+  # rustc = unstable.rustc;
 
   brave = unstable.brave;
 

@@ -151,15 +151,16 @@ plug "mesabloo/kakship" do %{
 
 
 # -- LSP
-plug "kak-lsp/kak-lsp" do %{
+plug "kak-lsp/kak-lsp" tag "v13.0.0" do %{
   cargo build --release --locked
   cargo install --force --path . --root ~/.local
 } config %{
-  set global lsp_diagnostic_line_error_sign ''
-  set global lsp_diagnostic_line_warning_sign ''
-  set global lsp_diagnostic_line_info_sign ''
-  set global lsp_diagnostic_line_hint_sign ''
-  set global lsp_hover_max_lines 30
+  set-option global lsp_diagnostic_line_error_sign ''
+  set-option global lsp_diagnostic_line_warning_sign ''
+  set-option global lsp_diagnostic_line_info_sign ''
+  set-option global lsp_diagnostic_line_hint_sign ''
+  set-option global lsp_code_lens_sign ''
+  set-option global lsp_hover_max_lines 30
 
   set-face global LineFlagError bright-red+b
   set-face global LineFlagWarning bright-yellow+b
@@ -167,10 +168,10 @@ plug "kak-lsp/kak-lsp" do %{
   set-face global LineFlagHint bright-blue+b
 
   # change L&F of reports in code
-  set-face global DiagnosticError default,default,bright-red+c
-  set-face global DiagnosticWarning default,default,bright-yellow+c
-  set-face global DiagnosticHint default,default,bright-blue+c
-  set-face global DiagnosticInfo default,default,bright-green+c
+  set-face global DiagnosticError default,default,bright-red+u
+  set-face global DiagnosticWarning default,default,bright-yellow+u
+  set-face global DiagnosticHint default,default,bright-blue+u
+  set-face global DiagnosticInfo default,default,bright-green+u
 
   # change L&F of markdown boxes
   set-face global InfoMono default+d
@@ -215,12 +216,14 @@ plug "kak-lsp/kak-lsp" do %{
   }
 
   hook global WinSetOption filetype=rust %{
-    hook window -group rust-inlay-hints BufReload .* rust-analyzer-inlay-hints
-    hook window -group rust-inlay-hints NormalIdle .* rust-analyzer-inlay-hints
-    hook window -group rust-inlay-hints InsertIdle .* rust-analyzer-inlay-hints
-    hook -once -always window WinSetOption filetype=.* %{
-      remove-hooks window rust-inlay-hints
-    }
+    lsp-inlay-hints-enable global
+
+    # hook window -group rust-inlay-hints BufReload .* rust-analyzer-inlay-hints
+    # hook window -group rust-inlay-hints NormalIdle .* rust-analyzer-inlay-hints
+    # hook window -group rust-inlay-hints InsertIdle .* rust-analyzer-inlay-hints
+    # hook -once -always window WinSetOption filetype=.* %{
+    #   remove-hooks window rust-inlay-hints
+    # }
     
     set window lsp_server_configuration rust.clippy_preference="on"
   }
