@@ -25,4 +25,9 @@ in
   nbtexplorer = pkgs.callPackage ./nbtexplorer.nix { inherit pkgs; };
   # mdfmt = pkgs.callPackage ./mdfmt.nix { inherit pkgs; };
   jprofiler = pkgs.callPackage ./jprofiler.nix { inherit pkgs; };
+  agda = pkgs.callPackage ./agda.nix (pkgs // {
+    Agda = pkgs.haskellPackages.Agda;
+    ghcWithPackages = pkgs.ghc.withPackages;
+  });
 }
+

@@ -30,7 +30,7 @@ in
   the-powder-toy = unstable.the-powder-toy;
   minecraft = unstable.minecraft;
 
-  agda = unstable.agda;
+  # agda = unstable.agda;
   agda-pkg = unstable.agda-pkg;
 
   mercury = unstable.mercury;
