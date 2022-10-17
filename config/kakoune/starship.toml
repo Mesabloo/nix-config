@@ -145,7 +145,7 @@ disabled = false
 
 [custom.kaklsp_status]
 description = "Show status from kak-lsp"
-format = "[%opt{lsp_progress}]($style)"
+format = "[ %opt{lsp_progress}]($style)"
 style = "fg:cyan bold"
 when = '' # '[ -n "$kak_opt_lsp_diagnostic_error_count" -a "$kak_opt_lsp_diagnostic_error_count" -ne 0 ]'
 shell = ['sh']

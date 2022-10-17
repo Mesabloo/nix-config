@@ -56,3 +56,8 @@ args = ["-g", "use_module(library(lsp_server)).", "-g", "lsp_server:main", "-t",
 filetypes = ["dhall"]
 roots = []
 command = "dhall-lsp-server"
+
+[language.agda]
+filetypes = ["agda"]
+roots = ["*.agda-pkg"]
+command = "als"

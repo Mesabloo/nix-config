@@ -193,14 +193,14 @@ plug "kak-lsp/kak-lsp" tag "v14.0.0" do %{
 
   define-command lsp-restart -docstring 'restart lsp server' %{ lsp-stop; lsp-start }
 
-  hook global -group 'lsp' WinSetOption filetype=(c|cpp|cc|rust|javascript|typescript|haskell|nix|latex) %{
+  hook global -group 'lsp' WinSetOption filetype=(c|cpp|cc|rust|javascript|typescript|haskell|nix|latex|dhall|python) %{
     define-command -hidden -params 6 -override lsp-handle-progress %{
       echo -debug %sh{ echo "kak-lsp: %opt{filetype} language server: $1" }
       set global lsp_progress %sh{
         if [ "$5" = "" ]; then
-          echo " …"
+          echo ""
         else
-	        echo " ✓"
+	        echo "✓"
         fi
       }
     }
@@ -216,7 +216,7 @@ plug "kak-lsp/kak-lsp" tag "v14.0.0" do %{
   }
 
   hook global -group 'lsp' WinSetOption filetype=rust %{
-    lsp-inlay-hints-enable global
+    lsp-inlay-hints-enable window
 
     # hook window -group rust-inlay-hints BufReload .* rust-analyzer-inlay-hints
     # hook window -group rust-inlay-hints NormalIdle .* rust-analyzer-inlay-hints
@@ -230,7 +230,7 @@ plug "kak-lsp/kak-lsp" tag "v14.0.0" do %{
 
 
   hook global -group 'lsp' KakEnd .* %{
-		set global lsp_progress ""
+		set global lsp_progress ""
     
     lsp-exit
   }
@@ -546,3 +546,7 @@ set-face global PrimarySelection black,white+d
 set-face global PrimaryCursor black,white
 set-face global SecondarySelection black,white+d
 set-face global SecondaryCursor black,white
+
+hook global BufCreate .*\.agda$ %{
+  set-option buffer filetype agda
+}

@@ -5,15 +5,15 @@ with lib;
   config = mkIf config.modules.services.xob.enable {
     home.packages = with pkgs; [
       xob-scripts.brightness-listener
-      xob-scripts.pulse-listener
+      # xob-scripts.pulse-listener
     ];
 
-#		xsession.initExtra = with pkgs; ''
-#		  (${xob-scripts.brightness-listener}/bin/brightness-listener | ${xob}/bin/xob -s brightness) 1> /dev/null &
-#		  (${xob-scripts.pulse-listener}/bin/pulse-listener | ${xob}/bin/xob -s default) 1> /dev/null &
-#		'';
+    #		xsession.initExtra = with pkgs; ''
+    #		  (${xob-scripts.brightness-listener}/bin/brightness-listener | ${xob}/bin/xob -s brightness) 1> /dev/null &
+    #		  (${xob-scripts.pulse-listener}/bin/pulse-listener | ${xob}/bin/xob -s default) 1> /dev/null &
+    #		'';
 
-		modules.services.xob.styles =
+    modules.services.xob.styles =
       let
         default = {
           thickness = 15;
@@ -51,6 +51,7 @@ with lib;
           x = { relative = 0; offset = 48; };
         };
 
-      in { inherit default brightness; };
+      in
+      { inherit default brightness; };
   };
 }
