@@ -14,6 +14,10 @@ with lib;
         nix:
           enable: true
 
+        system-ghc: true
+
+        recommend-stack-upgrade: false
+
         templates:
           params:
             author-name: Mesabloo

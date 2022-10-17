@@ -151,7 +151,7 @@ plug "mesabloo/kakship" do %{
 
 
 # -- LSP
-plug "kak-lsp/kak-lsp" tag "v13.0.0" do %{
+plug "kak-lsp/kak-lsp" tag "v14.0.0" do %{
   cargo build --release --locked
   cargo install --force --path . --root ~/.local
 } config %{
@@ -193,11 +193,11 @@ plug "kak-lsp/kak-lsp" tag "v13.0.0" do %{
 
   define-command lsp-restart -docstring 'restart lsp server' %{ lsp-stop; lsp-start }
 
-  hook global WinSetOption filetype=(c|cpp|cc|rust|javascript|typescript|haskell|nix|latex) %{
-    define-command -hidden -params 4 -override lsp-handle-progress %{
+  hook global -group 'lsp' WinSetOption filetype=(c|cpp|cc|rust|javascript|typescript|haskell|nix|latex) %{
+    define-command -hidden -params 6 -override lsp-handle-progress %{
       echo -debug %sh{ echo "kak-lsp: %opt{filetype} language server: $1" }
       set global lsp_progress %sh{
-        if [ "$4" = "" ]; then
+        if [ "$5" = "" ]; then
           echo " …"
         else
 	        echo " ✓"
@@ -215,7 +215,7 @@ plug "kak-lsp/kak-lsp" tag "v13.0.0" do %{
     lsp-enable-window
   }
 
-  hook global WinSetOption filetype=rust %{
+  hook global -group 'lsp' WinSetOption filetype=rust %{
     lsp-inlay-hints-enable global
 
     # hook window -group rust-inlay-hints BufReload .* rust-analyzer-inlay-hints
@@ -229,7 +229,7 @@ plug "kak-lsp/kak-lsp" tag "v13.0.0" do %{
   }
 
 
-  hook global KakEnd .* %{
+  hook global -group 'lsp' KakEnd .* %{
 		set global lsp_progress ""
     
     lsp-exit
@@ -499,10 +499,12 @@ set global ui_options status_on_top=yes
 # -- custom movements keymaps
 map global normal <c-left> 'b;'
 map global normal <c-right> 'w;'
+map global insert <c-left> '<a-;>b<a-;>;'
+map global insert <c-right> '<a-;>w<a-;>;'
 map global normal <c-up> <c-u>
 map global normal <c-down> <c-d>
 # ↓↓↓ this one does not work in alacritty...
-# map global insert <c-backspace> '<esc>b<a-c>'
+map global insert <c-backspace> '<esc>b<a-c>'
 
 
 # -- set some custom colors

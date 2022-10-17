@@ -21,7 +21,7 @@ with lib;
       # ^^^ See ./nix-overlays/unstable.nix
 
       # haskellPackages.hie
-      haskell-language-server
+      # haskell-language-server
 
       haskellPackages.hoogle
     ];

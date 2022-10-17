@@ -15,6 +15,13 @@
       gtk-application-prefer-dark-theme = 1;
     };
 
+    gtk.gtk2.extraConfig = ''
+      gtk-cursor-theme-name=capitaine-cursors
+      gtk-cursor-theme-size=30
+      gtk-application-prefer-dark-theme=1
+      gtk-theme-name=Nordic
+    '';
+
     gtk.iconTheme = {
       package = pkgs.libsForQt5.breeze-icons; # for the Nordic theme
       name = "breeze-dark";
@@ -32,7 +39,7 @@
     ];
 
     /*
-    xdg.configFile."gtk-3.0/settings.ini".text = ''
+      xdg.configFile."gtk-3.0/settings.ini".text = ''
       gtk-theme-name="Breeze"
       gtk-icon-theme-name="breeze"
       gtk-font-name="Sans Serif  10"
@@ -48,6 +55,6 @@
       gtk-xft-hinting=1
       gtk-xft-hintstyle="hintslight"
       gtk-xft-rgba="rgb"
-    ''; */
+      ''; */
   };
 }

@@ -4,8 +4,8 @@ pkgs.buildGoModule rec {
   pname = "mdfmt";
   version = "0.4.2";
 
-  vendorSha256 = "08n4ds6fsli940m4gwvgq7d35chiwypgakkin3caacngn4jgb5d4";
-  runVend = true;
+  vendorSha256 = "/9NEcnfRjhxLaM3SoCkbVJcLzQqgie8/Zq18kWsEto8=";
+  proxyVendor = true;
 
   doCheck = false;
 

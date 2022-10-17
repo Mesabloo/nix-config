@@ -29,5 +29,6 @@ in
     Agda = pkgs.haskellPackages.Agda;
     ghcWithPackages = pkgs.ghc.withPackages;
   });
+  mdfmt = pkgs.callPackage ./mdfmt.nix { inherit pkgs; };
 }
 
