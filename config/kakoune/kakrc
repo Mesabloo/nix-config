@@ -140,26 +140,17 @@ map global user r ": open-ranger-on-current-file<ret>" -docstring "open files wi
 # }
 
 
-# -- kakship modeline
-declare-option str lsp_progress ""
-plug "mesabloo/kakship" do %{
-  cargo build --release --locked
-  cargo install --force --path . --root ~/.local
-} config %{
-  kakship-enable
-}
-
-
 # -- LSP
+declare-option -hidden str lsp_progress_indicator ""
 plug "kak-lsp/kak-lsp" tag "v14.0.0" do %{
   cargo build --release --locked
   cargo install --force --path . --root ~/.local
 } config %{
-  set-option global lsp_diagnostic_line_error_sign ''
-  set-option global lsp_diagnostic_line_warning_sign ''
-  set-option global lsp_diagnostic_line_info_sign ''
-  set-option global lsp_diagnostic_line_hint_sign ''
-  set-option global lsp_code_lens_sign ''
+  set-option global lsp_diagnostic_line_error_sign ''
+  set-option global lsp_diagnostic_line_warning_sign ''
+  set-option global lsp_diagnostic_line_info_sign ''
+  set-option global lsp_diagnostic_line_hint_sign ''
+  set-option global lsp_code_lens_sign ''
   set-option global lsp_hover_max_lines 30
 
   set-face global LineFlagError bright-red+b
@@ -194,24 +185,24 @@ plug "kak-lsp/kak-lsp" tag "v14.0.0" do %{
   define-command lsp-restart -docstring 'restart lsp server' %{ lsp-stop; lsp-start }
 
   hook global -group 'lsp' WinSetOption filetype=(c|cpp|cc|rust|javascript|typescript|haskell|nix|latex|dhall|python) %{
-    define-command -hidden -params 6 -override lsp-handle-progress %{
-      echo -debug %sh{ echo "kak-lsp: %opt{filetype} language server: $1" }
-      set global lsp_progress %sh{
-        if [ "$5" = "" ]; then
-          echo ""
-        else
-	        echo "✓"
-        fi
-      }
-    }
-
     set-option window lsp_auto_highlight_references true
     set-option window lsp_hover_anchor false
     lsp-auto-hover-enable
     echo -debug "Enabling LSP for filetype %opt{filetype}"
+
+    define-command -hidden -params 6 -override lsp-handle-progress %{
+      set global lsp_progress_indicator %sh{
+        if [ "$5" = "" ]; then
+          echo ""
+        else
+	        echo ""
+        fi
+      }
+    }
   
     hook window BufWritePre .* lsp-formatting-sync
-    
+
+    set global lsp_progress_indicator ""
     lsp-enable-window
   }
 
@@ -230,13 +221,20 @@ plug "kak-lsp/kak-lsp" tag "v14.0.0" do %{
 
 
   hook global -group 'lsp' KakEnd .* %{
-		set global lsp_progress ""
-    
     lsp-exit
   }
 
   map global user l ": enter-user-mode lsp<ret>" -docstring "LSP mode"
 } defer kak-lsp %{
+}
+
+
+# -- kakship modeline
+plug "mesabloo/kakship" do %{
+  cargo build --release --locked
+  cargo install --force --path . --root ~/.local
+} config %{
+  kakship-enable
 }
 
 

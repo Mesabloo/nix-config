@@ -1,25 +1,26 @@
 
 add_newline = false
 format = """\
-${custom.kakcursor}\
-${custom.kakposition}\
-${custom.separator}\
 ${custom.kakcontext} \
 ${custom.kakmode}\
+${custom.separator}\
+${custom.kakcursor}\
+${custom.kakposition}\
 ${custom.separator}\
 $directory\
 ${custom.kakfile}\
 ${custom.kakfiletype}\
 ${custom.kaklsp_status}\
-${custom.kaklsp_err}\
-${custom.kaklsp_warn}\
-${custom.separator}\
-$git_branch\
-$git_commit\
-$git_state\
-$git_status\
+${custom.kaklsp_errors}\
+${custom.kaklsp_warnings}\
+${custom.kaklsp_info}\
+${custom.kaklsp_hints}\
 ${custom.separator}\
 ${custom.kaksession}"""
+# $git_branch\
+# $git_commit\
+# $git_state\
+# $git_status\
 
 [git_branch]
 format = '[ $branch]($style)'
@@ -91,7 +92,7 @@ description = 'The current Kakoune buffername'
 format = '[$output]($style)'
 style = 'bold fg:bright-black'
 command = 'echo -n ${kak_buffile##*/}'
-when = 'true'
+when = ''
 shell = ['sh']
 disabled = false
 
@@ -131,8 +132,8 @@ disabled = false
 description = 'The current buffer filetype'
 format = '[ \[%opt{filetype}\]]($style)'
 style = 'bg:none fg:purple'
-when = ''
-shell = ['true']
+when = '[ -n "$kak_opt_filetype" ]'
+shell = ['sh']
 disabled = false
 
 [custom.kakposition]
@@ -145,26 +146,42 @@ disabled = false
 
 [custom.kaklsp_status]
 description = "Show status from kak-lsp"
-format = "[ %opt{lsp_progress}]($style)"
+format = '[ %opt{lsp_progress_indicator}]($style)'
 style = "fg:cyan bold"
-when = '' # '[ -n "$kak_opt_lsp_diagnostic_error_count" -a "$kak_opt_lsp_diagnostic_error_count" -ne 0 ]'
-shell = ['sh']
+when = ''
+shell = ['true']
 disabled = false
 
-[custom.kaklsp_err]
-description = "Show errors number from kak-lsp if any"
-format = "[  %opt{lsp_diagnostic_error_count}]($style)"
+[custom.kaklsp_errors]
+description = "Show errors from kak-lsp"
+format = '[  %opt{lsp_diagnostic_error_count}]($style)'
 style = "fg:red bold"
-when = '' # '[ -n "$kak_opt_lsp_diagnostic_error_count" -a "$kak_opt_lsp_diagnostic_error_count" -ne 0 ]'
-shell = ['sh']
+when = ''
+shell = ['true']
 disabled = false
 
-[custom.kaklsp_warn]
-description = "Show warnings number from kak-lsp if any"
-format = "[  %opt{lsp_diagnostic_warning_count}]($style)"
+[custom.kaklsp_warnings]
+description = "Show warnings from kak-lsp"
+format = '[  %opt{lsp_diagnostic_warning_count}]($style)'
 style = "fg:yellow bold"
-when = '' # '[ -n "$kak_opt_lsp_diagnostic_warning_count" -a "$kak_opt_lsp_diagnostic_warning_count" -ne 0 ]'
-shell = ['sh']
+when = ''
+shell = ['true']
+disabled = false
+
+[custom.kaklsp_info]
+description = "Show info from kak-lsp"
+format = '[  %opt{lsp_diagnostic_info_count}]($style)'
+style = "fg:green bold"
+when = ''
+shell = ['true']
+disabled = false
+
+[custom.kaklsp_hints]
+description = "Show hints from kak-lsp"
+format = '[  %opt{lsp_diagnostic_hint_count}]($style)'
+style = "fg:blue bold"
+when = ''
+shell = ['true']
 disabled = false
 
 [custom.separator]
