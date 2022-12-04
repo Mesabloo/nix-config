@@ -12,6 +12,7 @@
     ./emacs.nix
     ./git.nix
     ./haskell.nix
+    ./isabelle.nix
     ./java.nix
     ./kakoune.nix
     ./latex.nix
@@ -27,6 +28,6 @@
     ./web.nix
   ];
 
-  config = {};
-  options = {};
+  config = { };
+  options = { };
 }

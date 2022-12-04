@@ -40,6 +40,27 @@ with lib;
         default = false;
       };
     };
+
+    pragmata_pro = {
+      enable = mkOption {
+        type = types.bool;
+        default = false;
+      };
+    };
+
+    fantasque_sans = {
+      enable = mkOption {
+        type = types.bool;
+        default = false;
+      };
+    };
+
+    input = {
+      enable = mkOption {
+        type = types.bool;
+        default = false;
+      };
+    };
   };
 
   config = mkIf config.modules.services.fonts.enable {
@@ -50,6 +71,9 @@ with lib;
       (mkIf config.modules.services.fonts.font_awesome.enable font-awesome)
       (mkIf config.modules.services.fonts.nerdfonts.enable (nerdfonts.override { fonts = config.modules.services.fonts.nerdfonts.fonts; }))
       (mkIf config.modules.services.fonts.mplus.enable mplus-outline-fonts.githubRelease)
+      (mkIf config.modules.services.fonts.pragmata_pro.enable (pkgs.callPackage ./fonts/pragmata_pro { }))
+      (mkIf config.modules.services.fonts.fantasque_sans.enable fantasque-sans-mono)
+      (mkIf config.modules.services.fonts.input.enable input-fonts)
     ];
   };
 }

@@ -8,9 +8,6 @@ with lib;
     xdg.configFile."alacritty/alacritty.yml".source =
       ./config.yml;
 
-    modules.services.fonts.nerdfonts = {
-      enable = mkDefault true;
-      fonts = mkDefault [ "Iosevka" ];
-    };
+    modules.services.fonts.input.enable = mkDefault true;
   };
 }

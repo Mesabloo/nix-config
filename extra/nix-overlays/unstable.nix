@@ -66,4 +66,6 @@ in
   visualvm = unstable.visualvm;
 
   xmonad = unstable.xmonad;
+
+  dotty = unstable.dotty;
 }

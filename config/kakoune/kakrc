@@ -142,7 +142,7 @@ map global user r ": open-ranger-on-current-file<ret>" -docstring "open files wi
 
 # -- LSP
 declare-option -hidden str lsp_progress_indicator ""
-plug "kak-lsp/kak-lsp" tag "v14.0.0" do %{
+plug "kak-lsp/kak-lsp" commit "751bb5dc90a6fc23c0170bf4b0e2c37083f4a1e2" do %{
   cargo build --release --locked
   cargo install --force --path . --root ~/.local
 } config %{
@@ -177,6 +177,7 @@ plug "kak-lsp/kak-lsp" tag "v14.0.0" do %{
   set-face global InfoDiagnosticWarning @LineFlagWarning
 
   set-face global InlayHint bright-black,default+i
+  set-face global InlayCodeLens @InlayHint
 
   define-command ne -docstring 'go to next error/warning from lsp' %{ lsp-find-error --include-warnings }
   define-command pe -docstring 'go to previous error/warning from lsp' %{ lsp-find-error --previous --include-warnings }
@@ -188,6 +189,8 @@ plug "kak-lsp/kak-lsp" tag "v14.0.0" do %{
     set-option window lsp_auto_highlight_references true
     set-option window lsp_hover_anchor false
     lsp-auto-hover-enable
+    lsp-inlay-hints-enable window
+    lsp-inlay-code-lenses-enable window
     echo -debug "Enabling LSP for filetype %opt{filetype}"
 
     define-command -hidden -params 6 -override lsp-handle-progress %{
@@ -207,15 +210,6 @@ plug "kak-lsp/kak-lsp" tag "v14.0.0" do %{
   }
 
   hook global -group 'lsp' WinSetOption filetype=rust %{
-    lsp-inlay-hints-enable window
-
-    # hook window -group rust-inlay-hints BufReload .* rust-analyzer-inlay-hints
-    # hook window -group rust-inlay-hints NormalIdle .* rust-analyzer-inlay-hints
-    # hook window -group rust-inlay-hints InsertIdle .* rust-analyzer-inlay-hints
-    # hook -once -always window WinSetOption filetype=.* %{
-    #   remove-hooks window rust-inlay-hints
-    # }
-    
     set window lsp_server_configuration rust.clippy_preference="on"
   }
 
@@ -454,13 +448,13 @@ hook global GlobalSetOption kitty_window_type=.* %{
 declare-option -docstring "The position in the buffer, in percent" int buf_position 0
 hook global BufSetOption filetype=(?!\*kaktree\*).* %{
   hook -always buffer ModeChange push:.*:insert %{
-    add-highlighter -override buffer/line_numbers number-lines -separator ' ▎' -hlcursor -min-digits 4
+    add-highlighter -override buffer/line_numbers number-lines -separator ' ' -min-digits 4
   }
   hook -always buffer ModeChange pop:insert:.* %{
-		add-highlighter -override buffer/line_numbers number-lines -separator ' ▎' -hlcursor -relative -min-digits 4
+		add-highlighter -override buffer/line_numbers number-lines -separator ' ' -relative -min-digits 4
   }
 
-  add-highlighter -override buffer/line_numbers number-lines -separator ' ▎' -hlcursor -relative -min-digits 4
+  add-highlighter -override buffer/line_numbers number-lines -separator ' ' -relative -min-digits 4
   add-highlighter buffer/wrap_lines wrap -word -indent
 
   hook buffer RawKey .* %{
@@ -544,6 +538,10 @@ set-face global PrimarySelection black,white+d
 set-face global PrimaryCursor black,white
 set-face global SecondarySelection black,white+d
 set-face global SecondaryCursor black,white
+
+set-face global LineNumbers bright-black+ib
+set-face global LineNumbersCursor bright-white+ib
+set-face global LineNumbersWrapped black
 
 hook global BufCreate .*\.agda$ %{
   set-option buffer filetype agda

@@ -3,7 +3,7 @@ self: super:
 let
   pkgs = super;
 in
-{
+rec {
   deadd-notification-center = pkgs.callPackage ./deadd-notification-center.nix { inherit pkgs; };
   key-mon = pkgs.callPackage ./key-mon.nix { inherit pkgs; };
   neuron = pkgs.callPackage ./neuron.nix { inherit pkgs; };
@@ -30,5 +30,8 @@ in
     ghcWithPackages = pkgs.ghc.withPackages;
   });
   mdfmt = pkgs.callPackage ./mdfmt.nix { inherit pkgs; };
+  polyml = pkgs.callPackage ./polyml.nix { };
+  isabelle = pkgs.callPackage ./isabelle.nix { inherit polyml; };
+  input-fonts = pkgs.callPackage ./input-fonts.nix { };
 }
 
