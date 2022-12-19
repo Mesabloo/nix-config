@@ -19,6 +19,7 @@ with lib;
       # Will try to setup doom emacs with Nix later.
 
       ispell
+      direnv
     ];
   };
 }

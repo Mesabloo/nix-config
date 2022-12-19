@@ -448,13 +448,13 @@ hook global GlobalSetOption kitty_window_type=.* %{
 declare-option -docstring "The position in the buffer, in percent" int buf_position 0
 hook global BufSetOption filetype=(?!\*kaktree\*).* %{
   hook -always buffer ModeChange push:.*:insert %{
-    add-highlighter -override buffer/line_numbers number-lines -separator ' ' -min-digits 4
+    add-highlighter -override buffer/line_numbers number-lines -hlcursor -separator ' ' -min-digits 4
   }
   hook -always buffer ModeChange pop:insert:.* %{
-		add-highlighter -override buffer/line_numbers number-lines -separator ' ' -relative -min-digits 4
+		add-highlighter -override buffer/line_numbers number-lines -hlcursor -separator ' ' -relative -min-digits 4
   }
 
-  add-highlighter -override buffer/line_numbers number-lines -separator ' ' -relative -min-digits 4
+  add-highlighter -override buffer/line_numbers number-lines -hlcursor -separator ' ' -relative -min-digits 4
   add-highlighter buffer/wrap_lines wrap -word -indent
 
   hook buffer RawKey .* %{
@@ -539,9 +539,9 @@ set-face global PrimaryCursor black,white
 set-face global SecondarySelection black,white+d
 set-face global SecondaryCursor black,white
 
-set-face global LineNumbers bright-black+ib
-set-face global LineNumbersCursor bright-white+ib
-set-face global LineNumbersWrapped black
+set-face global LineNumbers bright-black+i
+set-face global LineNumberCursor bright-white+i
+set-face global LineNumbersWrapped rgb:2E3440 # This sucks to hardcode but oh well
 
 hook global BufCreate .*\.agda$ %{
   set-option buffer filetype agda

@@ -93,6 +93,9 @@ include "%L"
 <Multi_key> <less> <equal> <space> : "⩽" # Less than or equal to (slanted)
 <Multi_key> <greater> <equal> <space> : "⩾" # Greater than or equal to (slanted)
 <Multi_key> <colon> <colon> : "∷" # Proportion
+<Multi_key> <colon> <space> : "⦂" 
+
+<Multi_key> <1> <b> : "𝟏" # Bold one
 
 <Multi_key> <bar> <N> : "ℕ" # Natural set
 <Multi_key> <bar> <R> : "ℝ" # Real set
@@ -136,6 +139,7 @@ include "%L"
 <Multi_key> <l> <exclam> : "¬" # Negation
 <Multi_key> <slash> <backslash> : "∧" # And
 <Multi_key> <backslash> <slash> : "∨" # Or
+<Multi_key> <ampersand> : "⅋" # Upside down ampersand
 
 ### Arrows
 <Multi_key> <asciitilde> <Right> : "↝" # Wavy right arrow
