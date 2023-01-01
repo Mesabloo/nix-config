@@ -34,6 +34,7 @@
     # export GTK_IM_MODULE=uim
     # export QT_IM_MODULE=uim
     # export QT4_IM_MODULE=uim
+    export GTK_THEME=Nordic
   '';
 
   home.packages = [ pkgs.ibus ];

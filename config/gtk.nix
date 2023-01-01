@@ -12,14 +12,14 @@
     gtk.gtk3.extraConfig = {
       gtk-cursor-theme-name = "capitaine-cursors";
       gtk-cursor-theme-size = 30;
-      gtk-application-prefer-dark-theme = 1;
+      gtk-application-prefer-dark-theme = true;
     };
 
     gtk.gtk2.extraConfig = ''
       gtk-cursor-theme-name=capitaine-cursors
       gtk-cursor-theme-size=30
-      gtk-application-prefer-dark-theme=1
-      gtk-theme-name=Nordic
+      gtk-application-prefer-dark-theme=true
+      gtk-theme-name="Nordic"
     '';
 
     gtk.iconTheme = {

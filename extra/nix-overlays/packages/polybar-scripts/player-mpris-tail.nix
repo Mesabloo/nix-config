@@ -10,7 +10,7 @@ pkgs.stdenv.mkDerivation rec {
   name = "player-mpris-tail";
 
   buildInputs = with pkgs; [
-    (python38.withPackages (ps: with ps; [
+    (python39.withPackages (ps: with ps; [
       dbus-python
       pygobject3
     ]))

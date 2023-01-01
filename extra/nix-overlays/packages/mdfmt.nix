@@ -13,7 +13,7 @@ pkgs.buildGoModule rec {
     rev = "v${version}";
     owner = "elliotxx";
     repo = "mdfmt";
-    sha256 = "1r12pghnv35yzk7549a35313bvyszy97yx2bpyyfqdrbirk7h1c2";
+    sha256 = "sha256-YQqBvUAp/pd4c71lODOXrQFJacpBy22vx5EHYHTvdYY=";
   };
 
   meta = with pkgs.lib; {

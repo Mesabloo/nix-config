@@ -142,7 +142,7 @@ map global user r ": open-ranger-on-current-file<ret>" -docstring "open files wi
 
 # -- LSP
 declare-option -hidden str lsp_progress_indicator ""
-plug "kak-lsp/kak-lsp" commit "751bb5dc90a6fc23c0170bf4b0e2c37083f4a1e2" do %{
+plug "kak-lsp/kak-lsp" commit "136846cc4e78c41f38c9efbaa586fa753ab23fc3" do %{
   cargo build --release --locked
   cargo install --force --path . --root ~/.local
 } config %{

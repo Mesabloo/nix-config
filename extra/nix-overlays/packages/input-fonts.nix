@@ -1,7 +1,7 @@
 { lib
 , stdenv
 , fetchzip
-  # , unzip
+, unzip
   # , python3
 , config
 , acceptLicense ? config.input-fonts.acceptLicense or true # I don't care, I copied all this to change the style of the font
@@ -30,14 +30,15 @@ stdenv.mkDerivation rec {
   pname = "input-fonts";
   version = "1.2";
 
-  src =
-    assert !acceptLicense -> throwLicense;
-    fetchzip {
-      name = "input-fonts-${version}";
-      # Add .zip parameter so that zip unpackCmd can match it.
-      url = "https://input.djr.com/build/?fontSelection=whole&a=0&g=0&i=serif&l=serif&zero=0&asterisk=height&braces=straight&preset=pragmata&line-height=1.1&accept=I+do&email=&.zip";
-      sha256 = "sha256-Flp8duwa0CBp0wcDZzh9dXyP/WILBySUi1swa9svmaw=";
-      stripRoot = false;
+  src = ./input-fonts.zip;
+  sourceRoot = ".";
+#    assert !acceptLicense -> throwLicense;
+#    fetchzip {
+#      name = "input-fonts-${version}";
+#      # Add .zip parameter so that zip unpackCmd can match it.
+#      url = "https://input.djr.com/build/?fontSelection=whole&a=0&g=0&i=serif&l=serif&zero=0&asterisk=height&braces=straight&preset=pragmata&line-height=1.1&accept=I+do&email=&.zip";
+#      sha256 = "sha256-+LPHO1oTZVLd6GuDiFjvnB9MayWFQ5V20LzqMMFZI+Q=";
+#      stripRoot = false;#
 
       # postFetch = ''
       #   # Reset the timestamp to release date for determinism.
@@ -51,9 +52,9 @@ stdenv.mkDerivation rec {
       #     rm "$ttx_file"
       #   done
       # '';
-    };
+#    };
 
-  # buildInputs = [ unzip ];
+  buildInputs = [ unzip ];
 
   dontConfigure = true;
   dontBuild = true;
