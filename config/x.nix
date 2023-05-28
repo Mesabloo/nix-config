@@ -43,4 +43,21 @@
   systemd.user.services.setxkbmap = {
     Service.ExecStart = lib.mkForce "${pkgs.coreutils}/bin/true";
   };
+
+  services.xidlehook = {
+    enable = true;
+    detect-sleep = true;
+    not-when-audio = true;
+    not-when-fullscreen = true;
+    timers = [
+      {
+        delay = 300;
+        command = "${pkgs.betterlockscreen}/bin/betterlockscreen -l dim";
+      }
+      {
+        delay = 3600;
+        command = "${pkgs.systemd}/bin/systemctl suspend";
+      }
+    ];
+  };
 }

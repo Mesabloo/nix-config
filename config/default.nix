@@ -21,6 +21,8 @@
     ./neuron.nix
     ./picom.nix
     ./qt.nix
+    ./sound.nix
+    ./systemd.nix
     ./termite.nix
     ./x.nix
     ./xob.nix

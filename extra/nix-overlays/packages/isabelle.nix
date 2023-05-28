@@ -1,4 +1,4 @@
-{ lib, stdenv, fetchurl, coreutils, nettools, jdk, polyml, z3, veriT, vampire, eprover-ho, naproche, rlwrap, perl, makeDesktopItem, isabelle-components, isabelle, symlinkJoin, fetchhg, curl, spass }:
+{ lib, stdenv, fetchurl, coreutils, nettools, jdk, polyml, z3_4_4_0, veriT, vampire, eprover-ho, naproche, rlwrap, perl, makeDesktopItem, isabelle-components, isabelle, symlinkJoin, fetchhg, curl, spass, leo2, leo3-bin, iprover, satallax, cvc4, cvc5 }:
 # nettools needed for hostname
 
 let
@@ -29,6 +29,8 @@ let
   };
 
   java = jdk;
+  z3 = z3_4_4_0;
+  leo3 = leo3-bin;
 
   contrib-apache-commons = fetchurl {
     url = "https://isabelle.sketis.net/components/apache-commons-20211211.tar.gz";
@@ -188,7 +190,7 @@ stdenv.mkDerivation
           sha256 = "sha256-lDoqIu4UrJ8lcjPj+vuX1tx7Jk0Q0QJu9yiz+8mKFZc=";
         };
 
-    buildInputs = [ polyml z3 veriT vampire eprover-ho nettools curl ]
+    buildInputs = [ polyml z3 veriT vampire eprover-ho nettools curl cvc4 cvc5 leo2 leo3 iprover satallax ]
     ++ lib.optionals (!stdenv.isDarwin) [ java ];
 
     # sourceRoot = "${dirname}${lib.optionalString stdenv.isDarwin ".app"}";
@@ -211,8 +213,7 @@ stdenv.mkDerivation
         tar -xf ${contrib-bib2xhtml}
         echo 'unpacking source archive ${contrib-csdp}'
         tar -xf ${contrib-csdp}
-        echo 'unpacking source archive ${contrib-cvc4}'
-        tar -xf ${contrib-cvc4}
+        # CVC4
         # E prover
         echo 'unpacking source archive ${contrib-flatlaf}'
         tar -xf ${contrib-flatlaf}
@@ -263,6 +264,7 @@ stdenv.mkDerivation
         echo 'unpacking source archive ${contrib-xz-java}'
         tar -xf ${contrib-xz-java}
         # Z3
+        # Zipperposition
         echo 'unpacking source archive ${contrib-zipperposition}'
         tar -xf ${contrib-zipperposition}
 
@@ -278,7 +280,13 @@ stdenv.mkDerivation
         contrib/e-2.6-1/etc \
         contrib/vampire-4.6/etc \
         contrib/polyml-test-bafe319bc3a6-1/etc \
-        contrib/jdk-17.0.4.1+1/etc
+        contrib/jdk-17.0.4.1+1/etc \
+        contrib/${leo2.name}/etc \
+        contrib/${leo3.name}/etc \
+        contrib/${satallax.name}/etc \
+        contrib/${cvc5.name}/etc \
+        contrib/${cvc4.name}/etc \
+        contrib/${iprover.name}/etc \
       
       cat >contrib/z3-4.4.0_4.4.1/etc/settings <<EOF
         Z3_HOME=${z3}
@@ -302,12 +310,13 @@ stdenv.mkDerivation
         VAMPIRE_EXTRA_OPTIONS="--mode casc"
       EOF
 
+        # ML_SYSTEM_64=true
+
       cat >contrib/polyml-test-bafe319bc3a6-1/etc/settings <<EOF
-        ML_SYSTEM_64=true
         ML_SYSTEM=${polyml.name}
         ML_PLATFORM=${stdenv.system}
         ML_HOME=${polyml}/bin
-        ML_OPTIONS="--minheap 1000"
+        ML_OPTIONS="--minheap 512 --max-heap 16384"
         POLYML_HOME="\$COMPONENT"
         ML_SOURCES="\$POLYML_HOME/src"
       EOF
@@ -315,6 +324,38 @@ stdenv.mkDerivation
       cat >contrib/jdk-17.0.4.1+1/etc/settings <<EOF
         ISABELLE_JAVA_PLATFORM=${stdenv.system}
         ISABELLE_JDK_HOME=${java}
+      EOF
+
+      cat >contrib/${leo2.name}/etc/settings <<EOF
+        LEO2_HOME=${leo2}/bin
+        LEO2_VERSION=${leo2.version}
+      EOF
+
+      cat >contrib/${leo3.name}/etc/settings <<EOF
+        LEO3_HOME=${leo3}/bin
+        LEO3_VERSION=${leo3.version}
+      EOF
+
+      cat >contrib/${satallax.name}/etc/settings <<EOF
+        SATALLAX_HOME=${satallax}/bin
+        SATALLAX_VERSION=${satallax.version} 
+      EOF
+
+      cat >contrib/${cvc5.name}/etc/settings <<EOF
+        CVC5_HOME=${cvc5}/bin
+        CVC5_SOLVER=${cvc5}/bin/cvc5
+        CVC5_VERSION=${cvc5.version}
+      EOF
+
+      cat >contrib/${cvc4.name}/etc/settings <<EOF
+        CVC4_HOME=${cvc4}/bin
+        CVC4_SOLVER=${cvc4}/bin/cvc4
+        CVC4_VERSION=${cvc4.version}
+      EOF
+
+      cat >contrib/${iprover.name}/etc/settings <<EOF
+        IPROVER_HOME=${iprover}/bin
+        IPROVER_VERSION=${iprover.version}
       EOF
 
       cat >etc/components <<EOF
@@ -335,10 +376,12 @@ stdenv.mkDerivation
       contrib/bash_process-1.3
       contrib/bib2xhtml-20190409
       contrib/csdp-6.1.1
-      contrib/cvc4-1.8
+      contrib/${cvc4.name}
+      contrib/${cvc5.name}
       contrib/e-2.6-1
       contrib/flatlaf-2.4
       contrib/idea-icons-20210508
+      contrib/${iprover.name}
       contrib/isabelle_fonts-20211004
       contrib/isabelle_setup-20221020
       contrib/jdk-17.0.4.1+1
@@ -346,6 +389,8 @@ stdenv.mkDerivation
       contrib/jfreechart-1.5.3
       contrib/jortho-1.0-2
       contrib/kodkodi-1.5.7
+      contrib/${leo2.name}
+      contrib/${leo3.name}
       contrib/minisat-2.2.1-1
       contrib/mlton-20210117-1
       contrib/nunchaku-0.5
@@ -353,6 +398,7 @@ stdenv.mkDerivation
       contrib/pdfjs-2.14.305
       contrib/polyml-test-bafe319bc3a6-1
       contrib/postgresql-42.5.0
+      contrib/${satallax.name}
       contrib/scala-3.2.0-2
       contrib/smbc-0.4.1
       contrib/spass-3.8ds-2
@@ -445,6 +491,11 @@ stdenv.mkDerivation
       # icon
       mkdir -p "$out/share/icons/hicolor/isabelle/apps"
       cp "$out/Isabelle${version}/lib/icons/isabelle.xpm" "$out/share/icons/hicolor/isabelle/apps/"
+
+      # fonts
+      mkdir -p "$out/share/fonts/ttf-hinted"
+      # cp -r "$out/Isabelle${version}/contrib/isabelle_fonts-20211004/ttf" "$out/share/fonts"
+      cp -r "$out/Isabelle${version}/contrib/isabelle_fonts-20211004/ttf-hinted" "$out/share/fonts"
 
       # desktop item
       mkdir -p "$out/share"

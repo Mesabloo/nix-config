@@ -8,7 +8,7 @@
 
     qt.style = {
       package = pkgs.nordic;
-      name = "Nordic";
+      name = "gtk2";
     };
 
     home.packages = with pkgs; [

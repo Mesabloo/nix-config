@@ -95,15 +95,53 @@ include "%L"
 <Multi_key> <colon> <colon> : "∷" # Proportion
 <Multi_key> <colon> <space> : "⦂" 
 
-<Multi_key> <1> <b> : "𝟏" # Bold one
+<Multi_key> <0> <b> : "𝟎"
+<Multi_key> <KP_0> <b> : "𝟎"
+<Multi_key> <1> <b> : "𝟏"
+<Multi_key> <KP_1> <b> : "𝟏"
+<Multi_key> <2> <b> : "𝟐" 
+<Multi_key> <KP_2> <b> : "𝟐" 
+<Multi_key> <3> <b> : "𝟑" 
+<Multi_key> <KP_3> <b> : "𝟑" 
+<Multi_key> <4> <b> : "𝟒" 
+<Multi_key> <KP_4> <b> : "𝟒" 
+<Multi_key> <5> <b> : "𝟓" 
+<Multi_key> <KP_5> <b> : "𝟓" 
+<Multi_key> <6> <b> : "𝟔" 
+<Multi_key> <KP_6> <b> : "𝟔" 
+<Multi_key> <7> <b> : "𝟕" 
+<Multi_key> <KP_7> <b> : "𝟕" 
+<Multi_key> <8> <b> : "𝟖" 
+<Multi_key> <KP_8> <b> : "𝟖" 
+<Multi_key> <9> <b> : "𝟗"
+<Multi_key> <KP_9> <b> : "𝟗"
 
-<Multi_key> <bar> <N> : "ℕ" # Natural set
-<Multi_key> <bar> <R> : "ℝ" # Real set
-<Multi_key> <bar> <Q> : "ℚ" # Fractions set
-<Multi_key> <bar> <P> : "ℙ" # Prime number set
-<Multi_key> <bar> <Z> : "ℤ" # Integer set
-<Multi_key> <bar> <H> : "ℍ" # Quaternion set
+<Multi_key> <bar> <A> : "𝔸" 
+<Multi_key> <bar> <B> : "𝔹"
 <Multi_key> <bar> <C> : "ℂ" # Complex set
+<Multi_key> <bar> <D> : "𝔻" 
+<Multi_key> <bar> <E> : "𝔼" 
+<Multi_key> <bar> <F> : "𝔽" 
+<Multi_key> <bar> <G> : "𝔾" 
+<Multi_key> <bar> <H> : "ℍ" # Quaternion set
+<Multi_key> <bar> <I> : "𝕀" 
+<Multi_key> <bar> <J> : "𝕁" 
+<Multi_key> <bar> <K> : "𝕂" 
+<Multi_key> <bar> <L> : "𝕃" 
+<Multi_key> <bar> <M> : "𝕄"
+<Multi_key> <bar> <N> : "ℕ" # Natural set
+<Multi_key> <bar> <O> : "𝕆"
+<Multi_key> <bar> <P> : "ℙ" # Prime number set
+<Multi_key> <bar> <Q> : "ℚ" # Fractions set
+<Multi_key> <bar> <R> : "ℝ" # Real set
+<Multi_key> <bar> <S> : "𝕊" 
+<Multi_key> <bar> <T> : "𝕋" 
+<Multi_key> <bar> <U> : "𝕌" 
+<Multi_key> <bar> <V> : "𝕍" 
+<Multi_key> <bar> <W> : "𝕎" 
+<Multi_key> <bar> <X> : "𝕏" 
+<Multi_key> <bar> <Y> : "𝕐"
+<Multi_key> <bar> <Z> : "ℤ" # Integer set
 
 <Multi_key> <bar> <0> : "𝟘" # Double struck 0
 <Multi_key> <bar> <KP_0> : "𝟘" # Double struck 0
@@ -149,10 +187,10 @@ include "%L"
 <Multi_key> <equal> <uparrow> : "⇑" # Double up arrow
 <Multi_key> <equal> <downarrow> : "⇓" # Double left arrow
 <Multi_key> <less> <equal> <greater> : "⇔" # Logical equivalence
-<Multi_key> <Left> : "←" # Left arrow
-<Multi_key> <Right> : "→" # Right arrow
-<Multi_key> <Up> : "↑" # Up arrow
-<Multi_key> <Down> : "↓" # Down arrow
+<Multi_key> <Left> <space> : "←" # Left arrow
+<Multi_key> <Right> <space> : "→" # Right arrow
+<Multi_key> <Up> <space> : "↑" # Up arrow
+<Multi_key> <Down> <space> : "↓" # Down arrow
 <Multi_key> <equal> <Right> : "⇒" # Double right arrow
 <Multi_key> <equal> <Left> : "⇐" # Double left arrow
 <Multi_key> <equal> <Up> : "⇑" # Double up arrow
@@ -161,6 +199,23 @@ include "%L"
 <Multi_key> <bar> <Left> : "↤" # Left arrow from bar
 <Multi_key> <bar> <Up> : "↥" # Up arrow from bar
 <Multi_key> <bar> <Down> : "↧" # Down arrow from bar
+<Multi_key> <minus> <minus> <Left> : "⟵" # Long leftwards arrow
+<Multi_key> <minus> <KP_Subtract> <Left> : "⟵" # Long leftwards arrow
+<Multi_key> <KP_Subtract> <minus> <Left> : "⟵" # Long leftwards arrow
+<Multi_key> <KP_Subtract> <KP_Subtract> <Left> : "⟵" # Long leftwards arrow
+<Multi_key> <minus> <minus> <Right> : "⟶" # Long rightwards arrow
+<Multi_key> <minus> <KP_Subtract> <Right> : "⟶" # Long rightwards arrow
+<Multi_key> <KP_Subtract> <minus> <Right> : "⟶" # Long rightwards arrow
+<Multi_key> <KP_Subtract> <KP_Subtract> <Right> : "⟶" # Long rightwards arrow
+<Multi_key> <equal> <equal> <Left> : "⟸" # Long leftwards double arrow
+<Multi_key> <equal> <equal> <Right> : "⟹" # Long rightwards double arrow
+<Multi_key> <Left> <minus> <Right> : "⟷" # Long left right arrow 
+<Multi_key> <Left> <KP_Subtract> <Right> : "⟷" # Long left right arrow 
+<Multi_key> <Left> <equal> <Right> : "⟺" # Long left right double arrow
+<Multi_key> <Left> <Right> : "↔" # Left right arrow 
+<Multi_key> <less> <minus> <greater> : "↔" # Left right arrow 
+<Multi_key> <less> <KP_Subtract> <greater> : "↔" # Left right arrow 
+<Multi_key> <less> <equal> <greater> : "⇔" # Left right double arrow 
 
 ### Brackets
 <Multi_key> <bracketleft> <bar> : "⟦" # White left bracket
@@ -181,38 +236,98 @@ include "%L"
 <dead_circumflex> <KP_Subtract> : "⁻" # Superscript minus
 
 <Multi_key> <asciicircum> <a> : "ᵃ" # Superscript a
+<Multi_key> <asciicircum> <A> : "ᴬ" # Superscript A
 <Multi_key> <asciicircum> <b> : "ᵇ" # Superscript b
+<Multi_key> <asciicircum> <B> : "ᴮ" # Superscript B
 <Multi_key> <asciicircum> <c> : "ᶜ" # Superscript c
+<Multi_key> <asciicircum> <C> : "ꟲ" # Superscript C
 <Multi_key> <asciicircum> <d> : "ᵈ" # Superscript d
+<Multi_key> <asciicircum> <D> : "ᴰ" # Superscript D
 <Multi_key> <asciicircum> <e> : "ᵉ" # Superscript e
+<Multi_key> <asciicircum> <E> : "ᴱ" # Superscript E
 <Multi_key> <asciicircum> <f> : "ᶠ" # Superscript f
+<Multi_key> <asciicircum> <F> : "ꟳ" # Superscript F
 <Multi_key> <asciicircum> <g> : "ᶢ" # Superscript g
+<Multi_key> <asciicircum> <G> : "ᴳ" # Superscript G
+<Multi_key> <asciicircum> <h> : "ʰ" # Superscript h
+<Multi_key> <asciicircum> <H> : "ᴴ" # Superscript H
 <Multi_key> <asciicircum> <i> : "ⁱ" # Superscript i
+<Multi_key> <asciicircum> <I> : "ᴵ" # Superscript I
+<Multi_key> <asciicircum> <j> : "ʲ" # Superscript j
+<Multi_key> <asciicircum> <J> : "ᴶ" # Superscript J
 <Multi_key> <asciicircum> <k> : "ᵏ" # Superscript k
+<Multi_key> <asciicircum> <K> : "ᴷ" # Superscript K
+<Multi_key> <asciicircum> <l> : "ˡ" # Superscript l
+<Multi_key> <asciicircum> <L> : "ᴸ" # Superscript L
 <Multi_key> <asciicircum> <m> : "ᵐ" # Superscript m
+<Multi_key> <asciicircum> <M> : "ᴹ" # Superscript M
 <Multi_key> <asciicircum> <n> : "ⁿ" # Superscript n
+<Multi_key> <asciicircum> <N> : "ᴺ" # Superscript N
 <Multi_key> <asciicircum> <o> : "ᵒ" # Superscript o
+<Multi_key> <asciicircum> <O> : "ᴼ" # Superscript O
 <Multi_key> <asciicircum> <p> : "ᵖ" # Superscript p
+<Multi_key> <asciicircum> <P> : "ᴾ" # Superscript P
+<Multi_key> <asciicircum> <Q> : "ꟴ" # Superscript Q
+<Multi_key> <asciicircum> <r> : "ʳ" # Superscript r
+<Multi_key> <asciicircum> <R> : "ᴿ" # Superscript R
+<Multi_key> <asciicircum> <s> : "ˢ" # Superscript s
 <Multi_key> <asciicircum> <t> : "ᵗ" # Superscript t
+<Multi_key> <asciicircum> <T> : "ᵀ" # Superscript T
 <Multi_key> <asciicircum> <u> : "ᵘ" # Superscript u
+<Multi_key> <asciicircum> <U> : "ᵁ" # Superscript U
 <Multi_key> <asciicircum> <v> : "ᵛ" # Superscript v
+<Multi_key> <asciicircum> <V> : "ⱽ" # Superscript V
+<Multi_key> <asciicircum> <w> : "ʷ" # Superscript w
+<Multi_key> <asciicircum> <W> : "ᵂ" # Superscript W
+<Multi_key> <asciicircum> <x> : "ˣ" # Superscript x
+<Multi_key> <asciicircum> <y> : "ʸ" # Superscript y
 <Multi_key> <asciicircum> <z> : "ᶻ" # Superscript z
 <Multi_key> <dead_circumflex> <a> : "ᵃ" # Superscript a
+<Multi_key> <dead_circumflex> <A> : "ᴬ" # Superscript A
 <Multi_key> <dead_circumflex> <b> : "ᵇ" # Superscript b
+<Multi_key> <dead_circumflex> <B> : "ᴮ" # Superscript B
 <Multi_key> <dead_circumflex> <c> : "ᶜ" # Superscript c
+<Multi_key> <dead_circumflex> <C> : "ꟲ" # Superscript C
 <Multi_key> <dead_circumflex> <d> : "ᵈ" # Superscript d
+<Multi_key> <dead_circumflex> <D> : "ᴰ" # Superscript D
 <Multi_key> <dead_circumflex> <e> : "ᵉ" # Superscript e
+<Multi_key> <dead_circumflex> <E> : "ᴱ" # Superscript E
 <Multi_key> <dead_circumflex> <f> : "ᶠ" # Superscript f
+<Multi_key> <dead_circumflex> <F> : "ꟳ" # Superscript F
 <Multi_key> <dead_circumflex> <g> : "ᶢ" # Superscript g
+<Multi_key> <dead_circumflex> <G> : "ᴳ" # Superscript G
+<Multi_key> <dead_circumflex> <h> : "ʰ" # Superscript h
+<Multi_key> <dead_circumflex> <H> : "ᴴ" # Superscript H
 <Multi_key> <dead_circumflex> <i> : "ⁱ" # Superscript i
+<Multi_key> <dead_circumflex> <I> : "ᴵ" # Superscript I
+<Multi_key> <dead_circumflex> <j> : "ʲ" # Superscript j
+<Multi_key> <dead_circumflex> <J> : "ᴶ" # Superscript J
 <Multi_key> <dead_circumflex> <k> : "ᵏ" # Superscript k
+<Multi_key> <dead_circumflex> <K> : "ᴷ" # Superscript K
+<Multi_key> <dead_circumflex> <l> : "ˡ" # Superscript l
+<Multi_key> <dead_circumflex> <L> : "ᴸ" # Superscript L
 <Multi_key> <dead_circumflex> <m> : "ᵐ" # Superscript m
+<Multi_key> <dead_circumflex> <M> : "ᴹ" # Superscript M
 <Multi_key> <dead_circumflex> <n> : "ⁿ" # Superscript n
+<Multi_key> <dead_circumflex> <N> : "ᴺ" # Superscript N
 <Multi_key> <dead_circumflex> <o> : "ᵒ" # Superscript o
+<Multi_key> <dead_circumflex> <O> : "ᴼ" # Superscript O
 <Multi_key> <dead_circumflex> <p> : "ᵖ" # Superscript p
+<Multi_key> <dead_circumflex> <P> : "ᴾ" # Superscript P
+<Multi_key> <dead_circumflex> <Q> : "ꟴ" # Superscript Q
+<Multi_key> <dead_circumflex> <r> : "ʳ" # Superscript r
+<Multi_key> <dead_circumflex> <R> : "ᴿ" # Superscript R
+<Multi_key> <dead_circumflex> <s> : "ˢ" # Superscript s
 <Multi_key> <dead_circumflex> <t> : "ᵗ" # Superscript t
+<Multi_key> <dead_circumflex> <T> : "ᵀ" # Superscript T
 <Multi_key> <dead_circumflex> <u> : "ᵘ" # Superscript u
+<Multi_key> <dead_circumflex> <U> : "ᵁ" # Superscript U
 <Multi_key> <dead_circumflex> <v> : "ᵛ" # Superscript v
+<Multi_key> <dead_circumflex> <V> : "ⱽ" # Superscript V
+<Multi_key> <dead_circumflex> <w> : "ʷ" # Superscript w
+<Multi_key> <dead_circumflex> <W> : "ᵂ" # Superscript W
+<Multi_key> <dead_circumflex> <x> : "ˣ" # Superscript x
+<Multi_key> <dead_circumflex> <y> : "ʸ" # Superscript y
 <Multi_key> <dead_circumflex> <z> : "ᶻ" # Superscript z
 
 ### Subscript
@@ -233,3 +348,12 @@ include "%L"
 <Multi_key> <underscore> <u> : "ᵤ" # Subscript u
 <Multi_key> <underscore> <v> : "ᵥ" # Subscript v
 <Multi_key> <underscore> <x> : "ₓ" # Subscript x
+
+<Multi_key> <underscore> <minus> : "₋" # Subscript minus
+<Multi_key> <underscore> <KP_Subtract> : "₋" # Subscript minus
+<Multi_key> <underscore> <plus> : "₊" # Subscript plus 
+<Multi_key> <underscore> <KP_Add> : "₊" # Subscript plus
+<Multi_key> <underscore> <equal> : "₌" # Subcript equal
+
+## Raw ASCII invisible characters 
+<Multi_key> <Escape> : "" # Escape character

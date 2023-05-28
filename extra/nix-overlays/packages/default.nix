@@ -33,5 +33,7 @@ rec {
   polyml = pkgs.callPackage ./polyml.nix { };
   isabelle = pkgs.callPackage ./isabelle.nix { inherit polyml; };
   input-fonts = pkgs.callPackage ./input-fonts.nix { };
+  noise-suppression-for-voice = pkgs.callPackage ./noise-suppression-pipewire.nix { };
+  emacs-bis = pkgs.callPackage ./emacs.nix { };
 }
 

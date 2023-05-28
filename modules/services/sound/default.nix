@@ -18,6 +18,7 @@ with lib;
   config = mkIf config.modules.services.sound.enable {
     home.packages = with pkgs; [
       pavucontrol
+      noise-suppression-for-voice
     ];
   };
 }

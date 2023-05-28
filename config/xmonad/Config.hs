@@ -111,7 +111,7 @@ myConfig =
 
                   spawnOnce "numlockx on"
 
-                  spawnOnce "xidlehook --not-when-fullscreen --not-when-audio --timer 300 'betterlockscreen -l dim' '' --timer 3600 'systemctl suspend' ''"
+                  -- spawnOnce "xidlehook --not-when-fullscreen --not-when-audio --timer 300 'betterlockscreen -l dim' '' --timer 3600 'systemctl suspend' ''"
 
                   spawnOnce "pulse-listener | xob -s default 1> /dev/null"
                   spawnOnce "brightness-listener | xob -s brightness 1> /dev/null"

@@ -185,7 +185,7 @@ plug "kak-lsp/kak-lsp" commit "136846cc4e78c41f38c9efbaa586fa753ab23fc3" do %{
 
   define-command lsp-restart -docstring 'restart lsp server' %{ lsp-stop; lsp-start }
 
-  hook global -group 'lsp' WinSetOption filetype=(c|cpp|cc|rust|javascript|typescript|haskell|nix|latex|dhall|python) %{
+  hook global -group 'lsp' WinSetOption filetype=(c|cpp|cc|rust|javascript|typescript|haskell|nix|latex|dhall|python|purescript) %{
     set-option window lsp_auto_highlight_references true
     set-option window lsp_hover_anchor false
     lsp-auto-hover-enable

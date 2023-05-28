@@ -21,7 +21,7 @@ in
 
   alacritty = unstable.alacritty;
 
-  emacs = unstable.emacs;
+  # emacs = unstable.emacs;
 
   rofi = unstable.rofi;
 
@@ -68,4 +68,6 @@ in
   xmonad = unstable.xmonad;
 
   dotty = unstable.dotty;
+
+  easyeffects = unstable.easyeffects;
 }

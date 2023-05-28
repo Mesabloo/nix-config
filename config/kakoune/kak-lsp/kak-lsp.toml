@@ -61,3 +61,9 @@ command = "dhall-lsp-server"
 filetypes = ["agda"]
 roots = ["*.agda-pkg"]
 command = "als"
+
+[language.purescript]
+filetypes = ["purescript"]
+roots = ["packages.dhall", "spago.dhall"]
+command = "purescript-language-server"
+args = ["--stdio"]

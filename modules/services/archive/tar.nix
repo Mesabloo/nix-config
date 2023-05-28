@@ -15,6 +15,7 @@ with lib;
   config = mkIf config.modules.services.archive.tar.enable {
     home.packages = with pkgs; [
       btar
+      gnutar
     ];
   };
 }

@@ -19,7 +19,7 @@ stdenv.mkDerivation rec {
   nativeBuildInputs = lib.optional stdenv.isDarwin autoreconfHook;
 
   configureFlags = [
-    "--enable-shared"
+    "--disable-shared"
     "--with-system-libffi"
     "--with-gmp"
     # this is needed for isabelle
