@@ -1,7 +1,0 @@
-{ ... }:
-
-{
-  imports = [
-    ./ksshaskpass.nix
-  ];
-}

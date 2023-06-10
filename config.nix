@@ -1,8 +1,10 @@
 { pkgs }:
 
 {
-  allowUnfree = true;
-  oraclejdk.accept_license = true;
-  input-fonts.acceptLicense = true;
-  allowBroken = true;
+  allowUnfreePredicate = pkg: builtins.elem (pkgs.lib.getName pkg) [
+    "input-fonts"
+    "discord" 
+    "teams"
+    "unrar"
+  ];
 }

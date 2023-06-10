@@ -1,9 +1,9 @@
 { config, options, lib, pkgs, ... }:
 
-with lib;
 {
-  config = mkIf config.modules.dev.git.enable {
+  config = {
     programs.git = {
+      enable = true;
       userName = "Mesabloo";
       userEmail = "22964017+Mesabloo@users.noreply.github.com";
       # delta.enable = true;

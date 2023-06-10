@@ -2,95 +2,68 @@
 
 with lib;
 {
-  require = [ ./extra/nix-overlays ];
-
-  nixpkgs.config.allowUnfree = true;
-
-  imports = [
-    ./modules
-    ./config
+  nixpkgs.overlays = [
+    (import ./packages)
   ];
 
-  #################################################################
+  imports = [
+    ./desktop.nix
+    ./browser.nix
+    ./social.nix
+    ./shell.nix
+    ./sound.nix
+    ./systemd-services.nix
+    ./config/ssh.nix
+    ./config/git.nix
+  ];
 
-  manual.manpages.enable = false;
+  programs.obs-studio.enable = true;
 
-  modules.desktop.i3.enable = false;
-  modules.desktop.xmonad.enable = true;
-  modules.desktop.xorg.utils.enable = true;
+  nixpkgs.config = import ./config.nix { inherit pkgs; };
 
-  modules.dev.agda.enable = false;
-  modules.dev.cpp.enable = false;
-  modules.dev.emacs.enable = true;
-  modules.dev.haskell.enable = true;
-  modules.dev.rust.enable = false;
-  modules.dev.python.enable = true;
-  modules.dev.vscode.enable = true;
+  home = rec {
+    username = "mesabloo";
+    stateVersion = "22.11";
+    homeDirectory = "/home/${username}";
 
-  modules.services.fonts = {
-    enable = true;
-    iosevka.enable = true;
-    font_awesome.enable = true;
-  };
+    # Remove at the end!
+    packages = with pkgs; [
+      evince 
+      
+      gnome.nautilus
 
-  modules.net.brave = {
-    enable = true;
-    defaultBrowser = true;
-  };
+      vlc
 
-  modules.dev.git.enable = true;
+      libreoffice-qt
 
-  modules.games.powder-toy.enable = true;
-  modules.games.void-space.enable = true;
+      libsForQt5.ark
+      zip
+      unzip
+      btar
+      gnutar
+      unrar
 
-  modules.linux.core.enable = true;
-  modules.linux.nix-utils.enable = true;
-  modules.linux.utils.enable = true;
+      nix-prefetch-scripts
+      nix-direnv
 
-  modules.social.discord.enable = true;
+      bat
+      cloc
+      dialog
+      file
+      hyperfine
+      mount-helper
+      neofetch
+      psmisc
+      tree
 
-  modules.services.asciinema.enable = true;
-  modules.services.dunst.enable = true;
-  # modules.services.deadd.enable = true;
-  modules.services.polybar.enable = true;
-  modules.services.rofi.enable = true;
+      binutils
+      coreutils
+      xdg-user-dirs
 
-  modules.services.shell.emulator = pkgs.alacritty;
-  modules.services.shell.zsh = {
-    enable = true;
-    oh-my-zsh.enable = true;
-  };
+      nomacs
 
-  modules.services.picom.enable = true;
-
-  modules.services.sound = {
-    enable = true;
-    effects.enable = true;
-  };
-
-  modules.services.archive.enable = true;
-
-  modules.services.neuron.enable = false;
-
-  modules.services.unipicker.enable = true;
-
-  modules.apps = {
-    audacity.enable = true;
-    flameshot.enable = true;
-    gimp.enable = false;
-    nomacs.enable = true;
-    obs.enable = true;
-    office.enable = true;
-    okular.enable = true;
-    pandoc.enable = true;
-    vlc.enable = true;
-  };
-
-  ############################################################################""
-
-  programs.home-manager = {
-    enable = true;
-    path = "https://github.com/nix-community/home-manager/archive/release-20.03.tar.gz";
+      wineWowPackages.stable
+      winetricks
+    ];
   };
 }
-
