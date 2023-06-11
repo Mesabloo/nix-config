@@ -527,6 +527,8 @@
 
     units = true;
 
+    hwmon-path = "/sys/devices/platform/thinkpad_hwmon/hwmon/hwmon5/temp1_input"; 
+
     format = "<ramp> <label>";
     format-padding = 1;
     format-warn = "<ramp> <label-warn>";

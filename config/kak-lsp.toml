@@ -1,0 +1,69 @@
+[server]
+timeout = 3600 # 60 minutes
+
+[language.haskell]
+filetypes = ["haskell"]
+roots = ["Setup.hs", "stack.yaml", "*.cabal"]
+command = "haskell-language-server-wrapper"
+args = ["--lsp"]
+settings_section = "hls"
+[language.haskell.settings.hls]
+"haskell.formattingProvider" = "fourmolu"
+
+[language.latex]
+filetypes = ["latex"]
+roots = ["main.tex"]
+command = "texlab"
+args = []
+
+[language.rust]
+filetypes = ["rust"]
+roots = ["Cargo.toml"]
+command = "rust-analyzer"
+settings_section = "rust-analyzer"
+[language.rust.settings.rust-analyzer]
+"procMacro.enable" = true
+
+[language.c_cpp]
+filetypes = ["c", "cpp"]
+roots = ["compile_commands.json", ".ccls", ".git"]
+command = "ccls"
+# Disable additional information in autocompletion menus that Kakoune inserts into the buffer until https://github.com/ul/kak-lsp/issues/40 gets fixed
+args = ["--init={\"completion\":{\"detailedLabel\":false}}"]
+
+[language.nix]
+filetypes = ["nix"]
+roots = ["shell.nix", "default.nix", "home.nix", ".git"]
+command = "rnix-lsp"
+
+[language.python]
+filetypes = ["python"]
+roots = []
+command = "pylsp"
+
+[language.ocaml]
+filetypes = ["ocaml"]
+roots = []
+command = "ocamllsp"
+
+[language.prolog]
+filetypes = ["prolog"]
+roots = []
+command = "swipl"
+args = ["-g", "use_module(library(lsp_server)).", "-g", "lsp_server:main", "-t", "halt", "--", "stdio"]
+
+[language.dhall]
+filetypes = ["dhall"]
+roots = []
+command = "dhall-lsp-server"
+
+[language.agda]
+filetypes = ["agda"]
+roots = ["*.agda-pkg"]
+command = "als"
+
+[language.purescript]
+filetypes = ["purescript"]
+roots = ["packages.dhall", "spago.dhall"]
+command = "purescript-language-server"
+args = ["--stdio"]

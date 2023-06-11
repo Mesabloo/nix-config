@@ -15,6 +15,7 @@ with lib;
     ./systemd-services.nix
     ./config/ssh.nix
     ./config/git.nix
+    ./kakoune.nix
   ];
 
   programs.obs-studio.enable = true;

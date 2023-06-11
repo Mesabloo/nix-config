@@ -1,0 +1,139 @@
+add_newline = false
+format = """\
+${custom.kakcontext} \
+${custom.kakmode}\
+${custom.separator}\
+${custom.kakcursor}\
+${custom.kakposition}\
+${custom.separator}\
+$directory\
+${custom.kakfile}\
+${custom.kakfiletype}\
+${custom.kaklsp_status}\
+${custom.kaklsp_errors}\
+${custom.kaklsp_warnings}\
+${custom.kaklsp_info}\
+${custom.kaklsp_hints}\
+${custom.separator}\
+${custom.kaksession}"""
+
+[directory]
+format = '[󰉋 ]($style)[$read_only]($read_only_style)[$path/]($style)'
+truncation_length = 1
+truncate_to_repo = false
+fish_style_pwd_dir_length = 1
+use_logical_path = true
+style = 'fg:bright-black'
+read_only_style = 'fg:bright-red bold'
+read_only = '[] '
+truncation_symbol = '…/'
+disabled = false
+
+#[directory.substitutions]
+#"~/.config" = ""
+#"~" = ""
+
+[custom.kakfile]
+description = 'The current Kakoune buffername'
+format = '[$output]($style)'
+style = 'bold fg:bright-black'
+command = 'echo -n ${kak_buffile##*/}'
+when = ''
+shell = ['sh']
+disabled = false
+
+[custom.kaksession]
+description = 'The current Kakoune session'
+format = '[ %val{client}:%val{session}]($style)'
+style = 'fg:green bg:none italic'
+when = ''
+shell = ['true']
+disabled = false
+
+[custom.kakcursor]
+description = 'The current Kakoune cursor position'
+format = '[%val{cursor_line}:%val{cursor_char_column}]($style)'
+style = 'fg:bright-white bold'
+when = ''
+shell = ['true']
+disabled = false
+
+[custom.kakmode]
+description = 'The current Kakoune mode'
+format = '[{{mode_info}}]($style)'
+style = 'bg:none'
+when = ''
+shell = ['true']
+disabled = false
+
+[custom.kakcontext]
+description = 'The current Kakoune context'
+format = '[{{context_info}}]($style)'
+style = 'bg:none'
+when = ''
+shell = ['true']
+disabled = false
+
+[custom.kakfiletype]
+description = 'The current buffer filetype'
+format = '[ \[%opt{filetype}\]]($style)'
+style = 'bg:none fg:purple'
+when = '[ -n "$kak_opt_filetype" ]'
+shell = ['sh']
+disabled = false
+
+[custom.kakposition]
+description = 'Relative position of the cursor inside the buffer'
+format = '[  %opt{buf_position}%]($style)'
+style = 'fg:bright-white bold'
+when = '' # '[ -n "$kak_cursor_line" ]'
+shell = ['true']
+disabled = false
+
+[custom.kaklsp_status]
+description = "Show status from kak-lsp"
+format = '[ %opt{lsp_progress_indicator}]($style)'
+style = "fg:cyan bold"
+when = ''
+shell = ['true']
+disabled = false
+
+[custom.kaklsp_errors]
+description = "Show errors from kak-lsp"
+format = '[ %opt{lsp_diagnostic_line_error_sign} %opt{lsp_diagnostic_error_count}]($style)'
+style = "fg:red bold"
+when = ''
+shell = ['true']
+disabled = false
+
+[custom.kaklsp_warnings]
+description = "Show warnings from kak-lsp"
+format = '[ %opt{lsp_diagnostic_line_warning_sign} %opt{lsp_diagnostic_warning_count}]($style)'
+style = "fg:yellow bold"
+when = ''
+shell = ['true']
+disabled = false
+
+[custom.kaklsp_info]
+description = "Show info from kak-lsp"
+format = '[ %opt{lsp_diagnostic_line_info_sign} %opt{lsp_diagnostic_info_count}]($style)'
+style = "fg:green bold"
+when = ''
+shell = ['true']
+disabled = false
+
+[custom.kaklsp_hints]
+description = "Show hints from kak-lsp"
+format = '[ %opt{lsp_diagnostic_line_hint_sign} %opt{lsp_diagnostic_hint_count}]($style)'
+style = "fg:blue bold"
+when = ''
+shell = ['true']
+disabled = false
+
+[custom.separator]
+description = "Module separator"
+format = "[ ┃ ]($style)" 
+style = "fg:bright-black dimmed bold"
+when = ''
+shell = ['true']
+disabled = false

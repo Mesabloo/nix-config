@@ -1,0 +1,248 @@
+# -- clipboard integration
+hook global WinCreate .* %{ kakboard-enable }
+
+
+# -- buffer selector
+map global user b ": enter-buffers-mode<ret>" -docstring "buffers"
+
+
+# -- file explorer
+define-command \
+  -params .. -file-completion \
+  -docstring %{ranger [<arguments>]: open the file system explorer to select buffers to open
+    All the optional arguments are forwarded to the ranger utility} \
+  ranger %{
+    try %{
+      terminal-tab ranger %arg{@} --cmd %sh[
+        cmd="map <return> chain eval fm.execute_console(f\"shell kak -p "
+        cmd="${cmd}$kak_session <<< 'evaluate-commands -client $kak_client edit {fm.thisfile.path}'\") "
+        cmd="${cmd}if fm.thisfile.is_file else fm.execute_console(\"move right=1\") ; quit!"
+        echo "$cmd"
+      ]
+    } catch %{
+      terminal ranger %arg{@} --cmd %sh[
+        cmd="map <return> chain eval fm.execute_console(f\"shell kak -p "
+        cmd="${cmd}$kak_session <<< 'evaluate-commands -client $kak_client edit {fm.thisfile.path}'\") "
+        cmd="${cmd}if fm.thisfile.is_file else fm.execute_console(\"move right=1\") ; quit!"
+        echo "$cmd"
+      ]
+    }
+  }
+define-command -docstring %{
+  Open ranger, selecting the file of the current buffer if it has one.
+} open-ranger-on-current-file %{
+  ranger --selectfile %val{buffile}
+}
+map global user r ": open-ranger-on-current-file<ret>" -docstring "open files with ranger"
+
+
+# -- kakship
+# hook global ModuleLoaded kakship %{
+#   kakship-enable
+# }
+
+
+# -- smarttabs
+hook global ModuleLoaded smarttab %{
+  set-option global softtabstop %opt{indentwidth}
+  hook global WinSetOption filetype=(rust|markdown|kak|lisp|scheme|sh|perl|c|cpp|haskell|nix|python|coq) expandtab
+  hook global WinSetOption filetype=(makefile|gas) noexpandtab
+}
+
+
+# -- rainbox parenthesis
+hook global ModuleLoaded rainbow %{
+  set-option global rainbow_colors rgb:5E81AC+db rgb:BF616A+db rgb:D08770+db rgb:EBCB8B+db rgb:A3BE8C+db rgb:B48EAD+db
+  hook global WinSetOption filetype=(rust|python|c|cpp|scheme|lisp|clojure|javascript|json|kak|haskell|python|latex|nix) %{
+    rainbow
+  }
+}
+
+
+# -- LSP
+hook global ModuleLoaded lsp %{
+  kakship-enable
+
+  set-option global lsp_diagnostic_line_error_sign '' 
+  set-option global lsp_diagnostic_line_warning_sign '' 
+  set-option global lsp_diagnostic_line_info_sign '' 
+  set-option global lsp_diagnostic_line_hint_sign ''
+  set-option global lsp_code_lens_sign '' 
+  set-option global lsp_hover_max_lines 30
+
+  set-face global LineFlagError bright-red+b
+  set-face global LineFlagWarning bright-yellow+b
+  set-face global LineFlagInfo bright-green+b
+  set-face global LineFlagHint bright-blue+b
+
+  # change L&F of reports in code
+  set-face global DiagnosticError default,default,bright-red+u
+  set-face global DiagnosticWarning default,default,bright-yellow+u
+  set-face global DiagnosticHint default,default,bright-blue+u
+  set-face global DiagnosticInfo default,default,bright-green+u
+
+  # change L&F of markdown boxes
+  set-face global InfoMono default+d
+  set-face global InfoLink blue+u
+  set-face global InfoLinkMono blue+u
+  set-face global InfoBlockQuote black
+  set-face global InfoBlock @InfoMono
+
+  set-face global InfoDiagnosticError @LineFlagError
+  set-face global InfoDiagnosticHint @LineFlagHint
+  set-face global InfoDiagnosticInformation @LineFlagInformation
+  set-face global InfoDiagnosticWarning @LineFlagWarning
+
+  set-face global InlayHint bright-black,default+i
+  set-face global InlayCodeLens @InlayHint
+
+  define-command ne -docstring 'go to next error/warning from lsp' %{ lsp-find-error --include-warnings }
+  define-command pe -docstring 'go to previous error/warning from lsp' %{ lsp-find-error --previous --include-warnings }
+  define-command ee -docstring 'go to current error/warning from lsp' %{ lsp-find-error --include-warnings; lsp-find-error --previous --include-warnings }
+
+  define-command lsp-restart -docstring 'restart lsp server' %{ lsp-stop; lsp-start }
+
+  hook global -group 'lsp' WinSetOption filetype=(c|cpp|cc|rust|javascript|typescript|haskell|nix|latex|dhall|python|purescript) %{
+    set-option window lsp_auto_highlight_references true
+    set-option window lsp_hover_anchor false
+    lsp-auto-hover-enable
+    lsp-inlay-hints-enable window
+    #lsp-inlay-code-lenses-enable window
+    echo -debug "Enabling LSP for filetype %opt{filetype}"
+
+    define-command -hidden -params 6 -override lsp-handle-progress %{
+      set global lsp_progress_indicator %sh{
+        if [ "$5" = "" ]; then
+          echo ""
+        else
+	        echo ""
+        fi
+      }
+    }
+  
+    hook window BufWritePre .* lsp-formatting-sync
+
+    set global lsp_progress_indicator "󱉺"
+    lsp-enable-window
+  }
+
+  hook global -group 'lsp' WinSetOption filetype=rust %{
+    set window lsp_server_configuration rust.clippy_preference="on"
+  }
+
+
+  hook global -group 'lsp' KakEnd .* %{
+    lsp-exit
+  }
+
+  map global user l ": enter-user-mode lsp<ret>" -docstring "LSP mode"
+}
+
+
+###################################################################
+
+declare-option -docstring "The position in the buffer, in percent" int buf_position 0
+hook global BufSetOption filetype=(?!\*kaktree\*).* %{
+  hook -always buffer ModeChange push:.*:insert %{
+    add-highlighter -override buffer/line_numbers number-lines -hlcursor -separator ' ' -min-digits 4
+  }
+  hook -always buffer ModeChange pop:insert:.* %{
+		add-highlighter -override buffer/line_numbers number-lines -hlcursor -separator ' ' -relative -min-digits 4
+  }
+
+  add-highlighter -override buffer/line_numbers number-lines -hlcursor -separator ' ' -relative -min-digits 4
+  add-highlighter buffer/wrap_lines wrap -word -indent
+
+  hook buffer RawKey .* %{
+    set-option buffer buf_position %sh{
+      echo -n $(($kak_cursor_line * 100 / $kak_buf_line_count))
+    }
+  }
+}
+
+
+# -- set <tab> for autocompletion
+hook global InsertCompletionShow .* %{
+  try %{
+    execute-keys -draft 'h<a-K>\h<ret>'
+    map window insert <tab> <c-n>
+    map window insert <s-tab> <c-p>
+    hook -once -always window InsertCompletionHide .* %{
+      map window insert <tab> <tab>
+      map window insert <s-tab> <s-tab>
+    }
+  }
+}
+
+
+# -- set indent to 2 spaces 
+set global indentwidth 2
+set global tabstop 2
+
+
+# -- custom movements keymaps
+map global normal <c-left> 'b;'
+map global normal <c-right> 'w;'
+map global insert <c-left> '<a-;>b<a-;>;'
+map global insert <c-right> '<a-;>w<a-;>;'
+map global normal <c-up> <c-u>
+map global normal <c-down> <c-d>
+# ↓↓↓ this one does not work in alacritty...
+map global insert <c-backspace> '<esc>b<a-c>'
+
+
+# -- set some custom colors
+set-face global Information white,rgb:434C5E
+set-face global MenuBackground white,rgb:3B4252
+set-face global MenuForeground default,rgb:3B4252+r
+#set-face global StatusLine default,rgb:3B4252
+
+
+# -- load the closest editorconfig to the newly opened buffer
+# hook global BufOpenFile .* editorconfig-load
+# hook global BufNewFile .* editorconfig-load
+
+
+# -- output a simple "-- INSERT --" when entering insert mode
+hook global ModeChange push:.*:insert %{
+  echo -markup "{+b}-- INSERT --"
+}
+hook global ModeChange pop:insert:.* echo
+
+
+# -- set formatters
+declare-user-mode format
+map global format s ': format-selections<ret>' -docstring 'selections'
+map global format b ': format-buffer<ret>' -docstring 'buffer'
+
+map global user f ': enter-user-mode format<ret>' -docstring 'format'
+
+hook global WinSetOption filetype=python %{ set-option buffer formatcmd 'yapf' }
+hook global WinSetOption filetype=nix %{ set-option buffer formatcmd 'nixpkgs-fmt' }
+hook global WinSetOption filetype=markdown %{ set-option buffer formatcmd 'mdfmt' }
+
+# -- small tweaks
+set-face global comment default+d
+set-option global scrolloff 2,0
+set-option global ui_options terminal_assistant=cat 
+
+
+# -- colors
+set-face global PrimarySelection black,white+d
+set-face global PrimaryCursor black,white
+set-face global SecondarySelection black,white+d
+set-face global SecondaryCursor black,white
+
+set-face global LineNumbers bright-black+b
+set-face global LineNumberCursor bright-white+b
+set-face global LineNumbersWrapped rgb:2E3440 # This sucks to hardcode but oh well
+set-face global BufferPadding @LineNumbers
+
+
+
+
+
+
+require-module lsp
+require-module smarttab
+require-module rainbow
