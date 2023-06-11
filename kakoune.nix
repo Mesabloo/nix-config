@@ -18,14 +18,10 @@ let
       };
     };
 
-    buildInputs = with pkgs; [
-      starship
-    ];
-
-    patchPhase = ''
-      substituteInPlace src/main.rs \
-        --replace '"starship"' "\"${pkgs.starship}/bin/starship\""
-    '';
+    # patchPhase = ''
+    #   substituteInPlace src/main.rs \
+    #     --replace '"starship"' "\"${pkgs.starship}/bin/starship\""
+    # '';
 
     postInstall = ''
       # Copy rc files to /share/kak/autoload
@@ -94,6 +90,8 @@ let
 in
 {
   home.packages = with pkgs; [
+    # Weirdly enough, we can't add `starship` as a build dependency of `kakship`.
+    starship
     kakship
     my-kakoune
     xclip

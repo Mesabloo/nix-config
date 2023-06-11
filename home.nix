@@ -68,6 +68,9 @@ with lib;
 
       wineWowPackages.stable
       winetricks
+
+      nixpkgs-fmt
+      rnix-lsp
     ];
   };
 }

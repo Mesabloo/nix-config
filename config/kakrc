@@ -54,7 +54,7 @@ hook global ModuleLoaded smarttab %{
 hook global ModuleLoaded rainbow %{
   set-option global rainbow_colors rgb:5E81AC+db rgb:BF616A+db rgb:D08770+db rgb:EBCB8B+db rgb:A3BE8C+db rgb:B48EAD+db
   hook global WinSetOption filetype=(rust|python|c|cpp|scheme|lisp|clojure|javascript|json|kak|haskell|python|latex|nix) %{
-    rainbow
+    rainbow-enable-window
   }
 }
 
