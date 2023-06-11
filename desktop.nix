@@ -14,7 +14,7 @@ with lib;
       filepath
     ];
     config = ./config/XMonad.hs;
-    haskellPackages = pkgs.haskell.packages.ghc924;
+    haskellPackages = unstable.haskell.packages.ghc926;
   };
 
   fonts.fontconfig.enable = true;
@@ -46,12 +46,15 @@ with lib;
   xsession = {
     enable = true;
     initExtra = ''
-      setxkbmap fr
-      setxkbmap -option compose:rctrl
+      ${pkgs.xorg.setxkbmap}/bin/setxkbmap fr
+      ${pkgs.xorg.setxkbmap}/bin/setxkbmap -option compose:rctrl
+
+      ${pkgs.xorg.xset}/bin/xset s off -dpms
 
       ${pkgs.ibus}/bin/ibus-daemon -drxR
     '';
     numlock.enable = true;
+    scriptPath = ".xsession";
   };
 
   home = {

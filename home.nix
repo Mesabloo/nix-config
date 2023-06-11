@@ -19,6 +19,7 @@ with lib;
   ];
 
   programs.obs-studio.enable = true;
+  dconf.enable = true;
 
   nixpkgs.config = import ./config.nix { inherit pkgs; };
 
@@ -29,7 +30,9 @@ with lib;
 
     # Remove at the end!
     packages = with pkgs; [
-      evince 
+      evince
+      gvfs
+      dconf
       
       gnome.nautilus
 

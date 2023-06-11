@@ -151,7 +151,7 @@
 
     label = "%output%";
 
-    double-click-left = "${pkgs.libnotify}/bin/notify-send 'XMonad' 'Shutting down in 5s...' --app-name 'xmonad' -u critical; sleep 5; shutdown -P now";
+    double-click-left = "${pkgs.libnotify}/bin/notify-send 'XMonad' 'Shutting down in 5s...' --app-name 'xmonad' -u critical; ${pkgs.coreutils}/bin/sleep 5; ${pkgs.systemd}/bin/systemctl poweroff";
   };
 
   "module/restart-button" = {
@@ -166,7 +166,7 @@
 
     label = "%output%";
 
-    double-click-left = "${pkgs.libnotify}/bin/notify-send 'XMonad' 'Restarting in 5s...' --app-name 'xmonad' -u critical; sleep 5; shutdown -r now";
+    double-click-left = "${pkgs.libnotify}/bin/notify-send 'XMonad' 'Restarting in 5s...' --app-name 'xmonad' -u critical; ${pkgs.coreutils}/bin/sleep 5; ${pkgs.systemd}/bin/systemctl reboot";
   };
 
   "module/logout-button" = {
@@ -181,7 +181,7 @@
 
     label = "%output%";
 
-    double-click-left = "${pkgs.libnotify}/bin/notify-send 'XMonad' 'Logging out in 5s...' --app-name 'xmonad' -u critical; sleep 5; ${pkgs.killall}/bin/killall -r 'xmonad*' -s TERM";
+    double-click-left = "${pkgs.libnotify}/bin/notify-send 'XMonad' 'Logging out in 5s...' --app-name 'xmonad' -u critical; ${pkgs.coreutils}/bin/sleep 5; ${pkgs.killall}/bin/killall -r 'xmonad*' -s TERM";
   };
 
   "module/sleep-button" = {
@@ -298,7 +298,7 @@
 
   "module/backlight" = rec {
     type = "internal/backlight";
-    card = "intel_backlight";
+    card = "amdgpu_bl0";
 
     format = "<ramp> <label>";
     format-padding = 1;

@@ -1,26 +1,34 @@
-{ stdenv, fetchurl, autoPatchelfHook, unzip, freetype }:
-
+{ stdenv, fetchurl, freetype, cmake, fetchFromGitHub, pkg-config, xorg }:
+  
 stdenv.mkDerivation rec {
-  name = "noise-suppression-for-voice";
+  pname = "noise-suppression-for-voice";
   version = "1.03";
 
-  src = fetchurl {
-    url = "https://github.com/werman/noise-suppression-for-voice/releases/download/v${version}/linux-rnnoise.zip";
-    sha256 = "sha256-LRlFHlRr047TUAfQ5D1DF+cvE5MwT+GIP45yv40vXoU=";
+  src = fetchFromGitHub {
+    owner = "werman";
+    repo = pname;
+    rev = "c1cf4307c75abed8e3ecccdd23a35f7782feaf69";
+    sha256 = "sha256-1/HvGzk/WhzZ7Jg5bsRSV/dKZRSwYdvQCCqgXpIOgNs=";
   };
 
-  nativeBuildInputs = [
-    unzip
-  ];
+  nativeBuildInputs = [ cmake pkg-config ];
 
   buildInputs = [
+    xorg.libX11
+    xorg.libXrandr
+    xorg.libXinerama
+    xorg.libXext
+    xorg.libXcursor
     freetype
-    stdenv.cc.cc.lib
-    autoPatchelfHook
   ];
 
-  installPhase = ''
-    mkdir -p $out/lib/
-    cp -r * $out/lib
-  '';
+  cmakeFlags = [
+    "-DBUILD_VST_PLUGIN=OFF"
+    "-DBUILD_LV2_PLUGIN=OFF"
+    "-DBUILD_VST3_PLUGIN=OFF"
+    "-DBUILD_AU_PLUGIN=OFF"
+    "-DBUILD_AUV3_PLUGIN=OFF"
+    "-DBUILD_LADSPA_PLUGIN=ON"
+    # Only build the ladspa plugin
+  ];
 }

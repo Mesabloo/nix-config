@@ -1,9 +1,9 @@
-{ config, options, lib, pkgs, ... }:
+{ config, options, lib, pkgs, unstable, ... }:
 
 {
   home = {
     packages = with pkgs; [
-      brave
+      unstable.brave
     ];
     sessionVariables."BROWSER" = "brave";
   };
