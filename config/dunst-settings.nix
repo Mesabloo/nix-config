@@ -11,8 +11,8 @@
     # geometry = "650x10-25+25";
     #width = "(250, 500)";
     #height = "(100, 500)";
-    width = 250;
-    height = 100;
+    width = 400;
+    height = 150;
     origin = "top-right";
     offset = "25x50";
 
